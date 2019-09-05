@@ -260,6 +260,11 @@ article {
 	border: 1px solid #aaa;
 }
 
+article.no-border {
+	border: 0;
+	padding-top: 30px;
+}
+
 footer {
 	background-color: #fff;
 	border-top: 1px solid #ccc;

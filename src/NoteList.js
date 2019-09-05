@@ -14,7 +14,7 @@ class NoteList extends React.Component {
 		// if selected a folder, show only the notes in that folder
 		// otherwise show all notes from all folders
 		const foldernotes = this.props.match.params.folderId
-			? notes.filter(note => note.folderId == this.props.match.params.folderId)
+			? notes.filter(note => note.folderId === this.props.match.params.folderId)
 			: notes;
 
 		return (
@@ -30,21 +30,26 @@ class NoteList extends React.Component {
 						</button>
 					</span>
 				</div>
-
-				{foldernotes.map(note => (
-					<article key={note.id}>
-						<div className="note">
-							{/*
+				{foldernotes.length > 0 ? (
+					foldernotes.map(note => (
+						<article key={note.id}>
+							<div className="note">
+								{/*
 							{...note}
 							use spread here because want whole note object
 							alternative is
 							note={note} and in NoteItem would need to do props.note.key vs. props.key
 							*/}
-							<NoteItem note={note} />
-							{/* console.log('props', JSON.stringify(...note)) */}
-						</div>
+								<NoteItem note={note} />
+								{/* console.log('props', JSON.stringify(...note)) */}
+							</div>
+						</article>
+					))
+				) : (
+					<article className="no-border">
+						<div className="note">No notes in this folder.</div>
 					</article>
-				))}
+				)}
 			</>
 		);
 	}

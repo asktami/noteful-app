@@ -11,13 +11,13 @@ const FolderItem = props => {
 	// - from the folders object, use the folderId to get the note's parent folder
 
 	const activeNote = notes
-		? notes.find(note => note.id == props.match.params.noteId)
+		? notes.find(note => note.id === props.match.params.noteId)
 		: '';
 
 	if (!activeNote) return 'Sorry, no note found.';
 
 	const folderId = activeNote.folderId;
-	const activeFolder = folders.filter(folder => folder.id == folderId);
+	const activeFolder = folders.filter(folder => folder.id === folderId);
 
 	return (
 		<>

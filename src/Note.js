@@ -14,7 +14,7 @@ const Note = props => {
 	// QUESTION
 	// reloading the browser wipes the context from memory
 	// so need to handle if user reloads the browser and its undefined
-	const note = notes.find(note => note.id == props.match.params.noteId) || {};
+	const note = notes.find(note => note.id === props.match.params.noteId) || {};
 
 	return (
 		<article>

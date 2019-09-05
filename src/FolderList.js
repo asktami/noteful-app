@@ -27,11 +27,16 @@ class FolderList extends React.Component {
 						<li
 							key={folder.id}
 							className={
-								folder.id == this.props.match.params.folderId ? ' active' : null
+								folder.id === this.props.match.params.folderId
+									? ' active'
+									: null
 							}
 						>
 							<NavLink to={`/folder/${folder.id}`}>
-								&#x1F4C2;&nbsp;{folder.name}
+								<span role="img" aria-label="Folder">
+									&#x1F4C2;
+								</span>
+								&nbsp;{folder.name}
 							</NavLink>
 						</li>
 					))}
