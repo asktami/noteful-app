@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FolderItem component renders a FolderItem by default 1`] = `
+<Fragment>
+  <div
+    className="header-container"
+    key="101"
+  >
+    <span>
+      <h2>
+        test-folder-label
+      </h2>
+    </span>
+  </div>
+  <br />
+  <button
+    className="btn-save"
+    onClick={null}
+  >
+    Go Back
+  </button>
+</Fragment>
+`;
+
+exports[`FolderItem component renders the FolderItem given props 1`] = `
+<Fragment>
+  <div
+    className="header-container"
+    key="101"
+  >
+    <span>
+      <h2>
+        test-folder-label
+      </h2>
+    </span>
+  </div>
+  <br />
+  <button
+    className="btn-save"
+    onClick={null}
+  >
+    Go Back
+  </button>
+</Fragment>
+`;

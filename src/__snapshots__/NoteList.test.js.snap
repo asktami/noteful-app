@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteList component renders a NoteList by default 1`] = `
+<Fragment>
+  <div
+    className="header-container"
+  >
+    <span>
+      <h2>
+        Notes
+      </h2>
+    </span>
+      
+    <span>
+      <button
+        className="btn-add"
+      >
+        +
+      </button>
+    </span>
+  </div>
+  <article>
+    <ul>
+      <li
+        key="1"
+      >
+        <NoteItem
+          match={
+            Object {
+              "params": Object {
+                "folderId": 101,
+              },
+            }
+          }
+          note={
+            Object {
+              "folderId": 101,
+              "id": 1,
+              "modified": 2019-09-30T04:00:00.000Z,
+              "title": "test-note-title",
+            }
+          }
+          notes={
+            Array [
+              Object {
+                "folderId": 101,
+                "id": 1,
+                "modified": 2019-09-30T04:00:00.000Z,
+                "title": "test-note-title",
+              },
+            ]
+          }
+        />
+      </li>
+    </ul>
+  </article>
+</Fragment>
+`;
+
+exports[`NoteList component renders the NoteList given props 1`] = `
+<Fragment>
+  <div
+    className="header-container"
+  >
+    <span>
+      <h2>
+        Notes
+      </h2>
+    </span>
+      
+    <span>
+      <button
+        className="btn-add"
+      >
+        +
+      </button>
+    </span>
+  </div>
+  <article>
+    <ul>
+      <li
+        key="1"
+      >
+        <NoteItem
+          match={
+            Object {
+              "params": Object {
+                "folderId": 101,
+              },
+            }
+          }
+          note={
+            Object {
+              "folderId": 101,
+              "id": 1,
+              "modified": 2019-09-30T04:00:00.000Z,
+              "title": "test-note-title",
+            }
+          }
+          notes={
+            Array [
+              Object {
+                "folderId": 101,
+                "id": 1,
+                "modified": 2019-09-30T04:00:00.000Z,
+                "title": "test-note-title",
+              },
+            ]
+          }
+        />
+      </li>
+    </ul>
+  </article>
+</Fragment>
+`;
