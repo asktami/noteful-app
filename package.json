@@ -5,7 +5,9 @@
   "homepage": "https://asktami.github.io/react-router-context-noteful/",
   "dependencies": {
     "date-fns": "^2.0.1",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.1",
+    "install": "^0.13.0",
+    "npm": "^6.11.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
