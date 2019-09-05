@@ -35,6 +35,7 @@ function deleteNoteRequest(noteId, cb) {
 }
 
 const NoteItem = props => {
+	console.log('props', JSON.stringify(props));
 	return (
 		<NotefulContext.Consumer>
 			{/*

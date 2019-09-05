@@ -39,6 +39,7 @@ class NoteList extends React.Component {
 							note={note} and in NoteItem would need to do props.note.key vs. props.key
 							*/}
 							<NoteItem {...note} />
+							console.log('props', JSON.stringify(...note))
 						</div>
 					</article>
 				))}
