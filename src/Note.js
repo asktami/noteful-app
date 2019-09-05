@@ -3,22 +3,18 @@ import NoteItem from './NoteItem';
 
 import NotefulContext from './NotefulContext';
 
-//
-// QUESTION - why get
-// TypeError: Cannot read property 'context' of undefined
-// when click on note title???
-//
-
 const Note = props => {
 	const context = useContext(NotefulContext);
 	const { notes } = context;
 
-	console.log('Note props = ', JSON.stringify(props));
-	console.log('Note notes = ', JSON.stringify(notes));
+	// console.log('Note props = ', JSON.stringify(props));
 	// console.log('Note params = ', props.match.params);
 	// console.log('Note note id = ', props.match.params.noteId);
 
-	const note = notes.find(note => note.id == props.match.params.noteId);
+	// QUESTION
+	// reloading the browser wipes the context from memory
+	// so need to handle if user reloads the browser and its undefined
+	const note = notes.find(note => note.id == props.match.params.noteId) || {};
 
 	return (
 		<article>

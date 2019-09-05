@@ -35,7 +35,7 @@ function deleteNoteRequest(noteId, cb) {
 }
 
 const NoteItem = props => {
-	console.log('NoteItem props', JSON.stringify(props));
+	// console.log('NoteItem props', JSON.stringify(props));
 	return (
 		<NotefulContext.Consumer>
 			{/*
@@ -63,10 +63,11 @@ const NoteItem = props => {
 
 					<div className="button-container">
 						<span>
-							console.log('got here'); Modified on
+							Modified on{' '}
 							<span className="note-datemod">
-								if(props.note.modified != undefined){' '}
-								{props.note.modified.split('T', 1)[0]}
+								{props.note.modified
+									? props.note.modified.split('T', 1)[0]
+									: ''}
 							</span>
 						</span>
 						<span>
