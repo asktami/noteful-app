@@ -13,7 +13,8 @@ const Note = props => {
 	const context = useContext(NotefulContext);
 	const { notes } = context;
 
-	// console.log('Note props = ', JSON.stringify(props));
+	console.log('Note props = ', JSON.stringify(props));
+	console.log('Note notes = ', JSON.stringify(notes));
 	// console.log('Note params = ', props.match.params);
 	// console.log('Note note id = ', props.match.params.noteId);
 
