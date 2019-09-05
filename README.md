@@ -1,6 +1,6 @@
 # react-router-context-noteful
 
-## Requirements - Refactor your Noteful application to use context instead of prop drilling
+## Refactor to use context instead of prop drilling
 
 - Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState in whichever component you were keeping your dummy state.
 
