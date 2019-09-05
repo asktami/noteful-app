@@ -62,7 +62,7 @@ const NoteItem = props => {
 
 					<div className="button-container">
 						<span>
-							Modified on
+							console.log('got here'); Modified on
 							<span className="note-datemod">
 								if(props.modified != undefined){' '}
 								{props.modified.split('T', 1)[0]}
