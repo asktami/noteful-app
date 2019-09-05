@@ -1,8 +1,20 @@
 # react-router-context-noteful
 
-[View Live](https://asktami.github.io/react-router-context-noteful/)
+Requirements - Refactor your Noteful application to use context instead of prop drilling
 
-Requirements
+- Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState in whichever component you were keeping your dummy state.
+
+- Implement the delete button for each note in the list in the main route and folder route.
+
+- Implement the delete button on the note page, if the delete is successful, redirect to the / path.
+
+- The API calls will be made to a local server called noteful-json-server that you'll need to have running separately to your noteful React application.
+
+- You aren't required to implement the "add-folder" or "add-note" forms just yet.
+
+
+
+Original Requirements
 
 There are 3 routes to build: the main route, the dynamic folder route and a dynamic note route. We'll supply you with 3 wireframes for each of these pages, you'll need to create the semantic (accessible) HTML for these as well as basic styling.
 
