@@ -107,6 +107,9 @@ export default class App extends React.Component {
 		this.setState({
 			notes: newNotes
 		});
+
+		//  if the delete is successful, redirect to the / path.
+		// this.props.history.push(`/`);
 	};
 
 	addNote = note => {

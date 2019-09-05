@@ -6,7 +6,7 @@ import NotefulContext from './NotefulContext';
 
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the updater function, to update state in context
-function deleteNoteRequest(noteId, cb) {
+function handleClickDelete(noteId, cb) {
 	fetch(config.API_NOTES + `/${noteId}`, {
 		method: 'DELETE',
 		headers: {
@@ -27,6 +27,9 @@ function deleteNoteRequest(noteId, cb) {
 			// call the callback function when the request is successful
 			// this is where the App component can remove it from state
 			cb(noteId);
+
+			//  if the delete is successful, redirect to the / path.
+			// this.props.history.push(`/`);
 		})
 		.catch(error => {
 			console.error('delete note errorNotes = ', error);
@@ -74,7 +77,7 @@ const NoteItem = props => {
 							<button
 								className="btn-delete"
 								onClick={() => {
-									deleteNoteRequest(props.note.id, context.deleteNote);
+									handleClickDelete(props.note.id, context.deleteNote);
 								}}
 							>
 								-
