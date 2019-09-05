@@ -57,23 +57,23 @@ const NoteItem = props => {
 				<h3>{note.title}</h3>
 			</NavLink> */}
 
-					<NavLink to={{ pathname: `/note/${props.id}`, props: props }}>
-						<h3>{props.name}</h3>
+					<NavLink to={{ pathname: `/note/${props.note.id}`, props: props }}>
+						<h3>{props.note.name}</h3>
 					</NavLink>
 
 					<div className="button-container">
 						<span>
 							console.log('got here'); Modified on
 							<span className="note-datemod">
-								if(props.modified != undefined){' '}
-								{props.modified.split('T', 1)[0]}
+								if(props.note.modified != undefined){' '}
+								{props.note.modified.split('T', 1)[0]}
 							</span>
 						</span>
 						<span>
 							<button
 								className="btn-delete"
 								onClick={() => {
-									deleteNoteRequest(props.id, context.deleteNote);
+									deleteNoteRequest(props.note.id, context.deleteNote);
 								}}
 							>
 								-

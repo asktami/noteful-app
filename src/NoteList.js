@@ -34,11 +34,13 @@ class NoteList extends React.Component {
 				{foldernotes.map(note => (
 					<article key={note.id}>
 						<div className="note">
-							{/* use spread here because want whole note object
+							{/*
+							{...note}
+							use spread here because want whole note object
 							alternative is
 							note={note} and in NoteItem would need to do props.note.key vs. props.key
 							*/}
-							<NoteItem {...note} />
+							<NoteItem note={note} />
 							console.log('props', JSON.stringify(...note))
 						</div>
 					</article>
