@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import NotefulContext from './NotefulContext';
 
 const FolderItem = props => {
-	const { folders } = this.context;
-	const { notes } = this.context;
+	const context = useContext(NotefulContext);
+	const { folders, notes } = context;
 
 	// use the selected noteId to
 	// - use the notes object & get the folderId
@@ -13,30 +13,29 @@ const FolderItem = props => {
 	const activeNote = notes
 		? notes.find(note => note.id == props.match.params.noteId)
 		: '';
+
+	if (!activeNote) return 'Sorry, no note found.';
+
 	const folderId = activeNote.folderId;
 	const activeFolder = folders.filter(folder => folder.id == folderId);
 
 	return (
-		<NotefulContext.Consumer>
-			{context => (
-				<>
-					{!activeFolder
-						? null
-						: activeFolder.map(folder => (
-								<div className="header-container" key={folder.id}>
-									<span>
-										<h2>{folder.name}</h2>
-									</span>
-								</div>
-						  ))}
+		<>
+			{!activeFolder
+				? null
+				: activeFolder.map(folder => (
+						<div className="header-container" key={folder.id}>
+							<span>
+								<h2>{folder.name}</h2>
+							</span>
+						</div>
+				  ))}
 
-					<br />
-					<button className="btn-save" onClick={props.history.goBack}>
-						Go Back
-					</button>
-				</>
-			)}
-		</NotefulContext.Consumer>
+			<br />
+			<button className="btn-save" onClick={props.history.goBack}>
+				Go Back
+			</button>
+		</>
 	);
 };
 

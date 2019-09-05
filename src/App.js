@@ -74,6 +74,16 @@ export default class App extends React.Component {
 		errorNotes: null
 	};
 
+	// const [folders, setFolders] = useState({
+	// 	folders: [],
+	// 	error: null
+	//   });
+
+	//   const [notes, setNotes] = useState({
+	// 	notes: [],
+	// 	error: null
+	//   });
+
 	togglePopup = () => {
 		alert('Feature not done yet.');
 	};
@@ -156,7 +166,7 @@ export default class App extends React.Component {
 			.then(this.setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => this.setState({ error }));
+			.catch(error => this.setState({ errorFolders: error }));
 	};
 
 	getNotes = () => {
@@ -175,7 +185,7 @@ export default class App extends React.Component {
 			.then(this.setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => this.setState({ error }));
+			.catch(error => this.setState({ errorNotes: error }));
 	};
 
 	// get Folders & Notes when componentDidMount() {}
@@ -196,9 +206,21 @@ export default class App extends React.Component {
 		return (
 			<>
 				<Header />
-				{/* actually update the values stored in NotefulContext by passoing contextValue into value */}
+				{/* actually update the values stored in NotefulContext by passing contextValue into value
+
+				Use the Provider to make values available to all children/grandchildren/subcomponents
+
+				See: https://reactjs.org/docs/context.html#caveats
+
+				-- the code below will re-render all consumers every time the Provider re-renders because a new object is always created for valuethe code below will re-render all consumers every time the Provider re-renders because a new object is always created for value
+				*/}
 				<NotefulContext.Provider value={contextValue}>
 					<main>
+						{/* NOTE:
+						 used render props to pass togglePopup prop via route
+						if did not want to pass props via route could just do
+						component={A}
+						*/}
 						<aside>
 							{routes.map(({ path, exact, aside: A }) => (
 								<Route
@@ -213,6 +235,11 @@ export default class App extends React.Component {
 						</aside>
 
 						<section>
+							{/* NOTE:
+						 used render props to pass togglePopup prop via route
+						if did not want to pass props via route could just do
+						component={S}
+						*/}
 							{routes.map(({ path, exact, section: S }) => (
 								<Route
 									key={path}

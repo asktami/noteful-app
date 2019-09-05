@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import config from './config';
 import NotefulContext from './NotefulContext';
-
-//
-// QUESTION: how to set different fetch errors in context, errorNotes vs. errorFolders?
-//
 
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the updater function, to update state in context
@@ -33,13 +29,26 @@ function deleteNoteRequest(noteId, cb) {
 			cb(noteId);
 		})
 		.catch(error => {
-			console.error(error);
+			console.error('delete note errorNotes = ', error);
+			this.setState({ errorNotes: error });
 		});
 }
 
 const NoteItem = props => {
+	const context = useContext(NotefulContext);
+	const { folders, notes } = context;
+
 	return (
 		<NotefulContext.Consumer>
+			{/*
+			Use the Consumer to grab values from contex
+
+ 			QUESTION: what is context?
+			ANSWER:
+			is it equal to the object inside NotefulCcontext.js?
+			an anonymous function with the parameter context automatically defined by {context => ... }, don't know where the parameter function comes from, don't need to know where it comes from because we're using it to render a result; context is a variable containing data; this function is called by line 39 NotefulContext.Consumer
+			*/}
+
 			{context => (
 				<div className="note-item">
 					{/*
