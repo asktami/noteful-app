@@ -1,6 +1,6 @@
 # react-router-context-noteful
 
-##Requirements - Refactor your Noteful application to use context instead of prop drilling
+## Requirements - Refactor your Noteful application to use context instead of prop drilling
 
 - Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState in whichever component you were keeping your dummy state.
 
@@ -14,7 +14,7 @@
 
 
 
-##Original Requirements
+## Original Requirements
 
 There are 3 routes to build: the main route, the dynamic folder route and a dynamic note route. We'll supply you with 3 wireframes for each of these pages, you'll need to create the semantic (accessible) HTML for these as well as basic styling.
 
