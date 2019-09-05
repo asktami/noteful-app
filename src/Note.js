@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import NoteItem from './NoteItem';
 
-import config from './config';
 import NotefulContext from './NotefulContext';
 
 //
@@ -11,7 +10,8 @@ import NotefulContext from './NotefulContext';
 //
 
 const Note = props => {
-	const { notes } = useContext(NotefulContext);
+	const context = useContext(NotefulContext);
+	const { notes } = context;
 
 	// console.log('Note props = ', JSON.stringify(props));
 	// console.log('Note params = ', props.match.params);

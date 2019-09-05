@@ -35,9 +35,6 @@ function deleteNoteRequest(noteId, cb) {
 }
 
 const NoteItem = props => {
-	const context = useContext(NotefulContext);
-	const { folders, notes } = context;
-
 	return (
 		<NotefulContext.Consumer>
 			{/*
@@ -47,6 +44,8 @@ const NoteItem = props => {
 			ANSWER:
 			is it equal to the object inside NotefulCcontext.js?
 			an anonymous function with the parameter context automatically defined by {context => ... }, don't know where the parameter function comes from, don't need to know where it comes from because we're using it to render a result; context is a variable containing data; this function is called by line 39 NotefulContext.Consumer
+
+			NOTE: context could be any word since its just the parameter label
 			*/}
 
 			{context => (
@@ -63,8 +62,9 @@ const NoteItem = props => {
 
 					<div className="button-container">
 						<span>
-							Modified on{' '}
+							Modified on
 							<span className="note-datemod">
+								if(props.modified != undefined){' '}
 								{props.modified.split('T', 1)[0]}
 							</span>
 						</span>
