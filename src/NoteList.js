@@ -36,11 +36,14 @@ class NoteList extends React.Component {
 							<div className="note">
 								{/*
 							{...note}
-							use spread here because want whole note object
+							use spread here b/c want whole note object, and get inside NoteItem via note.key
 							alternative is
-							note={note} and in NoteItem would need to do props.note.key vs. props.key
+							note={note} and in NoteItem get via props.note.key
+
+							QUESTION:
+							pass {...this.props} so I can have the history object inside the NoteItem component to pass a new location to (as well as the location and match objects)
 							*/}
-								<NoteItem note={note} />
+								<NoteItem {...this.props} note={note} />
 								{/* console.log('props', JSON.stringify(...note)) */}
 							</div>
 						</article>

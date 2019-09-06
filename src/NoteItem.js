@@ -1,12 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 import config from './config';
 import NotefulContext from './NotefulContext';
 
+// redirect
+const redirectToTarget = props => {
+	props.history.push(`/`);
+};
+
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the updater function, to update state in context
-function handleClickDelete(noteId, cb) {
+function handleClickDelete(noteId, cb, props) {
 	fetch(config.API_NOTES + `/${noteId}`, {
 		method: 'DELETE',
 		headers: {
@@ -26,23 +31,26 @@ function handleClickDelete(noteId, cb) {
 		.then(data => {
 			// call the callback function when the request is successful
 			// this is where the App component can remove it from state
+			// ie. update the notes stored in state
+			// which also updates the notes stored in context
 			cb(noteId);
-
-			//  if the delete is successful, redirect to the / path.
-			// this.props.history.push(`/`);
 		})
 		.catch(error => {
 			console.error('delete note errorNotes = ', error);
 			this.setState({ errorNotes: error });
 		});
+
+	// redirect
+	redirectToTarget(props);
 }
 
 const NoteItem = props => {
-	// console.log('NoteItem props', JSON.stringify(props));
+	console.log('NoteItem props', props);
 	return (
 		<NotefulContext.Consumer>
 			{/*
 			Use the Consumer to grab values from contex
+			--- the value we're grabbing from context is the deleteNote function, we're passing it to the delete button
 
  			QUESTION: what is context?
 			ANSWER:
@@ -77,7 +85,7 @@ const NoteItem = props => {
 							<button
 								className="btn-delete"
 								onClick={() => {
-									handleClickDelete(props.note.id, context.deleteNote);
+									handleClickDelete(props.note.id, context.deleteNote, props);
 								}}
 							>
 								-

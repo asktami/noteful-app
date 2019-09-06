@@ -47,21 +47,6 @@ const routes = [
 	}
 ];
 
-/*
-HOW TO CONVERT:
-  state = {
-        notes: [],
-        folders: []
-    };
-
-    componentDidMount() {
-        // fake date loading from API call
-        setTimeout(() => this.setState(dummyStore), 600);
-	}
-
-	TO WORK WITH FUNCTION instead of CLASS?
-*/
-
 export default class App extends React.Component {
 	// get context
 	static contextType = NotefulContext;
@@ -102,14 +87,14 @@ export default class App extends React.Component {
 		});
 	};
 
+	// deleteNotes updates state
+	// and inside render context is updated with values from state
+	// then context is used to display values in FolderList and NoteList
 	deleteNote = noteId => {
 		const newNotes = this.state.notes.filter(note => note.id !== noteId);
 		this.setState({
 			notes: newNotes
 		});
-
-		//  if the delete is successful, redirect to the / path.
-		// this.props.history.push(`/`);
 	};
 
 	addNote = note => {
@@ -240,6 +225,10 @@ export default class App extends React.Component {
 						<section>
 							{/* NOTE:
 						 used render props to pass togglePopup prop via route
+						 AND
+						 because wanted to pass location, match and history props to the component so that in the component I have access to the history object to push a new location into
+						 (THIS IS THE ONLY WAY)
+
 						if did not want to pass props via route could just do
 						component={S}
 						*/}
