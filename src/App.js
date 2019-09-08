@@ -90,6 +90,9 @@ export default class App extends React.Component {
 	// deleteNotes updates state
 	// and inside render context is updated with values from state
 	// then context is used to display values in FolderList and NoteList
+	/*
+	After making successful a DELETE API request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.
+	*/
 	deleteNote = noteId => {
 		const newNotes = this.state.notes.filter(note => note.id !== noteId);
 		this.setState({
