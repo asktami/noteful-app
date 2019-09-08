@@ -1,5 +1,11 @@
 # react-router-context-noteful
 
+[View Live](https://asktami.github.io/react-router-context-noteful/)
+
+Note: using [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database.  See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
+
+-----
+
 ## Refactor to use context instead of prop drilling
 
 - Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState in whichever component you were keeping your dummy state.
