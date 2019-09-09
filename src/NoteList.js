@@ -39,8 +39,11 @@ const NoteList = props => {
 							use spread here IF want whole note object, and get inside NoteItem via note.key
 							alternative is
 							note={note} and in NoteItem get via props.note.key
+
+							QUESTION:
+							why MUST pass {...props} to have the history, location, and match props inside NoteItem
 							*/}
-									<NoteItem note={note} />
+									<NoteItem note={note} {...props} />
 								</div>
 							</article>
 						))

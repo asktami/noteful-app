@@ -69,7 +69,7 @@ const App = () => {
     After making successful a DELETE API request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.
     */
 	const deleteNote = noteId => {
-		const newNotes = this.state.notes.filter(note => note.id !== noteId);
+		const newNotes = notes.filter(note => note.id !== noteId);
 		setNotes(newNotes);
 	};
 
@@ -133,10 +133,11 @@ const App = () => {
 	// 	this.getNotes();
 	// }
 
+	// only load ONCE, to fetch initial API data
 	useEffect(() => {
 		getFolders();
 		getNotes();
-	});
+	}, []); /* <-- add this */
 
 	// create object to update the values stored in NotefulContext
 	const contextValue = {

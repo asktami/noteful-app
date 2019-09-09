@@ -7,6 +7,10 @@ import NotefulContext from './NotefulContext';
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the updater function, to update state in context
 function handleClickDelete(noteId, cb, props) {
+	// alert('handleClickDelete');
+	console.log('NoteItem handleClickDelete props', props);
+	console.log('NoteItem handleClickDelete props.history', props.history);
+
 	fetch(config.API_NOTES + `/${noteId}`, {
 		method: 'DELETE',
 		headers: {
@@ -43,7 +47,7 @@ function handleClickDelete(noteId, cb, props) {
 }
 
 const NoteItem = props => {
-	// console.log('NoteItem props', props);
+	console.log('NoteItem props', props);
 	return (
 		<NotefulContext.Consumer>
 			{/*
@@ -83,9 +87,7 @@ const NoteItem = props => {
 							<button
 								className="btn-delete"
 								onClick={() => {
-									handleClickDelete(props.note.id, context.deleteNote, {
-										...props
-									});
+									handleClickDelete(props.note.id, context.deleteNote, props);
 								}}
 							>
 								-
