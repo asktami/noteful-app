@@ -37,10 +37,8 @@ function handleClickDelete(noteId, cb, props) {
 		})
 		.catch(error => {
 			console.error('NoteItem delete note errorNotes = ', error);
-			// setValues(
-			// ...values,
-			// 	errorFolders: null
-			// );
+			// QUESTION: how to update errorNotes???
+			// errorNotes = error;
 		});
 }
 
