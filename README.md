@@ -4,6 +4,8 @@
 
 Note: using [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database.  See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
 
+Created a db.json file in this repository; access the api via https://my-json-server.typicode.com/asktami/react-router-context-noteful as the root URL.
+
 -----
 
 ## Refactor to use context instead of prop drilling
