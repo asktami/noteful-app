@@ -4,8 +4,8 @@ import NoteItem from './NoteItem';
 import NotefulContext from './NotefulContext';
 
 const Note = props => {
-	console.log('Note props = ', props);
-	console.log('Note history = ', props.history);
+	// console.log('Note props = ', props);
+	// console.log('Note history = ', props.history);
 	// console.log('Note params = ', props.match.params);
 	// console.log('Note note id = ', props.match.params.noteId);
 
@@ -21,7 +21,7 @@ const Note = props => {
 	return (
 		<article>
 			<div className="note">
-				<NoteItem {...props} note={note} togglePopup={props.togglePopup} />
+				<NoteItem {...props} note={note} />
 				<p className="note-content">{note.content}</p>
 			</div>
 		</article>
