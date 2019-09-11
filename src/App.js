@@ -19,6 +19,9 @@ import FolderItem from './FolderItem';
 import NoteList from './NoteList';
 import Note from './Note';
 
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
+
 const routes = [
 	{
 		path: '/',
@@ -42,6 +45,20 @@ const routes = [
 		section: Note
 	},
 	{
+		path: '/add-folder',
+		exact: true,
+		header: Header,
+		aside: null,
+		section: AddFolder
+	},
+	{
+		path: '/add-note',
+		exact: true,
+		header: Header,
+		aside: null,
+		section: AddNote
+	},
+	{
 		path: '/:any/:any/:any',
 		exact: true,
 		header: Header,
@@ -55,12 +72,8 @@ const App = props => {
 	// setting default state with hooks
 	const [folders, setFolders] = useState([]);
 	const [notes, setNotes] = useState([]);
-	const [errorFolders, setErrorFolders] = useState(null);
-	const [errorNotes, setErrorNotes] = useState(null);
-
-	const unfinishedMessage = () => {
-		alert('Feature not doen yet!');
-	};
+	const [getFoldersError, setGetFoldersError] = useState(null);
+	const [getNotesError, setGetNotesError] = useState(null);
 
 	// deleteNotes updates state
 	// and inside render context is updated with values from state
@@ -71,14 +84,6 @@ const App = props => {
 	const deleteNote = noteId => {
 		const newNotes = notes.filter(note => note.id !== noteId);
 		setNotes(newNotes);
-	};
-
-	const addErrorNotes = error => {
-		setErrorNotes(error);
-	};
-
-	const addErrorFolders = error => {
-		setErrorFolders(error);
 	};
 
 	const addNote = note => {
@@ -112,7 +117,7 @@ const App = props => {
 			.then(setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => setErrorFolders(error));
+			.catch(error => setGetFoldersError(error));
 	};
 
 	const getNotes = () => {
@@ -131,14 +136,8 @@ const App = props => {
 			.then(setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => setErrorNotes(error));
+			.catch(error => setGetNotesError(error));
 	};
-
-	// get Folders & Notes when componentDidMount() {}
-	// componentDidMount() {
-	// 	this.getFolders();
-	// 	this.getNotes();
-	// }
 
 	// only load ONCE, to fetch initial API data
 	useEffect(() => {
@@ -152,10 +151,7 @@ const App = props => {
 		folders: folders,
 		deleteNote: deleteNote,
 		addNote: addNote,
-		addFolder: addFolder,
-		addErrorNotes: addErrorNotes,
-		addErrorFolders: addErrorFolders,
-		unfinishedMessage: unfinishedMessage
+		addFolder: addFolder
 	};
 
 	return (

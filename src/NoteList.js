@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+
+import NoteError from './NoteError';
 
 import NotefulContext from './NotefulContext';
 
 import NoteItem from './NoteItem';
 
 const NoteList = props => {
-	console.log('NoteList props = ', props);
-	console.log('NoteList props history = ', props.history);
+	// console.log('NoteList props = ', props);
+	// console.log('NoteList props history = ', props.history);
 
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
@@ -28,16 +32,17 @@ const NoteList = props => {
 						</span>
 						&nbsp;&nbsp;
 						<span>
-							<button className="btn-add" onClick={context.unfinishedMessage}>
-								+
-							</button>
+							<NavLink to={'/add-note'}>
+								<button className="btn-add">+</button>
+							</NavLink>
 						</span>
 					</div>
 					{foldernotes.length > 0 ? (
 						foldernotes.map(note => (
-							<article key={note.id}>
-								<div className="note">
-									{/*
+							<NoteError>
+								<article key={note.id}>
+									<div className="note">
+										{/*
 							{...note}
 							use spread here IF want whole note object, and get inside NoteItem via note.key
 							alternative is
@@ -46,9 +51,10 @@ const NoteList = props => {
 							QUESTION:
 							why MUST pass {...props} to have the history, location, and match props inside NoteItem
 							*/}
-									<NoteItem note={note} {...props} />
-								</div>
-							</article>
+										<NoteItem note={note} {...props} />
+									</div>
+								</article>
+							</NoteError>
 						))
 					) : (
 						<article className="no-border">
@@ -62,3 +68,14 @@ const NoteList = props => {
 };
 
 export default NoteList;
+
+// validate that get an array that has id and name
+// this array is the "notes" variable coming from context
+NoteList.propTypes = {
+	notes: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			note: PropTypes.object.isRequired
+		})
+	)
+};

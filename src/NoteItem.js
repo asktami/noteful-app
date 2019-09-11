@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import config from './config';
@@ -18,13 +19,13 @@ export default class NoteItem extends React.Component {
 	handleClickDelete = e => {
 		e.preventDefault();
 
-		console.log('handleClickDelete props = ', this.props);
-		console.log('handleClickDelete contextType = ', this.context);
+		// console.log('handleClickDelete props = ', this.props);
+		// console.log('handleClickDelete contextType = ', this.context);
 
-		console.log(
-			'handleClickDelete props.location.pathname.includes(/note/)',
-			this.props.location.pathname.includes('/note/')
-		);
+		// console.log(
+		// 	'handleClickDelete props.location.pathname.includes(/note/)',
+		// 	this.props.location.pathname.includes('/note/')
+		// );
 
 		const noteId = this.props.note.id;
 
@@ -62,8 +63,8 @@ export default class NoteItem extends React.Component {
 	};
 
 	render() {
-		console.log('inside NoteItem props = ', this.props);
-		console.log('inside NoteItem contextType = ', this.contextType);
+		// console.log('inside NoteItem props = ', this.props);
+		// console.log('inside NoteItem contextType = ', this.contextType);
 
 		return (
 			<NotefulContext.Consumer>
@@ -117,3 +118,7 @@ export default class NoteItem extends React.Component {
 		);
 	}
 }
+
+NoteItem.propTypes = {
+	note: PropTypes.object.isRequired
+};

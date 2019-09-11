@@ -151,6 +151,20 @@ label {
 .btn-add:focus {
 	background-color: #005fa3;
 }
+.btn-cancel {
+	background: #909091;
+	color: #fff;
+	border: 2px solid #000;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.btn-cancel:hover,
+.btn-cancel:focus {
+	background-color: #363637;
+}
 
 .btn-save {
 	background: #0095ff;
@@ -163,7 +177,7 @@ label {
 }
 
 .btn-save:hover,
-.btn-add:focus {
+.btn-save:focus {
 	background-color: #005fa3;
 }
 

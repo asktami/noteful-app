@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import NoteItem from './NoteItem';
 
 import NotefulContext from './NotefulContext';
@@ -29,3 +30,7 @@ const Note = props => {
 };
 
 export default Note;
+
+Note.propTypes = {
+	note: PropTypes.object.isRequired
+};

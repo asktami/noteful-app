@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import NotefulContext from './NotefulContext';
 
@@ -40,3 +41,20 @@ const FolderItem = props => {
 };
 
 export default FolderItem;
+
+// validate that get an array that has id and name
+// this array is the "folders" variable coming from context
+FolderItem.propTypes = {
+	folders: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired
+		})
+	),
+	notes: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			folderId: PropTypes.string.isRequired
+		})
+	)
+};
