@@ -72,8 +72,8 @@ const App = props => {
 	// setting default state with hooks
 	const [folders, setFolders] = useState([]);
 	const [notes, setNotes] = useState([]);
-	const [getFoldersError, setGetFoldersError] = useState(null);
-	const [getNotesError, setGetNotesError] = useState(null);
+	const [foldersError, setFoldersError] = useState(null);
+	const [notesError, setNotesError] = useState(null);
 
 	// deleteNotes updates state
 	// and inside render context is updated with values from state
@@ -117,7 +117,7 @@ const App = props => {
 			.then(setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => setGetFoldersError(error));
+			.catch(error => setFoldersError(error));
 	};
 
 	const getNotes = () => {
@@ -136,7 +136,7 @@ const App = props => {
 			.then(setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => setGetNotesError(error));
+			.catch(error => setNotesError(error));
 	};
 
 	// only load ONCE, to fetch initial API data
