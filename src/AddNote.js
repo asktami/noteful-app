@@ -3,13 +3,16 @@ import config from './config';
 
 import NotefulContext from './NotefulContext';
 
+import ValidationError from './ValidationError';
+
 class AddNote extends React.Component {
 	static contextType = NotefulContext;
 
 	state = {
+		apiError: null,
 		formValid: false,
 		errorCount: null,
-		error: null,
+		errorMessage: null,
 		folderId: '',
 		name: '',
 		content: '',
@@ -20,19 +23,75 @@ class AddNote extends React.Component {
 		}
 	};
 
+	updateErrorCount = () => {
+		let errors = this.state.errors;
+
+		let errMsg =
+			this.state.errorMessage === null ? '' : this.state.errorMessage;
+
+		let count = 0;
+
+		console.log('updateErrorCount errors = ', errors);
+
+		Object.values(errors).forEach(val => {
+			console.log('updateErrorCount errors VAL = ', val);
+			if (val.length > 0) {
+				count++;
+				errMsg += `<br />${val}`;
+			}
+		});
+
+		this.setState({ errorCount: count });
+		let valid = this.state.errorCount === 0 ? true : false;
+		this.setState({ formValid: valid });
+	};
+
+	validateField = (name, value) => {
+		let err = '';
+
+		// Name
+		if (name === 'name') {
+			if (value.length === 0) {
+				err = 'Folder name is required';
+			} else if (value.length < 3) {
+				err = 'Folder name must be at least 3 characters long';
+			}
+		}
+
+		// folderId
+		if (name === 'folderId') {
+			if (value.length === 0) {
+				err = 'You must select a folder';
+			}
+		}
+
+		// content
+		if (name === 'content') {
+			if (value.length === 0) {
+				err = 'You enter a note';
+			} else if (value.length < 5) {
+				err = 'The note must be at least 5 characters long';
+			}
+			this.setState({
+				errors: { [name]: err }
+			});
+		}
+
+		// setValues({ ...values, [name]: { value: value.trim(), touched: true } });
+
+		// this.setState({ errors: { [name]: err } });
+
+		// this.setState({
+		// 	errors: { [name]: err }
+		// });
+	};
+
 	handleChange = event => {
 		const { name, value } = event.target;
-
-		console.log('this.state = ', this.state);
-
-		console.log('---- in AddNote, handleChange ----');
-		console.log('--------e = ', event.target);
-		console.log('--------e name = ', name);
-		console.log('--------e value = ', value);
-
 		this.setState({ [name]: value.trim() });
 
-		console.log('this.state = ', this.state);
+		this.validateField(name, value);
+		this.updateErrorCount();
 	};
 
 	handleClickCancel = () => {
@@ -41,6 +100,13 @@ class AddNote extends React.Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		this.updateErrorCount();
+
+		// do NOT submit form if any errors
+		if (this.state.errorCount > 0) {
+			alert('Form Error');
+			return;
+		}
 
 		// TO DO - make sure folderId, name and content are not blank or an empty string
 
@@ -52,9 +118,7 @@ class AddNote extends React.Component {
 			content: content.value,
 			modified: new Date()
 		};
-		this.setState({ error: null });
-
-		console.log('config.API_NOTES = ', config.API_NOTES);
+		this.setState({ apiError: null });
 
 		fetch(config.API_NOTES, {
 			method: 'POST',
@@ -82,14 +146,21 @@ class AddNote extends React.Component {
 				this.props.history.push('/');
 			})
 			.catch(error => {
-				this.setState({ error });
+				this.setState({ apiError: error });
 			});
 	};
 
 	render() {
+		const { errors } = this.state;
+		const folders = this.context.folders;
+
 		console.log('AddNote props = ', this.props);
 		console.log('AddNote context folders = ', this.context.folders);
-		const folders = this.context.folders;
+		console.log('this.state. = ', this.state);
+		console.log('errors = ', errors);
+		console.log('errCount = ', this.state.errorCount);
+
+		console.log('errors.content.length =', errors.content.length);
 
 		return (
 			<form onSubmit={this.handleSubmit}>
@@ -117,17 +188,31 @@ class AddNote extends React.Component {
 						onChange={this.handleChange}
 					/>
 					<label htmlFor="content">Description</label>
-					<textarea
-						id="content"
-						name="content"
-						onChange={this.handleChange}
-					></textarea>
+					<textarea id="content" name="content" onChange={this.handleChange} />
+					{errors.content.length > 0 && (
+						<ValidationError message={errors.content} />
+					)}
 					<br />
 					<button className="btn-cancel" onClick={this.handleClickCancel}>
 						Cancel
 					</button>{' '}
-					<button className="btn-save">Save Note</button>
+					<button
+						className="btn-save"
+						disabled={
+							this.state.errorCount === null || this.state.formValid === false
+						}
+					>
+						Save Note
+					</button>
 				</fieldset>
+
+				{this.state.errorCount !== null ? (
+					<p className="form-status">
+						Form is {this.state.formValid ? 'valid ✅' : 'invalid ❌'}
+						<br />
+						{this.state.errorMessage}
+					</p>
+				) : null}
 			</form>
 		);
 	}

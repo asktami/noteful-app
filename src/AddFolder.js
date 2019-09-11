@@ -12,6 +12,7 @@ class AddFolder extends React.Component {
 		apiError: null,
 		formValid: false,
 		errorCount: null,
+		errorMessage: null,
 		name: '',
 		errors: {
 			name: ''
@@ -20,18 +21,23 @@ class AddFolder extends React.Component {
 
 	updateErrorCount = () => {
 		let errors = this.state.errors;
+
+		let errMsg =
+			this.state.errorMessage === null ? '' : this.state.errorMessage;
+
 		let count = 0;
 
+		console.log('updateErrorCount errors = ', errors);
+
 		Object.values(errors).forEach(val => {
+			console.log('updateErrorCount errors VAL = ', val);
 			if (val.length > 0) {
-				count = count + 1;
-			} else {
-				count = 0;
+				count++;
+				errMsg += `<br />${val}`;
 			}
 		});
 
 		this.setState({ errorCount: count });
-
 		let valid = this.state.errorCount === 0 ? true : false;
 		this.setState({ formValid: valid });
 	};
@@ -57,11 +63,6 @@ class AddFolder extends React.Component {
 
 		this.validateField(name, value);
 		this.updateErrorCount();
-
-		console.log('---- in AddFolder, handleChange ----');
-		console.log('--------e = ', event.target);
-		console.log('--------e name = ', name);
-		console.log('--------e value = ', value);
 	};
 
 	handleClickCancel = () => {
@@ -120,7 +121,7 @@ class AddFolder extends React.Component {
 		console.log('errCount = ', this.state.errorCount);
 
 		return (
-			<form className="addFolderForm" onSubmit={this.handleSubmit}>
+			<form className="addFolderForm" onSubmit={this.handleSubmit} noValidate>
 				<fieldset>
 					<legend>New Folder</legend>
 					<label htmlFor="name">Name</label>
@@ -151,6 +152,8 @@ class AddFolder extends React.Component {
 				{this.state.errorCount !== null ? (
 					<p className="form-status">
 						Form is {this.state.formValid ? 'valid ✅' : 'invalid ❌'}
+						<br />
+						{this.state.errorMessage}
 					</p>
 				) : null}
 			</form>
