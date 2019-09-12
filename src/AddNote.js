@@ -16,6 +16,9 @@ class AddNote extends React.Component {
 		folderId: '',
 		name: '',
 		content: '',
+		error_folderId: '',
+		error_name: '',
+		error_content: '',
 		errors: {
 			folderId: '',
 			name: '',
@@ -73,9 +76,16 @@ class AddNote extends React.Component {
 				err = 'The note must be at least 5 characters long';
 			}
 			this.setState({
+				...this.state,
+				...this.state.errors,
+				[name]: value,
 				errors: { [name]: err }
 			});
 		}
+
+		// this will put values into error_folderId, error_name,and error_content instead of error :  {note: '', folderId: '', content: ''}
+		let key = 'error_' + name;
+		this.setState({ [key]: err });
 
 		// setValues({ ...values, [name]: { value: value.trim(), touched: true } });
 
