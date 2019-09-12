@@ -37,9 +37,9 @@ class AddFolder extends React.Component {
 		let err = '';
 
 		if (name === 'name') {
-			if (value.length === 0) {
+			if (value.trim().length === 0) {
 				err = 'Folder name is required';
-			} else if (value.length < 3) {
+			} else if (value.trim().length < 3) {
 				err = 'Folder name must be at least 3 characters long';
 			}
 		}

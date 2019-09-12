@@ -78,7 +78,7 @@ class AddNote extends React.Component {
 		const { name, value } = event.target;
 		this.setState({ [name]: value.trim() });
 
-		this.validateField(name, value);
+		this.validateField(name, value.trim());
 		this.updateErrorCount();
 	};
 
