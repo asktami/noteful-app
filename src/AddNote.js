@@ -12,84 +12,59 @@ class AddNote extends React.Component {
 		apiError: null,
 		formValid: false,
 		errorCount: null,
-		errorMessage: null,
 		folderId: '',
 		name: '',
 		content: '',
-		error_folderId: '',
-		error_name: '',
-		error_content: '',
 		errors: {
-			folderId: '',
-			name: '',
-			content: ''
+			folderId: 'You must select a folder',
+			name: 'You must enter a note title',
+			content: 'You must enter a description'
 		}
 	};
 
 	updateErrorCount = () => {
 		let errors = this.state.errors;
-
 		let count = 0;
 
-		console.log('updateErrorCount errors = ', errors);
-
 		Object.values(errors).forEach(val => {
-			console.log('updateErrorCount errors VAL = ', val);
 			if (val.length > 0) {
 				count++;
 			}
 		});
 
 		this.setState({ errorCount: count });
-		let valid = this.state.errorCount === 0 ? true : false;
+		let valid = count === 0 ? true : false;
 		this.setState({ formValid: valid });
 	};
 
 	validateField = (name, value) => {
 		let err = '';
 
-		// Name
 		if (name === 'name') {
 			if (value.length === 0) {
-				err = 'Folder name is required';
+				err = 'Note title is required';
 			} else if (value.length < 3) {
-				err = 'Folder name must be at least 3 characters long';
+				err = 'Note title must be at least 3 characters long';
 			}
 		}
 
-		// folderId
 		if (name === 'folderId') {
 			if (value.length === 0) {
 				err = 'You must select a folder';
 			}
 		}
 
-		// content
 		if (name === 'content') {
 			if (value.length === 0) {
-				err = 'You enter a note';
+				err = 'You must enter a description';
 			} else if (value.length < 5) {
-				err = 'The note must be at least 5 characters long';
+				err = 'The description must be at least 5 characters long';
 			}
-			this.setState({
-				...this.state,
-				...this.state.errors,
-				[name]: value,
-				errors: { [name]: err }
-			});
 		}
 
-		// this will put values into error_folderId, error_name,and error_content instead of error :  {note: '', folderId: '', content: ''}
-		let key = 'error_' + name;
-		this.setState({ [key]: err });
-
-		// setValues({ ...values, [name]: { value: value.trim(), touched: true } });
-
-		// this.setState({ errors: { [name]: err } });
-
-		// this.setState({
-		// 	errors: { [name]: err }
-		// });
+		const { errors } = { ...this.state };
+		errors[name] = err;
+		this.setState({ errors });
 	};
 
 	handleChange = event => {
@@ -106,15 +81,10 @@ class AddNote extends React.Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.updateErrorCount();
+		// this.updateErrorCount();
 
 		// do NOT submit form if any errors
-		if (this.state.errorCount > 0) {
-			alert('Form Error');
-			return;
-		}
-
-		// TO DO - make sure folderId, name and content are not blank or an empty string
+		if (this.state.errorCount > 0) return;
 
 		// get the form fields from the event
 		const { folderId, name, content } = e.target;
@@ -144,10 +114,13 @@ class AddNote extends React.Component {
 				return res.json();
 			})
 			.then(data => {
-				// best practice, clear form values by doing  = ''
+				// clear form values
+				folderId.value = '';
 				name.value = '';
-				// addFolder:
+				content.value = '';
+
 				this.context.addNote(data);
+
 				// return to list:
 				this.props.history.push('/');
 			})
@@ -160,14 +133,6 @@ class AddNote extends React.Component {
 		const { errors } = this.state;
 		const folders = this.context.folders;
 
-		console.log('AddNote props = ', this.props);
-		console.log('AddNote context folders = ', this.context.folders);
-		console.log('this.state. = ', this.state);
-		console.log('errors = ', errors);
-		console.log('errCount = ', this.state.errorCount);
-
-		console.log('errors.content.length =', errors.content.length);
-
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
@@ -176,6 +141,7 @@ class AddNote extends React.Component {
 					<select
 						id="folderId"
 						name="folderId"
+						required
 						value={this.state.folderId}
 						onChange={this.handleChange}
 					>
@@ -186,6 +152,9 @@ class AddNote extends React.Component {
 							</option>
 						))}
 					</select>
+					{errors.folderId.length > 0 && (
+						<ValidationError message={errors.folderId} />
+					)}
 					<label htmlFor="name">Title</label>
 					<input
 						type="text"
@@ -193,6 +162,7 @@ class AddNote extends React.Component {
 						name="name"
 						onChange={this.handleChange}
 					/>
+					{errors.name.length > 0 && <ValidationError message={errors.name} />}
 					<label htmlFor="content">Description</label>
 					<textarea id="content" name="content" onChange={this.handleChange} />
 					{errors.content.length > 0 && (
@@ -204,9 +174,7 @@ class AddNote extends React.Component {
 					</button>{' '}
 					<button
 						className="btn-save"
-						disabled={
-							this.state.errorCount === null || this.state.formValid === false
-						}
+						disabled={this.state.formValid === false}
 					>
 						Save Note
 					</button>
@@ -214,9 +182,7 @@ class AddNote extends React.Component {
 
 				{this.state.errorCount !== null ? (
 					<p className="form-status">
-						Form is {this.state.formValid ? 'valid ✅' : 'invalid ❌'}
-						<br />
-						{this.state.errorMessage}
+						Form is {this.state.formValid ? 'complete  ✅' : 'incomplete  ❌'}
 					</p>
 				) : null}
 			</form>

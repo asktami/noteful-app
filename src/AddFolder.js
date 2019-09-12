@@ -12,45 +12,41 @@ class AddFolder extends React.Component {
 		apiError: null,
 		formValid: false,
 		errorCount: null,
-		errorMessage: null,
 		name: '',
 		errors: {
-			name: ''
+			name: 'You must enter a folder name'
 		}
 	};
 
 	updateErrorCount = () => {
 		let errors = this.state.errors;
-
 		let count = 0;
 
-		console.log('updateErrorCount errors = ', errors);
-
 		Object.values(errors).forEach(val => {
-			console.log('updateErrorCount errors VAL = ', val);
 			if (val.length > 0) {
 				count++;
 			}
 		});
 
 		this.setState({ errorCount: count });
-		let valid = this.state.errorCount === 0 ? true : false;
+		let valid = count === 0 ? true : false;
 		this.setState({ formValid: valid });
 	};
 
 	validateField = (name, value) => {
 		let err = '';
 
-		// Name
 		if (name === 'name') {
 			if (value.length === 0) {
 				err = 'Folder name is required';
 			} else if (value.length < 3) {
 				err = 'Folder name must be at least 3 characters long';
 			}
-
-			this.setState({ errors: { [name]: err } });
 		}
+
+		const { errors } = { ...this.state };
+		errors[name] = err;
+		this.setState({ errors });
 	};
 
 	handleChange = event => {
@@ -67,20 +63,17 @@ class AddFolder extends React.Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.updateErrorCount();
 
 		// do NOT submit form if any errors
-		if (this.state.errorCount > 0) {
-			alert('Form Error');
-			return;
-		}
+		if (this.state.errorCount > 0) return;
 
 		// get the form fields from the event
 		const { name } = e.target;
 		const folder = {
 			name: name.value
 		};
-		this.setState({ error: null });
+		this.setState({ apiError: null });
+
 		fetch(config.API_FOLDERS, {
 			method: 'POST',
 			body: JSON.stringify(folder),
@@ -99,10 +92,11 @@ class AddFolder extends React.Component {
 				return res.json();
 			})
 			.then(data => {
-				// best practice, clear form values by doing  = ''
+				// clear form values
 				name.value = '';
-				// addFolder:
+
 				this.context.addFolder(data);
+
 				// return to list:
 				this.props.history.push('/');
 			})
@@ -112,9 +106,6 @@ class AddFolder extends React.Component {
 	};
 	render() {
 		const { errors } = this.state;
-
-		console.log('this.state = ', this.state);
-		console.log('errCount = ', this.state.errorCount);
 
 		return (
 			<form className="addFolderForm" onSubmit={this.handleSubmit} noValidate>
@@ -137,9 +128,7 @@ class AddFolder extends React.Component {
 					</button>{' '}
 					<button
 						className="btn-save"
-						disabled={
-							this.state.errorCount === null || this.state.formValid === false
-						}
+						disabled={this.state.formValid === false}
 					>
 						Save Folder
 					</button>
@@ -147,9 +136,7 @@ class AddFolder extends React.Component {
 
 				{this.state.errorCount !== null ? (
 					<p className="form-status">
-						Form is {this.state.formValid ? 'valid ✅' : 'invalid ❌'}
-						<br />
-						{this.state.errorMessage}
+						Form is {this.state.formValid ? 'complete  ✅' : 'incomplete  ❌'}
 					</p>
 				) : null}
 			</form>
