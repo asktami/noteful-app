@@ -32,5 +32,5 @@ const Note = props => {
 export default Note;
 
 Note.propTypes = {
-	note: PropTypes.object.isRequired
+	props: PropTypes.object.isRequired
 };
