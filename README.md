@@ -2,6 +2,8 @@
 
 [View Live](https://asktami.github.io/react-router-context-noteful/)
 
+**Note: this works _without any issues_ if you clone and run from your desktop, however from GitHub, if you create a note, when you delete that note it appears as though nothing happens.  And, when you re-load any page, only the original folders and notes will show - any folders/notes you've created will disappear.**
+
 Note: using [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database.  See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
 
 Created a db.json file in this repository; access the api via https://my-json-server.typicode.com/asktami/react-router-context-noteful as the root URL.
