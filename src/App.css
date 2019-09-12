@@ -181,6 +181,13 @@ label {
 	background-color: #005fa3;
 }
 
+.btn-save:disabled,
+.btn-save[disabled] {
+	border: 1px solid #999999;
+	background-color: #cccccc;
+	color: #666666;
+}
+
 .btn-delete {
 	background: #ff0095;
 	color: #fff;
@@ -310,4 +317,8 @@ footer {
 .note {
 	display: flex;
 	flex-direction: column;
+}
+
+.error {
+	color: red;
 }
