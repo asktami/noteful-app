@@ -24,10 +24,10 @@ const FolderList = props => {
 				</span>
 			</div>
 			<ul>
-				{folders.map((folder, index) => (
+				{folders.map(folder => (
 					<FolderError>
 						<li
-							key={index}
+							key={folder.id}
 							className={
 								folder.id === props.match.params.folderId ? ' active' : null
 							}
