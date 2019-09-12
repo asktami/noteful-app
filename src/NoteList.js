@@ -9,9 +9,6 @@ import NotefulContext from './NotefulContext';
 import NoteItem from './NoteItem';
 
 const NoteList = props => {
-	// console.log('NoteList props = ', props);
-	// console.log('NoteList props history = ', props.history);
-
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
 	const { notes } = contextType;
@@ -23,59 +20,57 @@ const NoteList = props => {
 		: notes;
 
 	return (
-		<NotefulContext.Consumer>
-			{context => (
-				<>
-					<div className="header-container">
-						<span>
-							<h2>Notes</h2>
-						</span>
-						&nbsp;&nbsp;
-						<span>
-							<NavLink to={'/add-note'}>
-								<button className="btn-add">+</button>
-							</NavLink>
-						</span>
-					</div>
-					{foldernotes.length > 0 ? (
-						foldernotes.map(note => (
-							<NoteError>
-								<article key={note.id}>
-									<div className="note">
-										{/*
+		<>
+			<div className="header-container">
+				<span>
+					<h2>Notes</h2>
+				</span>
+				&nbsp;&nbsp;
+				<span>
+					<NavLink to={'/add-note'}>
+						<button className="btn-add">+</button>
+					</NavLink>
+				</span>
+			</div>
+			{foldernotes.length > 0 ? (
+				foldernotes.map(note => (
+					<NoteError key={note.id}>
+						<article>
+							<div className="note">
+								{/*
 							{...note}
-							use spread here IF want whole note object, and get inside NoteItem via note.key
+							use spread here IF want whole note object, and then get inside NoteItem via note.key
 							alternative is
 							note={note} and in NoteItem get via props.note.key
 
-							QUESTION:
-							why MUST pass {...props} to have the history, location, and match props inside NoteItem
+							NOTE:
+							MUST pass {...props} to have the history, location, and match props inside NoteItem
 							*/}
-										<NoteItem note={note} {...props} />
-									</div>
-								</article>
-							</NoteError>
-						))
-					) : (
-						<article className="no-border">
-							<div className="note">No notes in this folder.</div>
+								<NoteItem note={note} {...props} />
+							</div>
 						</article>
-					)}
-				</>
+					</NoteError>
+				))
+			) : (
+				<article className="no-border">
+					<div className="note">No notes in this folder.</div>
+				</article>
 			)}
-		</NotefulContext.Consumer>
+		</>
 	);
 };
 
 export default NoteList;
 
-// validate that get an array that has id and name
+// to catch bugs
+// check that get a notes array that has id, name, and modified
 // this array is the "notes" variable coming from context
 NoteList.propTypes = {
 	notes: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			note: PropTypes.object.isRequired
+			name: PropTypes.string.isRequired,
+			modified: PropTypes.string.isRequired
 		})
 	)
 };

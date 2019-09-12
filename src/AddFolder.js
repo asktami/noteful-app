@@ -107,6 +107,10 @@ class AddFolder extends React.Component {
 	render() {
 		const { errors } = this.state;
 
+		if (this.state.apiError) {
+			return <p class="error">{this.state.apiError}</p>;
+		}
+
 		return (
 			<form className="addFolderForm" onSubmit={this.handleSubmit} noValidate>
 				<fieldset>

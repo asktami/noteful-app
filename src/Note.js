@@ -5,15 +5,11 @@ import NoteItem from './NoteItem';
 import NotefulContext from './NotefulContext';
 
 const Note = props => {
-	// console.log('Note props = ', props);
-	// console.log('Note history = ', props.history);
-	// console.log('Note params = ', props.match.params);
-	// console.log('Note note id = ', props.match.params.noteId);
-
+	// need to grab NotefulContext (globals)
 	const context = useContext(NotefulContext);
 	const { notes } = context;
 
-	// QUESTION
+	// NOTE
 	// reloading the browser wipes the context from memory
 	// so need to handle if user reloads the browser and its undefined
 	// done by adding || {} here AND : '' for props.modified in NoteItem too
@@ -31,6 +27,16 @@ const Note = props => {
 
 export default Note;
 
+// to catch bugs
+// check that get a notes array that has id, name, content, and modified
+// this array is the "notes" variable coming from context
 Note.propTypes = {
-	props: PropTypes.object.isRequired
+	notes: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			content: PropTypes.string.isRequired,
+			modified: PropTypes.string.isRequired
+		})
+	)
 };

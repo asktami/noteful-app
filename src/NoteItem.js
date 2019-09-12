@@ -19,14 +19,6 @@ export default class NoteItem extends React.Component {
 	handleClickDelete = e => {
 		e.preventDefault();
 
-		// console.log('handleClickDelete props = ', this.props);
-		// console.log('handleClickDelete contextType = ', this.context);
-
-		// console.log(
-		// 	'handleClickDelete props.location.pathname.includes(/note/)',
-		// 	this.props.location.pathname.includes('/note/')
-		// );
-
 		const noteId = this.props.note.id;
 
 		fetch(config.API_NOTES + `/${noteId}`, {
@@ -63,62 +55,67 @@ export default class NoteItem extends React.Component {
 	};
 
 	render() {
-		// console.log('inside NoteItem props = ', this.props);
-		// console.log('inside NoteItem contextType = ', this.contextType);
+		// to see noteItem notesError in ui & trigger NoteError boundary:
+		// this.context.addErrorNotes({ value: 'notesItemAPI errorMessage' });
 
 		return (
-			<NotefulContext.Consumer>
+			<div className="note-item">
+				{this.context.notesError && (
+					<p class="error">{this.context.errorNotes.value}</p>
+				)}
 				{/*
-			Use the Consumer to grab values from contex
-			--- the value we're grabbing from context is the deleteNote function, we're passing it to the delete button
-
- 			QUESTION: what is context?
-			ANSWER:
-			is it equal to the object inside NotefulCcontext.js?
-			an anonymous function with the parameter context automatically defined by {context => ... }, don't know where the parameter function comes from, don't need to know where it comes from because we're using it to render a result; context is a variable containing data; this function is called by line 39 NotefulContext.Consumer
-
-			NOTE: context could be any word since its just the parameter label
-			*/}
-
-				{context => (
-					<div className="note-item">
-						{/*
 			THIS CAUSED A staticContent ERROR:
 			<NavLink to={`/note/${note.id}`} {...props}>
 				<h3>{note.title}</h3>
 			</NavLink> */}
-
-						<NavLink
-							to={{
-								pathname: `/note/${this.props.note.id}`,
-								props: this.props
-							}}
-						>
-							<h3>{this.props.note.name}</h3>
-						</NavLink>
-
-						<div className="button-container">
-							<span>
-								Modified on{' '}
-								<span className="note-datemod">
-									{this.props.note.modified
-										? this.props.note.modified.split('T', 1)[0]
-										: ''}
-								</span>
-							</span>
-							<span>
-								<button className="btn-delete" onClick={this.handleClickDelete}>
-									-
-								</button>
-							</span>
-						</div>
-					</div>
-				)}
-			</NotefulContext.Consumer>
+				<NavLink
+					to={{
+						pathname: `/note/${this.props.note.id}`,
+						props: this.props
+					}}
+				>
+					<h3>{this.props.note.name}</h3>
+				</NavLink>
+				<div className="button-container">
+					<span>
+						Modified on{' '}
+						<span className="note-datemod">
+							{this.props.note.modified
+								? this.props.note.modified.split('T', 1)[0]
+								: ''}
+						</span>
+					</span>
+					<span>
+						<button className="btn-delete" onClick={this.handleClickDelete}>
+							-
+						</button>
+					</span>
+				</div>
+			</div>
 		);
 	}
 }
 
+// to catch bugs
+// check that get a notes array that has id, name, and modified
+// this array is the "notes" variable coming from context
 NoteItem.propTypes = {
-	note: PropTypes.object.isRequired
+	notes: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			modified: PropTypes.string.isRequired
+		})
+	)
 };
+
+// default values
+// ONLY for props that are NOT required
+// so do NOT create NoteItem.defaultProps
+// NoteItem.defaultProps = {
+// 	note: {
+// 		id: '',
+// 		name: '',
+// 		modified: ''
+// 	}
+// };

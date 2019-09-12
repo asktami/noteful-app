@@ -22,6 +22,13 @@ class AddNote extends React.Component {
 		}
 	};
 
+	// to see addNote apiError in ui:
+	/*
+	state = {
+		apiError: 'addNote apiError errorMessage',
+		...
+	*/
+
 	updateErrorCount = () => {
 		let errors = this.state.errors;
 		let count = 0;
@@ -133,6 +140,10 @@ class AddNote extends React.Component {
 		const { errors } = this.state;
 		const folders = this.context.folders;
 
+		if (this.state.apiError) {
+			return <p class="error">{this.state.apiError}</p>;
+		}
+
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
@@ -191,7 +202,3 @@ class AddNote extends React.Component {
 }
 
 export default AddNote;
-
-// AddNote.defaultProps = {
-// 	modified: new Date().toLocaleTimeString()
-// };

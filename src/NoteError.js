@@ -24,7 +24,7 @@ class NoteError extends React.Component {
 	render() {
 		if (this.state.hasError) {
 			// You can render any custom fallback UI
-			return <h2>Could not display this folder.</h2>;
+			return <h2>Could not display this note.</h2>;
 		}
 		return this.props.children;
 	}

@@ -75,6 +75,12 @@ const App = props => {
 	const [foldersError, setFoldersError] = useState(null);
 	const [notesError, setNotesError] = useState(null);
 
+	// to see foldersError in ui:
+	// const [foldersError, setFoldersError] = useState({ value: 'foldersAPI errorMessage' });
+
+	// to see notesError in ui:
+	// const [notesError, setNotesError] = useState({value: 'notesAPI errorMessage'});
+
 	// deleteNotes updates state
 	// and inside render context is updated with values from state
 	// then context is used to display values in FolderList and NoteList
@@ -173,11 +179,11 @@ const App = props => {
 			<NotefulContext.Provider value={contextObj}>
 				<main>
 					<aside>
+						{foldersError && <p class="error">{foldersError.value}</p>}
 						{routes.map(({ path, exact, aside: A }) => (
 							<Route key={path} path={path} exact={exact} component={A} />
 						))}
 					</aside>
-
 					<section>
 						{/* NOTE:
                          CAN use render props to pass unfinishedMessage prop via route
@@ -193,6 +199,9 @@ const App = props => {
                         can also pass unfinishedMessage via Context and do:
                         component={S}
                         */}
+
+						{notesError && <p class="error">{notesError.value}</p>}
+
 						{routes.map(({ path, exact, section: S }) => (
 							<Route key={path} path={path} exact={exact} component={S} />
 						))}

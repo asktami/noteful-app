@@ -42,8 +42,12 @@ const FolderItem = props => {
 
 export default FolderItem;
 
-// validate that get an array that has id and name
+// to catch bugs
+// check that get a folders array that has id and name
 // this array is the "folders" variable coming from context
+// AND
+// check that get a notes array that has id, name, and modified
+// this array is the "notes" variable coming from context
 FolderItem.propTypes = {
 	folders: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -54,7 +58,8 @@ FolderItem.propTypes = {
 	notes: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			folderId: PropTypes.string.isRequired
+			name: PropTypes.string.isRequired,
+			modified: PropTypes.string.isRequired
 		})
 	)
 };

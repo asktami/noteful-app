@@ -25,9 +25,8 @@ const FolderList = props => {
 			</div>
 			<ul>
 				{folders.map(folder => (
-					<FolderError>
+					<FolderError key={folder.id}>
 						<li
-							key={folder.id}
 							className={
 								folder.id === props.match.params.folderId ? ' active' : null
 							}
@@ -48,7 +47,8 @@ const FolderList = props => {
 
 export default FolderList;
 
-// validate that get an array that has id and name
+// to catch bugs
+// check that get a folders array that has id and name
 // this array is the "folders" variable coming from context
 FolderList.propTypes = {
 	folders: PropTypes.arrayOf(
