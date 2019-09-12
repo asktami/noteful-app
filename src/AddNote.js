@@ -29,9 +29,6 @@ class AddNote extends React.Component {
 	updateErrorCount = () => {
 		let errors = this.state.errors;
 
-		let errMsg =
-			this.state.errorMessage === null ? '' : this.state.errorMessage;
-
 		let count = 0;
 
 		console.log('updateErrorCount errors = ', errors);
@@ -40,7 +37,6 @@ class AddNote extends React.Component {
 			console.log('updateErrorCount errors VAL = ', val);
 			if (val.length > 0) {
 				count++;
-				errMsg += `<br />${val}`;
 			}
 		});
 
