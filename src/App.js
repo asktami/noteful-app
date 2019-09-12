@@ -94,6 +94,10 @@ const App = props => {
 		setFolders([...folders, folder]);
 	};
 
+	const addErrorNotes = error => {
+		setNotesError(error);
+	};
+
 	/*
     // NOTE NOTE NOTE
     // Pattern: every route is responsible for loading the data it needs from scratch
@@ -151,7 +155,8 @@ const App = props => {
 		folders: folders,
 		deleteNote: deleteNote,
 		addNote: addNote,
-		addFolder: addFolder
+		addFolder: addFolder,
+		addErrorNotes: addErrorNotes
 	};
 
 	return (
