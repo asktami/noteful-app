@@ -1,7 +1,7 @@
 // hosted on github
 // https://my-json-server.typicode.com/asktami/react-router-context-noteful
 
-// export default {
+export default {
 	API_FOLDERS: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/folders`,
 	API_NOTES: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/notes`
 };
