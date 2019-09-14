@@ -12,11 +12,12 @@ class AddNote extends React.Component {
 		apiError: null,
 		formValid: false,
 		errorCount: null,
-		folderId: '',
+		folderId: this.props.location.state.folderId || '', // use selected folderId passed in via NavLink
 		name: '',
 		content: '',
 		errors: {
-			folderId: 'You must select a folder',
+			folderId:
+				!this.props.location.state.folderId && 'You must select a folder', // error only if no folderId passed in via NavLink
 			name: 'You must enter a note title',
 			content: 'You must enter a description'
 		}
@@ -139,6 +140,12 @@ class AddNote extends React.Component {
 	render() {
 		const { errors } = this.state;
 		const folders = this.context.folders;
+
+		// selected folderId passed in via NavLink:
+		// console.log(
+		// 	'AddNote props.location.state.folderId = ',
+		// 	this.props.location.state.folderId
+		// );
 
 		if (this.state.apiError) {
 			return <p class="error">{this.state.apiError}</p>;
