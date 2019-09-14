@@ -6,7 +6,10 @@
 	padding: 0;
 }
 
-body {
+body,
+input,
+select,
+textarea {
 	background-color: #fff;
 	color: #222;
 	font-family: 'Handlee', cursive;
