@@ -19,11 +19,6 @@ const NoteList = props => {
 		? notes.filter(note => note.folderId === props.match.params.folderId)
 		: notes;
 
-	console.log(
-		'NoteList props.match.params.folderId = ',
-		props.match.params.folderId
-	);
-
 	return (
 		<>
 			<div className="header-container">
