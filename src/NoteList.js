@@ -19,6 +19,11 @@ const NoteList = props => {
 		? notes.filter(note => note.folderId === props.match.params.folderId)
 		: notes;
 
+	console.log(
+		'NoteList props.match.params.folderId = ',
+		props.match.params.folderId
+	);
+
 	return (
 		<>
 			<div className="header-container">
@@ -27,15 +32,24 @@ const NoteList = props => {
 				</span>
 				&nbsp;&nbsp;
 				<span>
-					<NavLink to={'/add-note'}>
+					<NavLink
+						// if just passing url:
+						// to={'/add-note'}
+
+						// to pass selected folderId:
+						to={{
+							pathname: '/add-note',
+							state: { folderId: props.match.params.folderId }
+						}}
+					>
 						<button className="btn-add">+</button>
 					</NavLink>
 				</span>
 			</div>
 			{foldernotes.length > 0 ? (
 				foldernotes.map(note => (
-					<NoteError key={note.id}>
-						<article>
+					<article key={note.id}>
+						<NoteError>
 							<div className="note">
 								{/*
 							{...note}
@@ -48,8 +62,8 @@ const NoteList = props => {
 							*/}
 								<NoteItem note={note} {...props} />
 							</div>
-						</article>
-					</NoteError>
+						</NoteError>
+					</article>
 				))
 			) : (
 				<article className="no-border">

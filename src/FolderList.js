@@ -25,20 +25,21 @@ const FolderList = props => {
 			</div>
 			<ul>
 				{folders.map(folder => (
-					<FolderError key={folder.id}>
-						<li
-							className={
-								folder.id === props.match.params.folderId ? ' active' : null
-							}
-						>
+					<li
+						key={folder.id}
+						className={
+							folder.id === props.match.params.folderId ? ' active' : null
+						}
+					>
+						<FolderError>
 							<NavLink to={`/folder/${folder.id}`}>
 								<span role="img" aria-label="Folder">
 									&#x1F4C2;
 								</span>
 								&nbsp;{folder.name}
 							</NavLink>
-						</li>
-					</FolderError>
+						</FolderError>
+					</li>
 				))}
 			</ul>
 		</>
