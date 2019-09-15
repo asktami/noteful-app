@@ -6,7 +6,19 @@
 
 Note: using [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database.  See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
 
-Created a db.json file in this repository; access the api via https://my-json-server.typicode.com/asktami/react-router-context-noteful as the root URL.
+
+### Noteful JSON server
+
+To get your local copy of the noteful API, clone this project into your local projects folder.
+
+  git clone https://github.com/tomatau/noteful-json-server
+  cd ./noteful-json-server
+  npm install
+  npm start
+  - Ctrl-c to close the server
+
+You can see documentation for the JSON-server once its started by visiting http://localhost:9090.
+You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
 
 -----
 
