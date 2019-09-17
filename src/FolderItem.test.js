@@ -7,16 +7,16 @@ import FolderItem from './FolderItem';
 describe(`FolderItem component`, () => {
 	const folders = [
 		{
-			id: 101,
-			label: 'test-folder-label'
+			id: '101',
+			name: 'test-folder-label'
 		}
 	];
 
 	const notes = [
 		{
-			id: 101,
-			folderId: 101,
-			title: 'test-note-title',
+			id: '101',
+			folderId: '101',
+			name: 'test-note-title',
 			modified: new Date(2019, 8, 30)
 		}
 	];
@@ -24,7 +24,7 @@ describe(`FolderItem component`, () => {
 	const props = {
 		match: {
 			params: {
-				noteId: 101
+				noteId: '101'
 			}
 		},
 		history: {

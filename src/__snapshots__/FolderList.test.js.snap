@@ -2,70 +2,42 @@
 
 exports[`FolderList component renders a FolderList by default 1`] = `
 <Fragment>
-  <div
-    className="header-container"
-  >
-    <span>
-      <h2>
-        Folders
-      </h2>
-    </span>
+  <header>
+    <h2>
+      Folders
+    </h2>
       
-    <span>
+    <NavLink
+      to="/add-folder"
+    >
       <button
         className="btn-add"
       >
         +
       </button>
-    </span>
-  </div>
-  <ul>
-    <li
-      className=" active"
-      key="101"
-    >
-      <NavLink
-        to="/folder/101"
-      >
-        📂 
-        test-folder-label
-      </NavLink>
-    </li>
-  </ul>
+    </NavLink>
+  </header>
+  <ul />
 </Fragment>
 `;
 
 exports[`FolderList component renders the FolderList given props 1`] = `
 <Fragment>
-  <div
-    className="header-container"
-  >
-    <span>
-      <h2>
-        Folders
-      </h2>
-    </span>
+  <header>
+    <h2>
+      Folders
+    </h2>
       
-    <span>
+    <NavLink
+      to="/add-folder"
+    >
       <button
         className="btn-add"
       >
         +
       </button>
-    </span>
-  </div>
-  <ul>
-    <li
-      className=" active"
-      key="101"
-    >
-      <NavLink
-        to="/folder/101"
-      >
-        📂 
-        test-folder-label
-      </NavLink>
-    </li>
-  </ul>
+    </NavLink>
+  </header>
+  <ul />
 </Fragment>
 `;

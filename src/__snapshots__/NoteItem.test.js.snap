@@ -19,24 +19,24 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
       }
     }
   >
-    <h3>
-      test-note-title
-    </h3>
+    <h3 />
   </NavLink>
   <div
     className="button-container"
   >
     <span>
-      Modified on 
+      Modified on
+       
       <span
         className="note-datemod"
       >
-        <Component />
+        Mon Sep 30 2019 00:00:00 GM
       </span>
     </span>
     <span>
       <button
         className="btn-delete"
+        onClick={[Function]}
       >
         -
       </button>
@@ -64,24 +64,24 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
       }
     }
   >
-    <h3>
-      test-note-title
-    </h3>
+    <h3 />
   </NavLink>
   <div
     className="button-container"
   >
     <span>
-      Modified on 
+      Modified on
+       
       <span
         className="note-datemod"
       >
-        <Component />
+        Mon Sep 30 2019 00:00:00 GM
       </span>
     </span>
     <span>
       <button
         className="btn-delete"
+        onClick={[Function]}
       >
         -
       </button>

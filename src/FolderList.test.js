@@ -8,13 +8,13 @@ describe(`FolderList component`, () => {
 	const props = {
 		match: {
 			params: {
-				folderId: 101
+				folderId: '101'
 			}
 		},
 		folders: [
 			{
-				id: 101,
-				label: 'test-folder-label'
+				id: '101',
+				name: 'test-folder-label'
 			}
 		]
 	};
