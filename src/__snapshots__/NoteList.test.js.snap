@@ -2,114 +2,72 @@
 
 exports[`NoteList component renders a NoteList by default 1`] = `
 <Fragment>
-  <div
-    className="header-container"
-  >
-    <span>
-      <h2>
-        Notes
-      </h2>
-    </span>
+  <header>
+    <h2>
+      Notes
+    </h2>
       
-    <span>
+    <NavLink
+      to={
+        Object {
+          "pathname": "/add-note",
+          "state": Object {
+            "folderId": "101",
+          },
+        }
+      }
+    >
       <button
         className="btn-add"
       >
         +
       </button>
-    </span>
-  </div>
-  <article>
-    <ul>
-      <li
-        key="1"
-      >
-        <NoteItem
-          match={
-            Object {
-              "params": Object {
-                "folderId": 101,
-              },
-            }
-          }
-          note={
-            Object {
-              "folderId": 101,
-              "id": 1,
-              "modified": 2019-09-30T04:00:00.000Z,
-              "title": "test-note-title",
-            }
-          }
-          notes={
-            Array [
-              Object {
-                "folderId": 101,
-                "id": 1,
-                "modified": 2019-09-30T04:00:00.000Z,
-                "title": "test-note-title",
-              },
-            ]
-          }
-        />
-      </li>
-    </ul>
-  </article>
+    </NavLink>
+  </header>
+  <section
+    className="no-border"
+  >
+    <div
+      className="note"
+    >
+      No notes in this folder.
+    </div>
+  </section>
 </Fragment>
 `;
 
 exports[`NoteList component renders the NoteList given props 1`] = `
 <Fragment>
-  <div
-    className="header-container"
-  >
-    <span>
-      <h2>
-        Notes
-      </h2>
-    </span>
+  <header>
+    <h2>
+      Notes
+    </h2>
       
-    <span>
+    <NavLink
+      to={
+        Object {
+          "pathname": "/add-note",
+          "state": Object {
+            "folderId": "101",
+          },
+        }
+      }
+    >
       <button
         className="btn-add"
       >
         +
       </button>
-    </span>
-  </div>
-  <article>
-    <ul>
-      <li
-        key="1"
-      >
-        <NoteItem
-          match={
-            Object {
-              "params": Object {
-                "folderId": 101,
-              },
-            }
-          }
-          note={
-            Object {
-              "folderId": 101,
-              "id": 1,
-              "modified": 2019-09-30T04:00:00.000Z,
-              "title": "test-note-title",
-            }
-          }
-          notes={
-            Array [
-              Object {
-                "folderId": 101,
-                "id": 1,
-                "modified": 2019-09-30T04:00:00.000Z,
-                "title": "test-note-title",
-              },
-            ]
-          }
-        />
-      </li>
-    </ul>
-  </article>
+    </NavLink>
+  </header>
+  <section
+    className="no-border"
+  >
+    <div
+      className="note"
+    >
+      No notes in this folder.
+    </div>
+  </section>
 </Fragment>
 `;
