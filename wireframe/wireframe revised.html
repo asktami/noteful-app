@@ -250,10 +250,10 @@
 				background-color: #a3005f;
 			}
 
-			section ul {
+			article ul {
 				list-style: none;
 			}
-			section li {
+			article li {
 				padding: 10px 10px 0 10px;
 				border-bottom: 1px solid #aaa;
 				cursor: pointer;
@@ -313,13 +313,13 @@
 			}
 
 			/* main column */
-			article {
+			section {
 				flex: 4;
 				padding: 20px 0 20px 10px;
 				margin-bottom: 20px;
 			}
 
-			section {
+			article {
 				margin-bottom: 20px;
 				margin: 0 20px 20px 0;
 				padding: 10px;
@@ -333,22 +333,11 @@
 				text-align: center;
 			}
 
-			aside > header {
+			.header-container {
 				display: flex;
 				justify-content: flex-start;
-				align-items: center;
 				align-items: baseline;
-				background-color: #ddf1ff;
 			}
-			
-			article > header {
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-				align-items: baseline;
-				background-color: #fff;
-			}
-
 
 			.button-container {
 				display: flex;
@@ -392,12 +381,12 @@
 			<aside>
 				<!-- folders -->
 
-				<header>
+				<div class="header-container">
 					<span
 						><h2><a href="/">Folders</a></h2></span
 					>&nbsp;&nbsp;
 					<span><button class="btn-add">+</button></span>
-				</header>
+				</div>
 
 				<ul aria-live="polite">
 					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
@@ -410,17 +399,17 @@
 				<button class="btn-save">Go Back</button>
 			</aside>
 
-			<article>
+			<section>
 				<!-- notes -->
 
-				<header>
+				<div class="header-container">
 					<span
 						><h2><a href="/">Notes</a></h2></span
 					>&nbsp;&nbsp;
 					<span><button class="btn-add">+</button></span>
-				</header>
+				</div>
 
-				<section>
+				<article>
 					<ul>
 						<li>
 						<div class="note">
@@ -464,7 +453,7 @@
 							</p>
 						</li>
 					</ul>
-				</section>
+				</article>
 
 				<!-- NEW NOTE FORM -->
 				<form action="" method="post">
@@ -492,7 +481,7 @@
 						<button class="btn-save">Save Folder</button>
 					</fieldset>
 				</form>
-			</article>
+			</section>
 		</main>
 
 		<footer>
