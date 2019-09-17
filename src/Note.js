@@ -16,12 +16,12 @@ const Note = props => {
 	const note = notes.find(note => note.id === props.match.params.noteId) || {};
 
 	return (
-		<article>
+		<section>
 			<div className="note">
 				<NoteItem {...props} note={note} />
 				<p className="note-content">{note.content}</p>
 			</div>
-		</article>
+		</section>
 	);
 };
 
@@ -34,9 +34,10 @@ Note.propTypes = {
 	notes: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
+			folderId: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
 			content: PropTypes.string.isRequired,
-			modified: PropTypes.string.isRequired
+			modified: PropTypes.instanceOf(Date).isRequired
 		})
 	)
 };

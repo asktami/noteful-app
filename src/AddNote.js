@@ -159,7 +159,11 @@ class AddNote extends React.Component {
 					<select
 						id="folderId"
 						name="folderId"
+						aria-label="Folder Id"
 						required
+						aria-required="true"
+						aria-describedby="folderIdError"
+						aria-invalid="true"
 						value={this.state.folderId}
 						onChange={this.handleChange}
 					>
@@ -171,7 +175,7 @@ class AddNote extends React.Component {
 						))}
 					</select>
 					{errors.folderId.length > 0 && (
-						<ValidationError message={errors.folderId} />
+						<ValidationError id={'folderIdError'} message={errors.folderId} />
 					)}
 					<label htmlFor="name">Title</label>
 					<input
@@ -179,12 +183,31 @@ class AddNote extends React.Component {
 						id="name"
 						name="name"
 						onChange={this.handleChange}
+						aria-label="Note Title"
+						required
+						aria-required="true"
+						aria-describedby="noteTitleError"
+						aria-invalid="true"
 					/>
-					{errors.name.length > 0 && <ValidationError message={errors.name} />}
+					{errors.name.length > 0 && (
+						<ValidationError id={'noteTitleError'} message={errors.name} />
+					)}
 					<label htmlFor="content">Description</label>
-					<textarea id="content" name="content" onChange={this.handleChange} />
+					<textarea
+						id="content"
+						name="content"
+						onChange={this.handleChange}
+						aria-label="Note Description"
+						required
+						aria-required="true"
+						aria-describedby="noteDescriptionError"
+						aria-invalid="true"
+					/>
 					{errors.content.length > 0 && (
-						<ValidationError message={errors.content} />
+						<ValidationError
+							id={'noteDescriptionError'}
+							message={errors.content}
+						/>
 					)}
 					<br />
 					<button className="btn-cancel" onClick={this.handleClickCancel}>

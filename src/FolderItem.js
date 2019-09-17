@@ -25,17 +25,16 @@ const FolderItem = props => {
 			{!activeFolder
 				? null
 				: activeFolder.map(folder => (
-						<div className="header-container" key={folder.id}>
-							<span>
-								<h2>{folder.name}</h2>
-							</span>
-						</div>
+						<header key={folder.id}>
+							<h2>
+								{folder.name}
+								<br />
+								<button className="btn-save" onClick={props.history.goBack}>
+									Go Back
+								</button>
+							</h2>
+						</header>
 				  ))}
-
-			<br />
-			<button className="btn-save" onClick={props.history.goBack}>
-				Go Back
-			</button>
 		</>
 	);
 };
@@ -59,7 +58,7 @@ FolderItem.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.string.isRequired
+			modified: PropTypes.instanceOf(Date).isRequired
 		})
 	)
 };

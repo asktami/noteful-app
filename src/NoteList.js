@@ -21,29 +21,25 @@ const NoteList = props => {
 
 	return (
 		<>
-			<div className="header-container">
-				<span>
-					<h2>Notes</h2>
-				</span>
+			<header>
+				<h2>Notes</h2>
 				&nbsp;&nbsp;
-				<span>
-					<NavLink
-						// if just passing url:
-						// to={'/add-note'}
+				<NavLink
+					// if just passing url:
+					// to={'/add-note'}
 
-						// to pass selected folderId:
-						to={{
-							pathname: '/add-note',
-							state: { folderId: props.match.params.folderId }
-						}}
-					>
-						<button className="btn-add">+</button>
-					</NavLink>
-				</span>
-			</div>
+					// to pass selected folderId:
+					to={{
+						pathname: '/add-note',
+						state: { folderId: props.match.params.folderId }
+					}}
+				>
+					<button className="btn-add">+</button>
+				</NavLink>
+			</header>
 			{foldernotes.length > 0 ? (
 				foldernotes.map(note => (
-					<article key={note.id}>
+					<section key={note.id}>
 						<NoteError>
 							<div className="note">
 								{/*
@@ -58,12 +54,12 @@ const NoteList = props => {
 								<NoteItem note={note} {...props} />
 							</div>
 						</NoteError>
-					</article>
+					</section>
 				))
 			) : (
-				<article className="no-border">
+				<section className="no-border">
 					<div className="note">No notes in this folder.</div>
-				</article>
+				</section>
 			)}
 		</>
 	);
@@ -79,7 +75,7 @@ NoteList.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.string.isRequired
+			modified: PropTypes.instanceOf(Date).isRequired
 		})
 	)
 };

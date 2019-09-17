@@ -120,12 +120,16 @@ class AddFolder extends React.Component {
 						type="text"
 						id="name"
 						name="name"
+						aria-label="Folder Name"
 						required
 						aria-required="true"
+						aria-describedby="folderNameError"
 						aria-invalid="true"
 						onChange={this.handleChange}
 					/>
-					{errors.name.length > 0 && <ValidationError message={errors.name} />}
+					{errors.name.length > 0 && (
+						<ValidationError message={errors.name} id={'folderNameError'} />
+					)}
 					<br />
 					<button className="btn-cancel" onClick={this.handleClickCancel}>
 						Cancel

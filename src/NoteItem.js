@@ -81,7 +81,7 @@ export default class NoteItem extends React.Component {
 						Modified on{' '}
 						<span className="note-datemod">
 							{this.props.note.modified
-								? this.props.note.modified.split('T', 1)[0]
+								? this.props.note.modified.toString().split('T', 1)[0]
 								: ''}
 						</span>
 					</span>
@@ -104,7 +104,7 @@ NoteItem.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.string.isRequired
+			modified: PropTypes.instanceOf(Date).isRequired
 		})
 	)
 };

@@ -178,13 +178,13 @@ const App = props => {
                 */}
 			<NotefulContext.Provider value={contextObj}>
 				<main>
-					<aside>
+					<div className="aside">
 						{foldersError && <p class="error">{foldersError.value}</p>}
 						{routes.map(({ path, exact, aside: A }) => (
 							<Route key={path} path={path} exact={exact} component={A} />
 						))}
-					</aside>
-					<section>
+					</div>
+					<article>
 						{/* NOTE:
                          CAN use render props to pass unfinishedMessage prop via route
                          AND
@@ -205,7 +205,7 @@ const App = props => {
 						{routes.map(({ path, exact, section: S }) => (
 							<Route key={path} path={path} exact={exact} component={S} />
 						))}
-					</section>
+					</article>
 				</main>
 			</NotefulContext.Provider>
 

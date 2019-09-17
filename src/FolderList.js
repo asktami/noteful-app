@@ -12,17 +12,13 @@ const FolderList = props => {
 
 	return (
 		<>
-			<div className="header-container">
-				<span>
-					<h2>Folders</h2>
-				</span>
+			<header>
+				<h2>Folders</h2>
 				&nbsp;&nbsp;
-				<span>
-					<NavLink to={'/add-folder'}>
-						<button className="btn-add">+</button>
-					</NavLink>
-				</span>
-			</div>
+				<NavLink to={'/add-folder'}>
+					<button className="btn-add">+</button>
+				</NavLink>
+			</header>
 			<ul>
 				{folders.map(folder => (
 					<li
