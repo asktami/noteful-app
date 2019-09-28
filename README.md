@@ -1,5 +1,7 @@
 # react-router-context-noteful
 
+![Noteful screenshot](https://github.com/asktami/lyric-finder-api-capstone/blob/master/app-images/pwa-512x512.png?raw=true "Noteful")
+
 [View Live](https://asktami.github.io/react-router-context-noteful/)
 
 **Note: this works _without any issues_ if you clone and run from your desktop, however from GitHub, if you create a note, when you delete that note it appears as though nothing happens.  And, when you re-load any page, only the original folders and notes will show - any folders/notes you've created will disappear.**
