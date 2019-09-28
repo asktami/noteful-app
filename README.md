@@ -1,6 +1,6 @@
 # react-router-context-noteful
 
-![Noteful screenshot](https://github.com/asktami/lyric-finder-api-capstone/blob/master/app-images/pwa-512x512.png?raw=true "Noteful")
+![Noteful screenshot](https://github.com/asktami/react-router-context-noteful/blob/master/noteful.png "Noteful")
 
 [View Live](https://asktami.github.io/react-router-context-noteful/)
 
