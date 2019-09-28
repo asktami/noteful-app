@@ -153,7 +153,7 @@ const App = props => {
 	useEffect(() => {
 		getFolders();
 		getNotes();
-	}, []); /* <-- add this */
+	}, []); /* add an empty array as the 2nd argument to have this run only 1x after the initial render */
 
 	// create object to update the values stored in NotefulContext
 	const contextObj = {

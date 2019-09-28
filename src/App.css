@@ -332,5 +332,6 @@ article > header {
 }
 
 header a:focus {
+	outline: solid;
 	outline-color: #fff;
 }
