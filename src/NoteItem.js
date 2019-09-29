@@ -58,6 +58,7 @@ export default class NoteItem extends React.Component {
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error === 404) {
 					this.context.deleteNote(noteId);
+					console.log('workaround b/c 404 error');
 
 					// if in Note detail, return to show all notes list
 					if (this.props.location.pathname.includes('/note/')) {
