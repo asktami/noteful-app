@@ -72,8 +72,6 @@ export default class NoteItem extends React.Component {
 	render() {
 		// to see noteItem notesError in ui & trigger NoteError boundary:
 		// this.context.addErrorNotes({ value: 'notesItemAPI errorMessage' });
-
-		console.log(this.context.notesError);
 		return (
 			<div className="note-item">
 				{this.context.notesError && (
