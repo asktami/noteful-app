@@ -18,7 +18,7 @@ export default class NoteItem extends React.Component {
 
 	handleClickDelete = e => {
 		e.preventDefault();
-
+		alert('doing delete');
 		console.log('debug delete note');
 		const noteId = this.props.note.id;
 
