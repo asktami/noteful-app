@@ -19,6 +19,7 @@ export default class NoteItem extends React.Component {
 	handleClickDelete = e => {
 		e.preventDefault();
 
+		console.log('debug delete note');
 		const noteId = this.props.note.id;
 
 		fetch(config.API_NOTES + `/${noteId}`, {
@@ -26,11 +27,16 @@ export default class NoteItem extends React.Component {
 			headers: {
 				'content-type': 'application/json'
 			}
-		})
+		});
+		console
+			.log('doing delete note')
 			.then(res => {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
 
 				if (!res.ok || res.status === '404') {
+					console.log('debug got to res not ok');
+					console.log('res.status = ', res.status);
+
 					// get the error message from the response,
 					return res.json().then(error => {
 						// then throw it
@@ -54,6 +60,7 @@ export default class NoteItem extends React.Component {
 			})
 			.catch(error => {
 				this.context.addErrorNotes(error);
+				console.log('debug got to catch');
 
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error === 404) {
