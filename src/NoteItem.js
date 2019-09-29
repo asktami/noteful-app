@@ -98,7 +98,7 @@ export default class NoteItem extends React.Component {
 				</NavLink>
 				<div className="button-container">
 					<span>
-						Modified on{' '}
+						HELLO Modified on{' '}
 						<span className="note-datemod">
 							{this.props.note.modified
 								? this.props.note.modified.toString().split('T', 1)[0]
