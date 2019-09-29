@@ -18,8 +18,6 @@ export default class NoteItem extends React.Component {
 
 	handleClickDelete = e => {
 		e.preventDefault();
-		alert('doing delete note');
-		console.log('doing delete note');
 
 		const noteId = this.props.note.id;
 
@@ -33,9 +31,6 @@ export default class NoteItem extends React.Component {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
 
 				if (!res.ok || res.status === '404') {
-					console.log('debug got to res not ok');
-					console.log('res.status = ', res.status);
-
 					// get the error message from the response,
 					return res.json().then(error => {
 						// then throw it
@@ -59,12 +54,10 @@ export default class NoteItem extends React.Component {
 			})
 			.catch(error => {
 				this.context.addErrorNotes(error);
-				console.log('debug got to catch');
 
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error === 404) {
 					this.context.deleteNote(noteId);
-					console.log('workaround b/c 404 error');
 
 					// if in Note detail, return to show all notes list
 					if (this.props.location.pathname.includes('/note/')) {
@@ -98,7 +91,7 @@ export default class NoteItem extends React.Component {
 				</NavLink>
 				<div className="button-container">
 					<span>
-						HELLO Modified on{' '}
+						Modified on{' '}
 						<span className="note-datemod">
 							{this.props.note.modified
 								? this.props.note.modified.toString().split('T', 1)[0]
