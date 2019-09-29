@@ -108,7 +108,7 @@ class AddFolder extends React.Component {
 		const { errors } = this.state;
 
 		if (this.state.apiError) {
-			return <p class="error">{this.state.apiError}</p>;
+			return <p className="error">{this.state.apiError}</p>;
 		}
 
 		return (

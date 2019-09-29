@@ -28,11 +28,14 @@ export default class NoteItem extends React.Component {
 			}
 		})
 			.then(res => {
-				if (!res.ok) {
+				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
+
+				if (!res.ok || res.status === '404') {
 					// get the error message from the response,
 					return res.json().then(error => {
 						// then throw it
-						throw error;
+						// throw res.status instead of error b/c error is an empty object
+						throw res.status;
 					});
 				}
 				return res.json();
@@ -51,6 +54,16 @@ export default class NoteItem extends React.Component {
 			})
 			.catch(error => {
 				this.context.addErrorNotes(error);
+
+				// WORKAROUND to handle EMPTY error object and res.status = 404
+				if (error === 404) {
+					this.context.deleteNote(noteId);
+
+					// if in Note detail, return to show all notes list
+					if (this.props.location.pathname.includes('/note/')) {
+						this.props.history.push(`/`);
+					}
+				}
 			});
 	};
 
@@ -61,7 +74,7 @@ export default class NoteItem extends React.Component {
 		return (
 			<div className="note-item">
 				{this.context.notesError && (
-					<p class="error">{this.context.errorNotes.value}</p>
+					<p className="error">{this.context.notesError.value}</p>
 				)}
 				{/*
 			THIS CAUSED A staticContent ERROR:

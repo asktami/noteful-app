@@ -1,12 +1,6 @@
 import React from 'react';
 
-const NotefulContext = React.createContext({
-	notes: [],
-	folders: [],
-	deleteNote: () => {},
-	addNote: () => {},
-	addFolder: () => {},
-	addErrorNotes: () => {}
-});
+// nothing else needs to be here because the context is defined in App.js, lines 159 - 166 and 180
+const NotefulContext = React.createContext({});
 
 export default NotefulContext;

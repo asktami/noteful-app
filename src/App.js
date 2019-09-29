@@ -162,7 +162,8 @@ const App = props => {
 		deleteNote: deleteNote,
 		addNote: addNote,
 		addFolder: addFolder,
-		addErrorNotes: addErrorNotes
+		addErrorNotes: addErrorNotes,
+		notesError: notesError
 	};
 
 	return (
@@ -179,7 +180,7 @@ const App = props => {
 			<NotefulContext.Provider value={contextObj}>
 				<main>
 					<div className="aside">
-						{foldersError && <p class="error">{foldersError.value}</p>}
+						{foldersError && <p className="error">{foldersError.value}</p>}
 						{routes.map(({ path, exact, aside: A }) => (
 							<Route key={path} path={path} exact={exact} component={A} />
 						))}
@@ -200,7 +201,7 @@ const App = props => {
                         component={S}
                         */}
 
-						{notesError && <p class="error">{notesError.value}</p>}
+						{notesError && <p className="error">{notesError.value}</p>}
 
 						{routes.map(({ path, exact, section: S }) => (
 							<Route key={path} path={path} exact={exact} component={S} />
