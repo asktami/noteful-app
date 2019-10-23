@@ -29,7 +29,7 @@ const FolderList = props => {
 							<button
 								className="btn-delete"
 								onClick={() =>
-									handleClickDeleteFolder(props.match.params.folderId)
+									handleClickDeleteFolder(props.match.params.folderId, props)
 								}
 							>
 								-

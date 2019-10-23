@@ -200,7 +200,7 @@ const App = props => {
 		setNotes(newNotes);
 	};
 
-	const handleClickDeleteFolder = folderId => {
+	const handleClickDeleteFolder = (folderId, props) => {
 		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
 			method: 'DELETE',
 			headers: {
