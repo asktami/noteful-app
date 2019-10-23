@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import NoteItem from './NoteItem';
+import NoteItem from '../NoteItem/NoteItem';
 
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
 const Note = props => {
 	// need to grab NotefulContext (globals)

@@ -3,21 +3,40 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import FolderError from './FolderError';
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
 const FolderList = props => {
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
-	const { folders } = contextType;
+	const { folders, handleClickDeleteFolder } = contextType;
 
 	return (
 		<>
 			<header>
-				<h2>Folders</h2>
-				&nbsp;&nbsp;
-				<NavLink to={'/add-folder'}>
-					<button className="btn-add">+</button>
-				</NavLink>
+				<>
+					<h2>Folders</h2>
+					&nbsp;&nbsp;
+					<NavLink to={'/add-folder'}>
+						<button className="btn-add">+</button>
+					</NavLink>
+					&nbsp;&nbsp;
+					{props.match.params.folderId !== undefined ? (
+						<>
+							<NavLink to={`/edit-folder/${props.match.params.folderId}`}>
+								<button className="btn-edit">&#9998;</button>
+							</NavLink>
+							&nbsp;&nbsp;
+							<button
+								className="btn-delete"
+								onClick={() =>
+									handleClickDeleteFolder(props.match.params.folderId)
+								}
+							>
+								-
+							</button>
+						</>
+					) : null}
+				</>
 			</header>
 			<ul>
 				{folders.map(folder => (
@@ -28,7 +47,7 @@ const FolderList = props => {
 						}
 					>
 						<FolderError>
-							<NavLink to={`/folder/${folder.id}`}>
+							<NavLink to={`/folders/${folder.id}`}>
 								<span role="img" aria-label="Folder">
 									&#x1F4C2;
 								</span>

@@ -1,16 +1,24 @@
+/*
+export default {
+  NOTES_ENDPOINT: `http://localhost:8000/api/notes`,
+  FOLDERS_ENDPOINT: `http://localhost:8000/api/folders`,
+  API_KEY: process.env.REACT_APP_API_KEY,
+}
+*/
+
 // hosted on github
 // https://my-json-server.typicode.com/asktami/react-router-context-noteful
 
-export default {
-	API_FOLDERS: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/folders`,
-	API_NOTES: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/notes`
-};
+// export default {
+// 	FOLDERS_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/folders`,
+// 	NOTES_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/notes`
+// };
 
 // hosted locally:
-// export default {
-// 	API_FOLDERS: `http://localhost:9090/folders`,
-// 	API_NOTES: `http://localhost:9090/notes`
-// };
+export default {
+	FOLDERS_ENDPOINT: `http://localhost:9090/folders`,
+	NOTES_ENDPOINT: `http://localhost:9090/notes`
+};
 
 // see documentation at
 // http://localhost:9090

@@ -1,9 +1,9 @@
 import React from 'react';
-import config from './config';
+import config from '../config';
 
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
-import ValidationError from './ValidationError';
+import ValidationError from '../ValidationError';
 
 class AddNote extends React.Component {
 	static contextType = NotefulContext;
@@ -104,11 +104,12 @@ class AddNote extends React.Component {
 		};
 		this.setState({ apiError: null });
 
-		fetch(config.API_NOTES, {
+		fetch(config.NOTES_ENDPOINT, {
 			method: 'POST',
 			body: JSON.stringify(note),
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				Authorization: `Bearer ${config.API_KEY}`
 			}
 		})
 			.then(res => {

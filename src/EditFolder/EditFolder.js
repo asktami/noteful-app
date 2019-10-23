@@ -1,22 +1,50 @@
 import React from 'react';
-import config from './config';
+import config from '../config';
 
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
-import ValidationError from './ValidationError';
+import ValidationError from '../ValidationError';
 
-class AddFolder extends React.Component {
+class EditFolder extends React.Component {
 	static contextType = NotefulContext;
 
 	state = {
 		apiError: null,
-		formValid: false,
+		formValid: true,
 		errorCount: null,
+		id: this.props.match.params.folderId,
 		name: '',
 		errors: {
-			name: 'You must enter a folder name'
+			name: ''
 		}
 	};
+
+	// get folder to be updated
+	componentDidMount() {
+		const { folderId } = this.props.match.params;
+		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `Bearer ${config.API_KEY}`
+			}
+		})
+			.then(res => {
+				if (!res.ok) return res.json().then(error => Promise.reject(error));
+
+				return res.json();
+			})
+			.then(responseData => {
+				this.setState({
+					id: responseData.id,
+					name: responseData.name
+				});
+			})
+			.catch(error => {
+				console.error('XXX error = ', error);
+				this.setState({ apiError: error });
+			});
+	}
 
 	updateErrorCount = () => {
 		let errors = this.state.errors;
@@ -43,7 +71,6 @@ class AddFolder extends React.Component {
 				err = 'Folder name must be at least 3 characters long';
 			}
 		}
-
 		const { errors } = { ...this.state };
 		errors[name] = err;
 		this.setState({ errors });
@@ -61,6 +88,13 @@ class AddFolder extends React.Component {
 		this.props.history.push('/');
 	};
 
+	resetFields = newFields => {
+		this.setState({
+			id: newFields.id || '',
+			name: newFields.name || ''
+		});
+	};
+
 	handleSubmit = e => {
 		e.preventDefault();
 
@@ -68,42 +102,35 @@ class AddFolder extends React.Component {
 		if (this.state.errorCount > 0) return;
 
 		// get the form fields from the event
-		const { name } = e.target;
-		const folder = {
-			name: name.value
-		};
+		const { folderId } = this.props.match.params;
+		const { id, name } = this.state;
+		const newFolder = { id, name };
+
 		this.setState({ apiError: null });
 
-		fetch(config.API_FOLDERS, {
-			method: 'POST',
-			body: JSON.stringify(folder),
+		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+			method: 'PATCH',
+			body: JSON.stringify(newFolder),
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				authorization: `Bearer ${config.API_KEY}`
 			}
 		})
 			.then(res => {
-				if (!res.ok) {
-					// get the error message from the response,
-					return res.json().then(error => {
-						// then throw it
-						throw error;
-					});
-				}
-				return res.json();
+				if (!res.ok) return res.json().then(error => Promise.reject(error));
 			})
-			.then(data => {
-				// clear form values
-				name.value = '';
-
-				this.context.addFolder(data);
-
+			.then(() => {
+				this.resetFields(newFolder);
+				this.context.updateFolders(newFolder);
 				// return to list:
 				this.props.history.push('/');
 			})
 			.catch(error => {
+				console.error('error =', error);
 				this.setState({ apiError: error });
 			});
 	};
+
 	render() {
 		const { errors } = this.state;
 
@@ -112,9 +139,10 @@ class AddFolder extends React.Component {
 		}
 
 		return (
-			<form className="addFolderForm" onSubmit={this.handleSubmit} noValidate>
+			<form className="editFolderForm" onSubmit={this.handleSubmit} noValidate>
+				<input type="hidden" name="id" />
 				<fieldset>
-					<legend>New Folder</legend>
+					<legend>Edit Folder</legend>
 					<label htmlFor="name">Name</label>
 					<input
 						type="text"
@@ -125,6 +153,7 @@ class AddFolder extends React.Component {
 						aria-required="true"
 						aria-describedby="folderNameError"
 						aria-invalid="true"
+						value={this.state.name}
 						onChange={this.handleChange}
 					/>
 					{errors.name.length > 0 && (
@@ -139,6 +168,13 @@ class AddFolder extends React.Component {
 						disabled={this.state.formValid === false}
 					>
 						Save Folder
+					</button>{' '}
+					<button
+						className="btn-delete-folder"
+						disabled={this.state.formValid === false}
+						onClick={() => this.context.handleClickDeleteFolder(this.state.id)}
+					>
+						Delete
 					</button>
 				</fieldset>
 
@@ -152,4 +188,4 @@ class AddFolder extends React.Component {
 	}
 }
 
-export default AddFolder;
+export default EditFolder;

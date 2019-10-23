@@ -154,6 +154,58 @@ label {
 .btn-add:focus {
 	background-color: #006644;
 }
+
+.btn-edit {
+	color: #fff;
+	background-color: #005999;
+	border: 1px solid #006644;
+	box-shadow: inset 0 1px 0 #006644;
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+}
+
+.btn-edit:hover,
+.btn-edit:focus {
+	background-color: #006644;
+}
+
+.btn-delete {
+	color: #fff;
+	background-color: #ff0095;
+	border: 1px solid #cc0077;
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+}
+.btn-delete:hover,
+.btn-delete:focus {
+	background-color: #a3005f;
+}
+
+.btn-delete-folder {
+	background: #ff0095;
+	color: #fff;
+	border: 2px solid #cc0077;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.btn-delete-folder:hover,
+.btn-delete-folder:focus {
+	background-color: #a3005f;
+}
+
 .btn-cancel {
 	background: #58585a;
 	color: #fff;
@@ -191,7 +243,7 @@ label {
 	color: #666666;
 }
 
-.btn-delete {
+.btn-delete-note {
 	background: #ff0095;
 	color: #fff;
 	border: 2px solid #cc0077;
@@ -201,9 +253,24 @@ label {
 	cursor: pointer;
 }
 
-.btn-delete:hover,
-.btn-delete:focus {
+.btn-delete-note:hover,
+.btn-delete-note:focus {
 	background-color: #a3005f;
+}
+
+.btn-edit-note {
+	background: #005999;
+	color: #fff;
+	border: 2px solid #006644;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.btn-edit-note:hover,
+.btn-edit-note:focus {
+	background-color: #006644;
 }
 
 section ul {

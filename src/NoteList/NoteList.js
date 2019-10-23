@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 import NoteError from './NoteError';
 
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
-import NoteItem from './NoteItem';
+import NoteItem from '../NoteItem/NoteItem';
 
 const NoteList = props => {
 	// need to grab NotefulContext (globals)

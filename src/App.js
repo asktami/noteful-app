@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { Route } from 'react-router-dom';
 import './App.css';
 
@@ -11,16 +10,19 @@ import config from './config';
 // using React.Context:
 import NotefulContext from './NotefulContext';
 
-import Header from './Header';
-import Footer from './Footer';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
-import FolderList from './FolderList';
-import FolderItem from './FolderItem';
-import NoteList from './NoteList';
-import Note from './Note';
+import FolderList from './FolderList/FolderList';
+import FolderItem from './FolderItem/FolderItem';
+import NoteList from './NoteList/NoteList';
+import Note from './Note/Note';
 
-import AddFolder from './AddFolder';
-import AddNote from './AddNote';
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
+
+import EditFolder from './EditFolder/EditFolder';
+import EditNote from './EditNote/EditNote';
 
 const routes = [
 	{
@@ -31,14 +33,14 @@ const routes = [
 		section: NoteList
 	},
 	{
-		path: '/folder/:folderId',
+		path: '/folders/:folderId',
 		exact: true,
 		header: Header,
 		aside: FolderList,
 		section: NoteList
 	},
 	{
-		path: '/note/:noteId',
+		path: '/notes/:noteId',
 		exact: true,
 		header: Header,
 		aside: FolderItem,
@@ -59,6 +61,27 @@ const routes = [
 		section: AddNote
 	},
 	{
+		path: '/edit-note/:noteId',
+		exact: true,
+		header: Header,
+		aside: null,
+		section: EditNote
+	},
+	{
+		path: '/edit-folder/:folderId',
+		exact: true,
+		header: Header,
+		aside: null,
+		section: EditFolder
+	},
+	{
+		path: '/delete-folder/:folderId',
+		exact: true,
+		header: Header,
+		aside: FolderList,
+		section: NoteList
+	},
+	{
 		path: '/:any/:any/:any',
 		exact: true,
 		header: Header,
@@ -74,6 +97,9 @@ const App = props => {
 	const [notes, setNotes] = useState([]);
 	const [foldersError, setFoldersError] = useState(null);
 	const [notesError, setNotesError] = useState(null);
+
+	// const folderId = props.match.params.folderId;
+	console.log('props = ', props);
 
 	// to see foldersError in ui:
 	// const [foldersError, setFoldersError] = useState({ value: 'foldersAPI errorMessage' });
@@ -92,6 +118,11 @@ const App = props => {
 		setNotes(newNotes);
 	};
 
+	const deleteFolder = folderId => {
+		const newFolders = folders.filter(folder => folder.id !== folderId);
+		setFolders(newFolders);
+	};
+
 	const addNote = note => {
 		setNotes([...notes, note]);
 	};
@@ -104,6 +135,10 @@ const App = props => {
 		setNotesError(error);
 	};
 
+	const addErrorFolders = error => {
+		setFoldersError(error);
+	};
+
 	/*
     // NOTE NOTE NOTE
     // Pattern: every route is responsible for loading the data it needs from scratch
@@ -112,10 +147,11 @@ const App = props => {
     */
 
 	const getFolders = () => {
-		fetch(config.API_FOLDERS, {
+		fetch(config.FOLDERS_ENDPOINT, {
 			method: 'GET',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				Authorization: `Bearer ${config.API_KEY}`
 			}
 		})
 			.then(res => {
@@ -131,10 +167,11 @@ const App = props => {
 	};
 
 	const getNotes = () => {
-		fetch(config.API_NOTES, {
+		fetch(config.NOTES_ENDPOINT, {
 			method: 'GET',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				Authorization: `Bearer ${config.API_KEY}`
 			}
 		})
 			.then(res => {
@@ -147,6 +184,66 @@ const App = props => {
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
 			.catch(error => setNotesError(error));
+	};
+
+	const updateFolders = updatedFolder => {
+		const newFolders = folders.map(folder =>
+			folder.id !== updatedFolder.id ? folder : updatedFolder
+		);
+		setFolders(newFolders);
+	};
+
+	const updateNotes = updatedNote => {
+		const newNotes = notes.map(note =>
+			note.id !== updatedNote.id ? note : updatedNote
+		);
+		setNotes(newNotes);
+	};
+
+	const handleClickDeleteFolder = folderId => {
+		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json',
+				Authorization: `Bearer ${config.API_KEY}`
+			}
+		})
+			.then(res => {
+				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
+
+				if (!res.ok || res.status === '404') {
+					// get the error message from the response,
+					return res.json().then(error => {
+						// then throw it
+						// throw res.status instead of error b/c error is an empty object
+						throw res.status;
+					});
+				}
+				return res.json();
+			})
+			.then(data => {
+				// call the callback function when the request is successful
+				// this is where the App component can remove it from state
+				// ie. update the folders stored in state
+				// which also updates the folders stored in context
+				deleteFolder(folderId);
+
+				// remove folderId from URL
+				props.history.push(`/`);
+			})
+			.catch(error => {
+				// WORKAROUND to handle EMPTY error object and res.status = 404
+				if (error !== 404) {
+					addErrorFolders(error);
+				}
+
+				if (error === 404) {
+					deleteFolder(folderId);
+
+					// remove folderId from URL
+					props.history.push(`/`);
+				}
+			});
 	};
 
 	// only load ONCE, to fetch initial API data
@@ -163,7 +260,11 @@ const App = props => {
 		addNote: addNote,
 		addFolder: addFolder,
 		addErrorNotes: addErrorNotes,
-		notesError: notesError
+		addErrorFolders: addErrorFolders,
+		notesError: notesError,
+		updateFolders: updateFolders,
+		updateNotes: updateNotes,
+		handleClickDeleteFolder: handleClickDeleteFolder
 	};
 
 	return (
@@ -199,6 +300,18 @@ const App = props => {
 
                         can also pass unfinishedMessage via Context and do:
                         component={S}
+
+						---- ALTERNATIVE:
+
+						{routes.map(({ path, exact, section: S }) => (
+							<Route
+								key={path}
+								path={path}
+								exact={exact}
+								render={props => <S {...props} />}
+							/>
+						))}
+
                         */}
 
 						{notesError && <p className="error">{notesError.value}</p>}

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import config from './config';
-import NotefulContext from './NotefulContext';
+import config from '../config';
+import NotefulContext from '../NotefulContext';
 
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the update function, to update state in context
@@ -21,10 +21,11 @@ export default class NoteItem extends React.Component {
 
 		const noteId = this.props.note.id;
 
-		fetch(config.API_NOTES + `/${noteId}`, {
+		fetch(config.NOTES_ENDPOINT + `/${noteId}`, {
 			method: 'DELETE',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				authorization: `Bearer ${config.API_KEY}`
 			}
 		})
 			.then(res => {
@@ -48,7 +49,7 @@ export default class NoteItem extends React.Component {
 				this.context.deleteNote(noteId);
 
 				// if in Note detail, return to show all notes list
-				if (this.props.location.pathname.includes('/note/')) {
+				if (this.props.location.pathname.includes('/notes/')) {
 					this.props.history.push(`/`);
 				}
 			})
@@ -62,7 +63,7 @@ export default class NoteItem extends React.Component {
 					this.context.deleteNote(noteId);
 
 					// if in Note detail, return to show all notes list
-					if (this.props.location.pathname.includes('/note/')) {
+					if (this.props.location.pathname.includes('/notes/')) {
 						this.props.history.push(`/`);
 					}
 				}
@@ -79,12 +80,12 @@ export default class NoteItem extends React.Component {
 				)}
 				{/*
 			THIS CAUSED A staticContent ERROR:
-			<NavLink to={`/note/${note.id}`} {...props}>
+			<NavLink to={`/notes/${note.id}`} {...props}>
 				<h3>{note.title}</h3>
 			</NavLink> */}
 				<NavLink
 					to={{
-						pathname: `/note/${this.props.note.id}`,
+						pathname: `/notes/${this.props.note.id}`,
 						props: this.props
 					}}
 				>
@@ -100,7 +101,14 @@ export default class NoteItem extends React.Component {
 						</span>
 					</span>
 					<span>
-						<button className="btn-delete" onClick={this.handleClickDelete}>
+						<NavLink to={`/edit-note/${this.props.note.id}`}>
+							<button className="btn-edit-note">&#9998;</button>
+						</NavLink>
+						&nbsp;&nbsp;&nbsp;
+						<button
+							className="btn-delete-note"
+							onClick={this.handleClickDelete}
+						>
 							-
 						</button>
 					</span>

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import config from './config';
-import NotefulContext from './NotefulContext';
+import config from '../config';
+import NotefulContext from '../NotefulContext';
 
 // this function 1st deletes via the API, then from state
 // context.deleteNote = the update function, to update state in context
@@ -15,13 +15,13 @@ function handleClickDelete(props, context) {
 	console.log('handleClickDelete contextType = ', context);
 
 	// console.log(
-	// 	'props.location.pathname.includes(/note/)',
-	// 	props.location.pathname.includes('/note/')
+	// 	'props.location.pathname.includes(/notes/)',
+	// 	props.location.pathname.includes('/notes/')
 	// );
 
 	const noteId = props.note.id;
 
-	fetch(config.API_NOTES + `/${noteId}`, {
+	fetch(config.NOTES_ENDPOINT + `/${noteId}`, {
 		method: 'DELETE',
 		headers: {
 			'content-type': 'application/json'
@@ -45,7 +45,7 @@ function handleClickDelete(props, context) {
 			context.deleteNote(noteId);
 
 			// if in Note detail, return to show all notes list
-			if (props.location.pathname.includes('/note/')) {
+			if (props.location.pathname.includes('/notes/')) {
 				props.history.push(`/`);
 			}
 		})
@@ -78,11 +78,11 @@ const NoteItem = props => {
 				<div className="note-item">
 					{/*
 			THIS CAUSED A staticContent ERROR:
-			<NavLink to={`/note/${note.id}`} {...props}>
+			<NavLink to={`/notes/${note.id}`} {...props}>
 				<h3>{note.title}</h3>
 			</NavLink> */}
 
-					<NavLink to={{ pathname: `/note/${props.note.id}`, props: props }}>
+					<NavLink to={{ pathname: `/notes/${props.note.id}`, props: props }}>
 						<h3>{props.note.name}</h3>
 					</NavLink>
 

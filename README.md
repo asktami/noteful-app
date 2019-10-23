@@ -1,58 +1,45 @@
 # react-router-context-noteful
 
-![Noteful screenshot](https://github.com/asktami/react-router-context-noteful/blob/master/noteful.png "Noteful")
+![Noteful screenshot](https://github.com/asktami/react-router-context-noteful/blob/master/noteful.png 'Noteful')
 
 [View Live](https://asktami.github.io/react-router-context-noteful/)
 
 **Note:** when you re-load any page, only the original folders and notes will show - any folders/notes you've created will disappear because, as a function of the free service, "**changes are faked and aren't persisted**".
 
-Uses [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database.  See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
-
+Uses [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database. See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
 
 ### Noteful JSON server
 
 To get your local copy of the noteful API, clone this project into your local projects folder:
 
-	  git clone https://github.com/tomatau/noteful-json-server
-	  cd ./noteful-json-server
-	  npm install
-	  npm start
-	  
-	  Ctrl-c to close the server
+      git clone https://github.com/tomatau/noteful-json-server
+      cd ./noteful-json-server
+      npm install
+      npm start
+
+      Ctrl-c to close the server
 
 You can see documentation for the JSON-server once its started by visiting http://localhost:9090.
 You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
 
------
+---
 
 ## Requirements
 
-There are 3 routes: the main route, the dynamic folder route and a dynamic note route. 
+There are 3 routes: the main route, the dynamic folder route and a dynamic note route.
 
 - Each route should have a header, main section, and a sidebar section
 
 - Every route will have the same header section, the app's title should be a link to the main route.
 
-- The main route:
-	- Should be displayed when the path is /
-	- The main section will display all of the available notes
-	- - Each note should show it's name and modified date
-	- The sidebar will display a list of folders with none selected
+- The main route: - Should be displayed when the path is / - The main section will display all of the available notes - - Each note should show it's name and modified date - The sidebar will display a list of folders with none selected
 
-- The dynamic folder route:
-	- Should be displayed when the path is /folder/<with-a-folder-id-here>
-	- The folder-id will reference an id of one of the folders in state
-	- The main section should display only the notes that are "in" the selected folder
-	- The sidebar should display the folder list with the selected folder highlighted
+- The dynamic folder route: - Should be displayed when the path is /folder/<with-a-folder-id-here> - The folder-id will reference an id of one of the folders in state - The main section should display only the notes that are "in" the selected folder - The sidebar should display the folder list with the selected folder highlighted
 
-- The dynamic note route:
-	- Should be displayed when the path is /note/<with-a-note-id-here>
-	- The note-id will reference an id of one of the notes in state
-	- The main section should display the currently selected notes name, modified date and content
-	- The sidebar should display the folder of the currently selected note as well as a "back" button.
-	
+- The dynamic note route: - Should be displayed when the path is /notes/<with-a-note-id-here> - The note-id will reference an id of one of the notes in state - The main section should display the currently selected notes name, modified date and content - The sidebar should display the folder of the currently selected note as well as a "back" button.
+
 - Use the React Context API instead of prop drilling
-	
+
 - Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState inside the main App component.
 
 - The API calls will be made to a local server called noteful-json-server that you'll need to have running separately to your noteful React application.
@@ -62,7 +49,6 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 - Implement the delete button on the note page, if the delete is successful, redirect to the / path.
 
 - Implement "add-folder" and "add-note" controlled component forms.
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

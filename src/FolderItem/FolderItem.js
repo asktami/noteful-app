@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import NotefulContext from './NotefulContext';
+import NotefulContext from '../NotefulContext';
 
 const FolderItem = props => {
 	const context = useContext(NotefulContext);
@@ -28,6 +29,10 @@ const FolderItem = props => {
 						<header key={folder.id}>
 							<h2>
 								{folder.name}
+								<br />
+								<NavLink to={`/edit-folder/${folder.id}`} className="btn-save">
+									Edit
+								</NavLink>
 								<br />
 								<button className="btn-save" onClick={props.history.goBack}>
 									Go Back
