@@ -7,7 +7,7 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
   <NavLink
     to={
       Object {
-        "pathname": "/note/1",
+        "pathname": "/notes/1",
         "props": Object {
           "note": Object {
             "folderId": 101,
@@ -34,8 +34,18 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
       </span>
     </span>
     <span>
+      <NavLink
+        to="/edit-note/1"
+      >
+        <button
+          className="btn-edit-note"
+        >
+          ✎
+        </button>
+      </NavLink>
+         
       <button
-        className="btn-delete"
+        className="btn-delete-note"
         onClick={[Function]}
       >
         -
@@ -52,7 +62,7 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
   <NavLink
     to={
       Object {
-        "pathname": "/note/1",
+        "pathname": "/notes/1",
         "props": Object {
           "note": Object {
             "folderId": 101,
@@ -79,8 +89,18 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
       </span>
     </span>
     <span>
+      <NavLink
+        to="/edit-note/1"
+      >
+        <button
+          className="btn-edit-note"
+        >
+          ✎
+        </button>
+      </NavLink>
+         
       <button
-        className="btn-delete"
+        className="btn-delete-note"
         onClick={[Function]}
       >
         -
