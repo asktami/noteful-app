@@ -98,9 +98,6 @@ const App = props => {
 	const [foldersError, setFoldersError] = useState(null);
 	const [notesError, setNotesError] = useState(null);
 
-	// const folderId = props.match.params.folderId;
-	console.log('props = ', props);
-
 	// to see foldersError in ui:
 	// const [foldersError, setFoldersError] = useState({ value: 'foldersAPI errorMessage' });
 
