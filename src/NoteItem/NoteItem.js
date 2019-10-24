@@ -52,10 +52,18 @@ export default class NoteItem extends React.Component {
 				if (this.props.location.pathname.includes('/notes/')) {
 					this.props.history.push(`/`);
 				}
+
+				// if have selected a folder, need to refresh after delete a note
+				if (this.props.location.pathname.includes('/folders/')) {
+					this.props.history.push(this.props.location.pathname);
+				}
 			})
 			.catch(error => {
+				console.log('1st time click delete button error = ', error);
+				console.log('error', JSON.stringify(error));
+
 				// WORKAROUND to handle EMPTY error object and res.status = 404
-				if (error !== 404) {
+				if (error !== 404 && error !== 'Syntax') {
 					this.context.addErrorNotes(error);
 				}
 
@@ -65,6 +73,11 @@ export default class NoteItem extends React.Component {
 					// if in Note detail, return to show all notes list
 					if (this.props.location.pathname.includes('/notes/')) {
 						this.props.history.push(`/`);
+					}
+
+					// if have selected a folder, need to refresh after delete a note
+					if (this.props.location.pathname.includes('/folders/')) {
+						this.props.history.push(this.props.location.pathname);
 					}
 				}
 			});
