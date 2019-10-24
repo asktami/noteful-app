@@ -91,8 +91,7 @@ const routes = [
 ];
 
 const App = props => {
-	// // set default state variable values
-	// setting default state with hooks
+	// set default state variable values with hooks
 	const [folders, setFolders] = useState([]);
 	const [notes, setNotes] = useState([]);
 	const [foldersError, setFoldersError] = useState(null);

@@ -98,8 +98,8 @@ class AddFolder extends React.Component {
 
 				this.context.addFolder(data);
 
-				// return to list:
-				this.props.history.push('/');
+				// select newly created folder:
+				this.props.history.push(`/folders/${data.id}`);
 			})
 			.catch(error => {
 				this.setState({ apiError: error });

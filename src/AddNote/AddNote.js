@@ -142,12 +142,6 @@ class AddNote extends React.Component {
 		const { errors } = this.state;
 		const folders = this.context.folders;
 
-		// selected id_folder passed in via NavLink:
-		// console.log(
-		// 	'AddNote props.location.state.id_folder = ',
-		// 	this.props.location.state.id_folder
-		// );
-
 		if (this.state.apiError) {
 			return <p className="error">{this.state.apiError}</p>;
 		}

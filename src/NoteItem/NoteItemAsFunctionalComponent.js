@@ -11,14 +11,6 @@ import NotefulContext from '../NotefulContext';
 // - to know history, location and match
 
 function handleClickDelete(props, context) {
-	console.log('handleClickDelete props = ', props);
-	console.log('handleClickDelete contextType = ', context);
-
-	// console.log(
-	// 	'props.location.pathname.includes(/notes/)',
-	// 	props.location.pathname.includes('/notes/')
-	// );
-
 	const noteId = props.note.id;
 
 	fetch(config.NOTES_ENDPOINT + `/${noteId}`, {
@@ -57,8 +49,6 @@ function handleClickDelete(props, context) {
 const NoteItem = props => {
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
-	console.log('inside NoteItem props = ', props);
-	console.log('inside NoteItem contextType = ', contextType);
 
 	return (
 		<NotefulContext.Consumer>

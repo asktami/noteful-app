@@ -30,7 +30,6 @@ export default class NoteItem extends React.Component {
 		})
 			.then(res => {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
-
 				if (!res.ok || res.status === '404') {
 					// get the error message from the response,
 					return res.json().then(error => {
@@ -59,11 +58,8 @@ export default class NoteItem extends React.Component {
 				}
 			})
 			.catch(error => {
-				console.log('1st time click delete button error = ', error);
-				console.log('error', JSON.stringify(error));
-
 				// WORKAROUND to handle EMPTY error object and res.status = 404
-				if (error !== 404 && error !== 'Syntax') {
+				if (error !== 404) {
 					this.context.addErrorNotes(error);
 				}
 
