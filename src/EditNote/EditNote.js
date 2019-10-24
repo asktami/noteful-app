@@ -54,7 +54,6 @@ class EditNote extends React.Component {
 				});
 			})
 			.catch(error => {
-				console.error(error);
 				this.setState({ apiError: error });
 			});
 	}
@@ -134,7 +133,7 @@ class EditNote extends React.Component {
 		// get the form fields to be updated
 		const { noteId } = this.props.match.params;
 
-		// QUESTION - why doesn't it update MODIFIED?
+		// QUESTION - why doesn't it update MODIFIED when using db.json?
 		const newNote = {
 			id: this.state.id,
 			id_folder: this.state.id_folder,
@@ -164,7 +163,7 @@ class EditNote extends React.Component {
 				this.props.history.push(`/folders/${this.state.id_folder}`);
 			})
 			.catch(error => {
-				console.error(error);
+				error(error);
 				this.setState({ apiError: error });
 			});
 	};

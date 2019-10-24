@@ -41,7 +41,6 @@ class EditFolder extends React.Component {
 				});
 			})
 			.catch(error => {
-				console.error('XXX error = ', error);
 				this.setState({ apiError: error });
 			});
 	}
@@ -126,7 +125,6 @@ class EditFolder extends React.Component {
 				this.props.history.push('/');
 			})
 			.catch(error => {
-				console.error('error =', error);
 				this.setState({ apiError: error });
 			});
 	};
