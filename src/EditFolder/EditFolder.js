@@ -139,51 +139,71 @@ class EditFolder extends React.Component {
 		}
 
 		return (
-			<form className="editFolderForm" onSubmit={this.handleSubmit} noValidate>
-				<input type="hidden" name="id" />
-				<fieldset>
-					<legend>Edit Folder</legend>
-					<label htmlFor="name">Name</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						aria-label="Folder Name"
-						required
-						aria-required="true"
-						aria-describedby="folderNameError"
-						aria-invalid="true"
-						value={this.state.name}
-						onChange={this.handleChange}
-					/>
-					{errors.name.length > 0 && (
-						<ValidationError message={errors.name} id={'folderNameError'} />
-					)}
-					<br />
-					<button className="btn-cancel" onClick={this.handleClickCancel}>
-						Cancel
-					</button>{' '}
-					<button
-						className="btn-save"
-						disabled={this.state.formValid === false}
-					>
-						Save Folder
-					</button>{' '}
+			<>
+				<form
+					className="editFolderForm"
+					onSubmit={this.handleSubmit}
+					noValidate
+				>
+					<input type="hidden" name="id" />
+					<fieldset>
+						<legend>Edit Folder</legend>
+						<label htmlFor="name">Name</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							aria-label="Folder Name"
+							required
+							aria-required="true"
+							aria-describedby="folderNameError"
+							aria-invalid="true"
+							value={this.state.name}
+							onChange={this.handleChange}
+						/>
+						{errors.name.length > 0 && (
+							<ValidationError message={errors.name} id={'folderNameError'} />
+						)}
+						<br />
+						<button className="btn-cancel" onClick={this.handleClickCancel}>
+							Cancel
+						</button>{' '}
+						<button
+							className="btn-save"
+							disabled={this.state.formValid === false}
+						>
+							Save Folder
+						</button>{' '}
+						<button
+							className="btn-delete-folder"
+							disabled={this.state.formValid === false}
+							onClick={() =>
+								this.context.handleClickDeleteFolder(this.state.id, this.props)
+							}
+						>
+							Delete
+						</button>
+					</fieldset>
+
+					{this.state.errorCount !== null ? (
+						<p className="form-status">
+							Form is {this.state.formValid ? 'complete  ✅' : 'incomplete  ❌'}
+						</p>
+					) : null}
+				</form>
+
+				{this.state.errorCount === null ? (
 					<button
 						className="btn-delete-folder"
 						disabled={this.state.formValid === false}
-						onClick={() => this.context.handleClickDeleteFolder(this.state.id)}
+						onClick={() =>
+							this.context.handleClickDeleteFolder(this.state.id, this.props)
+						}
 					>
 						Delete
 					</button>
-				</fieldset>
-
-				{this.state.errorCount !== null ? (
-					<p className="form-status">
-						Form is {this.state.formValid ? 'complete  ✅' : 'incomplete  ❌'}
-					</p>
 				) : null}
-			</form>
+			</>
 		);
 	}
 }
