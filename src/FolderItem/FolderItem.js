@@ -37,8 +37,8 @@ const FolderItem = props => {
 							<h2>
 								{folder.name}
 								<br />
-								<NavLink to={`/edit-folder/${folder.id}`} className="btn-save">
-									Edit
+								<NavLink to={`/edit-folder/${folder.id}`}>
+									<button className="btn-edit">&#9998;</button>
 								</NavLink>
 								<br />
 								<button className="btn-save" onClick={props.history.goBack}>
