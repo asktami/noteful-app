@@ -1,8 +1,8 @@
 {
-	"name": "react-noteful",
+	"name": "noteful-react-client",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://asktami.github.io/react-router-context-noteful/",
+	"homepage": "https://asktami.github.io/noteful-react-client/",
 	"dependencies": {
 		"date-fns": "^2.0.1",
 		"gh-pages": "^2.1.1",
