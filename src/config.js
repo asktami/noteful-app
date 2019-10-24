@@ -1,5 +1,6 @@
 // hosted locally using PostgreSQL db
 export default {
+	DATASOURCE: `postgresql`,
 	NOTES_ENDPOINT: `http://localhost:8000/api/notes`,
 	FOLDERS_ENDPOINT: `http://localhost:8000/api/folders`,
 	API_KEY: process.env.REACT_APP_API_KEY
@@ -9,12 +10,14 @@ export default {
 // https://my-json-server.typicode.com/asktami/react-router-context-noteful
 
 // export default {
+//	DATASOURCE: `json`,
 // 	FOLDERS_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/folders`,
 // 	NOTES_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/notes`
 // };
 
 // hosted locally using json db
 // export default {
+// 	DATASOURCE: `json`,
 // 	FOLDERS_ENDPOINT: `http://localhost:9090/folders`,
 // 	NOTES_ENDPOINT: `http://localhost:9090/notes`
 // };
