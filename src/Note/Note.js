@@ -3,17 +3,26 @@ import PropTypes from 'prop-types';
 import NoteItem from '../NoteItem/NoteItem';
 
 import NotefulContext from '../NotefulContext';
+import config from '../config';
 
 const Note = props => {
 	// need to grab NotefulContext (globals)
 	const context = useContext(NotefulContext);
 	const { notes } = context;
+	let noteId;
 
 	// NOTE
 	// reloading the browser wipes the context from memory
 	// so need to handle if user reloads the browser and its undefined
 	// done by adding || {} here AND : '' for props.modified in NoteItem too
-	const note = notes.find(note => note.id == props.match.params.noteId) || {};
+
+	if (config.DATASOURCE === 'postgresql') {
+		noteId = parseInt(props.match.params.noteId);
+	} else {
+		noteId = props.match.params.noteId;
+	}
+
+	const note = notes.find(note => note.id === noteId) || {};
 
 	return (
 		<section>

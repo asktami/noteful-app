@@ -3,18 +3,25 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import NotefulContext from '../NotefulContext';
+import config from '../config';
 
 const FolderItem = props => {
 	const context = useContext(NotefulContext);
 	const { folders, notes } = context;
 
+	let noteId;
+
 	// use the selected noteId to
 	// - use the notes object & get the id_folder
 	// - from the folders object, use the id_folder to get the note's parent folder
 
-	const activeNote = notes
-		? notes.find(note => note.id == props.match.params.noteId)
-		: '';
+	if (config.DATASOURCE === 'postgresql') {
+		noteId = parseInt(props.match.params.noteId);
+	} else {
+		noteId = props.match.params.noteId;
+	}
+
+	const activeNote = notes ? notes.find(note => note.id === noteId) : '';
 
 	if (!activeNote) return 'Sorry, no note found.';
 

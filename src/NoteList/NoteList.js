@@ -3,20 +3,28 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import NoteError from './NoteError';
-
+import NoteItem from '../NoteItem/NoteItem';
 import NotefulContext from '../NotefulContext';
 
-import NoteItem from '../NoteItem/NoteItem';
+import config from '../config';
 
 const NoteList = props => {
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
 	const { notes } = contextType;
 
+	let folderId;
+
 	// if selected a folder, show only the notes in that folder
 	// otherwise show all notes from all folders
+	if (config.DATASOURCE === 'postgresql') {
+		folderId = parseInt(props.match.params.id_folder);
+	} else {
+		folderId = props.match.params.id_folder;
+	}
+
 	const foldernotes = props.match.params.id_folder
-		? notes.filter(note => note.id_folder == props.match.params.id_folder)
+		? notes.filter(note => note.id_folder === folderId)
 		: notes;
 
 	return (
