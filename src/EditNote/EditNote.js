@@ -127,13 +127,13 @@ class EditNote extends React.Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		// this.updateErrorCount();
 
 		// do NOT submit form if any errors
 		if (this.state.errorCount > 0) return;
 
 		// get the form fields to be updated
 		const { noteId } = this.props.match.params;
+
 		// QUESTION - why doesn't it update MODIFIED?
 		const newNote = {
 			id: this.state.id,
@@ -160,8 +160,7 @@ class EditNote extends React.Component {
 				this.resetFields(newNote);
 				this.context.updateNotes(newNote);
 
-				// return to list
-				// this.props.history.push('/');
+				// return to selected folder
 				this.props.history.push(`/folders/${this.state.id_folder}`);
 			})
 			.catch(error => {
@@ -173,12 +172,6 @@ class EditNote extends React.Component {
 	render() {
 		const { errors, name, content, id_folder } = this.state;
 		const folders = this.context.folders;
-
-		// selected id_folder passed in via NavLink:
-		// console.log(
-		// 	'EditNote props.location.state.id_folder = ',
-		// 	this.props.location.state.id_folder
-		// );
 
 		if (this.state.apiError) {
 			return <p className="error">{this.state.apiError}</p>;
