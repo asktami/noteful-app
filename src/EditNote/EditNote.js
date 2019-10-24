@@ -140,9 +140,7 @@ class EditNote extends React.Component {
 			id_folder: this.state.id_folder,
 			name: this.state.name,
 			content: this.state.content,
-			modified: new Date().toLocaleDateString('en-US', {
-				timeZone: 'America/New_York'
-			})
+			modified: new Date()
 		};
 
 		this.setState({ apiError: null });
@@ -161,7 +159,10 @@ class EditNote extends React.Component {
 			.then(() => {
 				this.resetFields(newNote);
 				this.context.updateNotes(newNote);
-				this.props.history.push('/');
+
+				// return to list
+				// this.props.history.push('/');
+				this.props.history.push(`/folders/${this.state.id_folder}`);
 			})
 			.catch(error => {
 				console.error(error);
