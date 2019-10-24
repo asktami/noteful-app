@@ -9,7 +9,7 @@ it('renders without crashing', () => {
 			push: () => {}
 		},
 		match: {
-			params: 99 // folderId
+			params: 99 // id_folder
 		}
 	};
 	ReactDOM.render(<EditFolder {...props} />, div);

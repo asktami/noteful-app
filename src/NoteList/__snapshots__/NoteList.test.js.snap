@@ -12,7 +12,7 @@ exports[`NoteList component renders a NoteList by default 1`] = `
         Object {
           "pathname": "/add-note",
           "state": Object {
-            "folderId": "101",
+            "id_folder": "101",
           },
         }
       }
@@ -48,7 +48,7 @@ exports[`NoteList component renders the NoteList given props 1`] = `
         Object {
           "pathname": "/add-note",
           "state": Object {
-            "folderId": "101",
+            "id_folder": "101",
           },
         }
       }

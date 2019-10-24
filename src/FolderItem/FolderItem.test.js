@@ -15,7 +15,7 @@ describe(`FolderItem component`, () => {
 	const notes = [
 		{
 			id: '101',
-			folderId: '101',
+			id_folder: '101',
 			name: 'test-note-title',
 			modified: new Date(2019, 8, 30)
 		}

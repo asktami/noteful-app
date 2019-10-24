@@ -13,11 +13,11 @@ class EditNote extends React.Component {
 		formValid: true,
 		errorCount: null,
 		id: '',
-		folderId: '',
+		id_folder: '',
 		name: '',
 		content: '',
 		errors: {
-			folderId: '',
+			id_folder: '',
 			name: '',
 			content: ''
 		}
@@ -49,7 +49,7 @@ class EditNote extends React.Component {
 				this.setState({
 					id: responseData.id,
 					name: responseData.name,
-					folderId: responseData.folderId,
+					id_folder: responseData.id_folder,
 					content: responseData.content
 				});
 			})
@@ -85,7 +85,7 @@ class EditNote extends React.Component {
 			}
 		}
 
-		if (name === 'folderId') {
+		if (name === 'id_folder') {
 			if (value.length === 0) {
 				err = 'You must select a folder';
 			}
@@ -121,7 +121,7 @@ class EditNote extends React.Component {
 			id: newFields.id || '',
 			name: newFields.name || '',
 			content: newFields.content || '',
-			folderId: newFields.folderId || ''
+			id_folder: newFields.id_folder || ''
 		});
 	};
 
@@ -137,7 +137,7 @@ class EditNote extends React.Component {
 		// QUESTION - why doesn't it update MODIFIED?
 		const newNote = {
 			id: this.state.id,
-			folderId: this.state.folderId,
+			id_folder: this.state.id_folder,
 			name: this.state.name,
 			content: this.state.content,
 			modified: new Date().toLocaleDateString('en-US', {
@@ -170,13 +170,13 @@ class EditNote extends React.Component {
 	};
 
 	render() {
-		const { errors, name, content, folderId } = this.state;
+		const { errors, name, content, id_folder } = this.state;
 		const folders = this.context.folders;
 
-		// selected folderId passed in via NavLink:
+		// selected id_folder passed in via NavLink:
 		// console.log(
-		// 	'EditNote props.location.state.folderId = ',
-		// 	this.props.location.state.folderId
+		// 	'EditNote props.location.state.id_folder = ',
+		// 	this.props.location.state.id_folder
 		// );
 
 		if (this.state.apiError) {
@@ -188,16 +188,16 @@ class EditNote extends React.Component {
 				<input type="hidden" name="id" />
 				<fieldset>
 					<legend>Edit Note</legend>
-					<label htmlFor="folderId">Folder</label>
+					<label htmlFor="id_folder">Folder</label>
 					<select
-						id="folderId"
-						name="folderId"
+						id="id_folder"
+						name="id_folder"
 						aria-label="Folder Id"
 						required
 						aria-required="true"
-						aria-describedby="folderIdError"
+						aria-describedby="id_folderError"
 						aria-invalid="true"
-						value={folderId}
+						value={id_folder}
 						onChange={this.handleChange}
 					>
 						<option value="">Select a folder</option>
@@ -207,8 +207,8 @@ class EditNote extends React.Component {
 							</option>
 						))}
 					</select>
-					{errors.folderId.length > 0 && (
-						<ValidationError id={'folderIdError'} message={errors.folderId} />
+					{errors.id_folder.length > 0 && (
+						<ValidationError id={'id_folderError'} message={errors.id_folder} />
 					)}
 					<label htmlFor="name">Title</label>
 					<input

@@ -20,16 +20,16 @@ const FolderList = props => {
 						<button className="btn-add">+</button>
 					</NavLink>
 					&nbsp;&nbsp;
-					{props.match.params.folderId !== undefined ? (
+					{props.match.params.id_folder !== undefined ? (
 						<>
-							<NavLink to={`/edit-folder/${props.match.params.folderId}`}>
+							<NavLink to={`/edit-folder/${props.match.params.id_folder}`}>
 								<button className="btn-edit">&#9998;</button>
 							</NavLink>
 							&nbsp;&nbsp;
 							<button
 								className="btn-delete"
 								onClick={() =>
-									handleClickDeleteFolder(props.match.params.folderId, props)
+									handleClickDeleteFolder(props.match.params.id_folder, props)
 								}
 							>
 								-
@@ -43,7 +43,7 @@ const FolderList = props => {
 					<li
 						key={folder.id}
 						className={
-							folder.id === props.match.params.folderId ? ' active' : null
+							folder.id === props.match.params.id_folder ? ' active' : null
 						}
 					>
 						<FolderError>

@@ -15,8 +15,8 @@ const NoteList = props => {
 
 	// if selected a folder, show only the notes in that folder
 	// otherwise show all notes from all folders
-	const foldernotes = props.match.params.folderId
-		? notes.filter(note => note.folderId === props.match.params.folderId)
+	const foldernotes = props.match.params.id_folder
+		? notes.filter(note => note.id_folder == props.match.params.id_folder)
 		: notes;
 
 	return (
@@ -28,10 +28,10 @@ const NoteList = props => {
 					// if just passing url:
 					// to={'/add-note'}
 
-					// to pass selected folderId:
+					// to pass selected id_folder:
 					to={{
 						pathname: '/add-note',
-						state: { folderId: props.match.params.folderId }
+						state: { id_folder: props.match.params.id_folder }
 					}}
 				>
 					<button className="btn-add">+</button>

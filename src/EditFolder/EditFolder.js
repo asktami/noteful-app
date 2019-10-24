@@ -12,7 +12,7 @@ class EditFolder extends React.Component {
 		apiError: null,
 		formValid: true,
 		errorCount: null,
-		id: this.props.match.params.folderId,
+		id: this.props.match.params.id_folder,
 		name: '',
 		errors: {
 			name: ''
@@ -21,8 +21,8 @@ class EditFolder extends React.Component {
 
 	// get folder to be updated
 	componentDidMount() {
-		const { folderId } = this.props.match.params;
-		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+		const { id_folder } = this.props.match.params;
+		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
@@ -102,13 +102,13 @@ class EditFolder extends React.Component {
 		if (this.state.errorCount > 0) return;
 
 		// get the form fields from the event
-		const { folderId } = this.props.match.params;
+		const { id_folder } = this.props.match.params;
 		const { id, name } = this.state;
 		const newFolder = { id, name };
 
 		this.setState({ apiError: null });
 
-		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'PATCH',
 			body: JSON.stringify(newFolder),
 			headers: {

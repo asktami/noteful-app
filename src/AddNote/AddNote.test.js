@@ -11,7 +11,7 @@ it('renders without crashing', () => {
 		modified: new Date(),
 		location: {
 			state: {
-				folderId: 99
+				id_folder: 99
 			}
 		},
 		history: {

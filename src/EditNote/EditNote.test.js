@@ -8,7 +8,7 @@ it('renders without crashing', () => {
 	const props = {
 		location: {
 			state: {
-				folderId: 99
+				id_folder: 99
 			}
 		},
 		match: {

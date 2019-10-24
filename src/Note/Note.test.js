@@ -14,7 +14,7 @@ describe(`Note component`, () => {
 		notes: [
 			{
 				id: '1',
-				folderId: '101',
+				id_folder: '101',
 				name: 'test-note-title',
 				content: 'test-note-content',
 				modified: new Date(2019, 8, 30)

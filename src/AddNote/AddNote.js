@@ -12,12 +12,12 @@ class AddNote extends React.Component {
 		apiError: null,
 		formValid: false,
 		errorCount: null,
-		folderId: this.props.location.state.folderId || '', // use selected folderId passed in via NavLink
+		id_folder: this.props.location.state.id_folder || '', // use selected id_folder passed in via NavLink
 		name: '',
 		content: '',
 		errors: {
-			folderId:
-				!this.props.location.state.folderId && 'You must select a folder', // error only if no folderId passed in via NavLink
+			id_folder:
+				!this.props.location.state.id_folder && 'You must select a folder', // error only if no id_folder passed in via NavLink
 			name: 'You must enter a note title',
 			content: 'You must enter a description'
 		}
@@ -56,7 +56,7 @@ class AddNote extends React.Component {
 			}
 		}
 
-		if (name === 'folderId') {
+		if (name === 'id_folder') {
 			if (value.length === 0) {
 				err = 'You must select a folder';
 			}
@@ -95,9 +95,9 @@ class AddNote extends React.Component {
 		if (this.state.errorCount > 0) return;
 
 		// get the form fields from the event
-		const { folderId, name, content } = e.target;
+		const { id_folder, name, content } = e.target;
 		const note = {
-			folderId: folderId.value,
+			id_folder: id_folder.value,
 			name: name.value,
 			content: content.value,
 			modified: new Date()
@@ -124,7 +124,7 @@ class AddNote extends React.Component {
 			})
 			.then(data => {
 				// clear form values
-				folderId.value = '';
+				id_folder.value = '';
 				name.value = '';
 				content.value = '';
 
@@ -142,10 +142,10 @@ class AddNote extends React.Component {
 		const { errors } = this.state;
 		const folders = this.context.folders;
 
-		// selected folderId passed in via NavLink:
+		// selected id_folder passed in via NavLink:
 		// console.log(
-		// 	'AddNote props.location.state.folderId = ',
-		// 	this.props.location.state.folderId
+		// 	'AddNote props.location.state.id_folder = ',
+		// 	this.props.location.state.id_folder
 		// );
 
 		if (this.state.apiError) {
@@ -156,16 +156,16 @@ class AddNote extends React.Component {
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
 					<legend>New Note</legend>
-					<label htmlFor="folderId">Folder</label>
+					<label htmlFor="id_folder">Folder</label>
 					<select
-						id="folderId"
-						name="folderId"
+						id="id_folder"
+						name="id_folder"
 						aria-label="Folder Id"
 						required
 						aria-required="true"
-						aria-describedby="folderIdError"
+						aria-describedby="id_folderError"
 						aria-invalid="true"
-						value={this.state.folderId}
+						value={this.state.id_folder}
 						onChange={this.handleChange}
 					>
 						<option value="">Select a folder</option>
@@ -175,8 +175,8 @@ class AddNote extends React.Component {
 							</option>
 						))}
 					</select>
-					{errors.folderId.length > 0 && (
-						<ValidationError id={'folderIdError'} message={errors.folderId} />
+					{errors.id_folder.length > 0 && (
+						<ValidationError id={'id_folderError'} message={errors.id_folder} />
 					)}
 					<label htmlFor="name">Title</label>
 					<input

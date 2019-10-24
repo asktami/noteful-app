@@ -33,7 +33,7 @@ const routes = [
 		section: NoteList
 	},
 	{
-		path: '/folders/:folderId',
+		path: '/folders/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
@@ -68,14 +68,14 @@ const routes = [
 		section: EditNote
 	},
 	{
-		path: '/edit-folder/:folderId',
+		path: '/edit-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: null,
 		section: EditFolder
 	},
 	{
-		path: '/delete-folder/:folderId',
+		path: '/delete-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
@@ -115,8 +115,8 @@ const App = props => {
 		setNotes(newNotes);
 	};
 
-	const deleteFolder = folderId => {
-		const newFolders = folders.filter(folder => folder.id !== folderId);
+	const deleteFolder = id_folder => {
+		const newFolders = folders.filter(folder => folder.id !== id_folder);
 		setFolders(newFolders);
 	};
 
@@ -197,8 +197,8 @@ const App = props => {
 		setNotes(newNotes);
 	};
 
-	const handleClickDeleteFolder = (folderId, props) => {
-		fetch(config.FOLDERS_ENDPOINT + `/${folderId}`, {
+	const handleClickDeleteFolder = (id_folder, props) => {
+		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
@@ -223,9 +223,9 @@ const App = props => {
 				// this is where the App component can remove it from state
 				// ie. update the folders stored in state
 				// which also updates the folders stored in context
-				deleteFolder(folderId);
+				deleteFolder(id_folder);
 
-				// remove folderId from URL
+				// remove id_folder from URL
 				props.history.push(`/`);
 			})
 			.catch(error => {
@@ -235,9 +235,9 @@ const App = props => {
 				}
 
 				if (error === 404) {
-					deleteFolder(folderId);
+					deleteFolder(id_folder);
 
-					// remove folderId from URL
+					// remove id_folder from URL
 					props.history.push(`/`);
 				}
 			});

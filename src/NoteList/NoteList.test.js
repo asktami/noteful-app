@@ -8,13 +8,13 @@ describe(`NoteList component`, () => {
 	const props = {
 		match: {
 			params: {
-				folderId: '101'
+				id_folder: '101'
 			}
 		},
 		notes: [
 			{
 				id: '1',
-				folderId: '101',
+				id_folder: '101',
 				name: 'test-note-title',
 				modified: new Date(2019, 8, 30)
 			}
