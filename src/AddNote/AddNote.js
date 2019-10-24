@@ -131,7 +131,7 @@ class AddNote extends React.Component {
 				this.context.addNote(data);
 
 				// return to list:
-				this.props.history.push('/');
+				this.props.history.push(`/folders/${id_folder.value}`);
 			})
 			.catch(error => {
 				this.setState({ apiError: error });
