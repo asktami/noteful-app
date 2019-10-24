@@ -13,7 +13,7 @@ const Note = props => {
 	// reloading the browser wipes the context from memory
 	// so need to handle if user reloads the browser and its undefined
 	// done by adding || {} here AND : '' for props.modified in NoteItem too
-	const note = notes.find(note => note.id === props.match.params.noteId) || {};
+	const note = notes.find(note => note.id == props.match.params.noteId) || {};
 
 	return (
 		<section>
@@ -34,7 +34,7 @@ Note.propTypes = {
 	notes: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			folderId: PropTypes.string.isRequired,
+			id_folder: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
 			content: PropTypes.string.isRequired,
 			modified: PropTypes.instanceOf(Date).isRequired
