@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
@@ -90,23 +90,15 @@ const routes = [
 	}
 ];
 
-class App extends React.Component {
+const App = props => {
 	// set default state variable values with hooks
-	// const [folders, setFolders] = useState([]);
-	// const [notes, setNotes] = useState([]);
-	// const [foldersError, setFoldersError] = useState(null);
-	// const [notesError, setNotesError] = useState(null);
+	const [folders, setFolders] = useState([]);
+	const [notes, setNotes] = useState([]);
+	const [foldersError, setFoldersError] = useState(null);
+	const [notesError, setNotesError] = useState(null);
 
-	// // to stop submit of EditFolder form since deleteFolder button is inside the form
-	// const [deletedFolderId, setDeletedFolderId] = useState(null);
-
-	state = {
-		folders: [],
-		notes: [],
-		foldersError: null,
-		notesError: null,
-		deleteFolderId: null
-	};
+	// to stop submit of EditFolder form since deleteFolder button is inside the form
+	const [deletedFolderId, setDeletedFolderId] = useState(null);
 
 	// to see foldersError in ui:
 	// const [foldersError, setFoldersError] = useState({ value: 'foldersAPI errorMessage' });
@@ -120,37 +112,32 @@ class App extends React.Component {
 	/*
     After making successful a DELETE API request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.
     */
-	deleteNote = noteId => {
-		const newNotes = this.state.notes.filter(note => note.id !== noteId);
-		this.setState({ notes: newNotes });
+	const deleteNote = noteId => {
+		const newNotes = notes.filter(note => note.id !== noteId);
+		setNotes(newNotes);
 	};
 
-	deleteFolder = id_folder => {
-		const newFolders = this.state.folders.filter(
-			folder => folder.id !== id_folder
-		);
-		this.setState({ folders: newFolders });
+	const deleteFolder = id_folder => {
+		const newFolders = folders.filter(folder => folder.id !== id_folder);
+		setFolders(newFolders);
 
-		console.log(
-			'folders inside App after delete = ',
-			JSON.stringify(this.state.folders)
-		);
+		console.log('folders inside App after delete = ', folders);
 	};
 
-	addNote = note => {
-		this.setState({ notes: [...this.state.notes, note] });
+	const addNote = note => {
+		setNotes([...notes, note]);
 	};
 
-	addFolder = folder => {
-		this.setState({ folders: [...this.state.folders, folder] });
+	const addFolder = folder => {
+		setFolders([...folders, folder]);
 	};
 
-	addErrorNotes = error => {
-		this.setState({ notesError: error });
+	const addErrorNotes = error => {
+		setNotesError(error);
 	};
 
-	addErrorFolders = error => {
-		this.setState({ foldersError: error });
+	const addErrorFolders = error => {
+		setFoldersError(error);
 	};
 
 	/*
@@ -160,20 +147,7 @@ class App extends React.Component {
     // So the component rendering the /detail/:id route needs to fetch data for itself, including the correct id to use from the url, via the props React Router provides.
     */
 
-	setFolders = folders => {
-		this.setState({
-			folders,
-			error: null
-		});
-	};
-	setNotes = notes => {
-		this.setState({
-			notes,
-			error: null
-		});
-	};
-
-	getFolders = () => {
+	const getFolders = () => {
 		fetch(config.FOLDERS_ENDPOINT, {
 			method: 'GET',
 			headers: {
@@ -187,13 +161,13 @@ class App extends React.Component {
 				}
 				return res.json();
 			})
-			.then(this.setFolders)
+			.then(setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => this.setState({ foldersError: error }));
+			.catch(error => setFoldersError(error));
 	};
 
-	getNotes = () => {
+	const getNotes = () => {
 		fetch(config.NOTES_ENDPOINT, {
 			method: 'GET',
 			headers: {
@@ -207,41 +181,34 @@ class App extends React.Component {
 				}
 				return res.json();
 			})
-			.then(this.setNotes)
+			.then(setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => this.setState({ notesError: error }));
+			.catch(error => setNotesError(error));
 	};
 
-	componentDidMount() {
-		this.getFolders();
-		this.getNotes();
-	}
-
-	updateFolders = updatedFolder => {
-		const newFolders = this.state.folders.map(folder =>
+	const updateFolders = updatedFolder => {
+		const newFolders = folders.map(folder =>
 			folder.id !== updatedFolder.id ? folder : updatedFolder
 		);
-
-		this.setState({ folders: newFolders });
+		setFolders(newFolders);
 	};
 
-	updateNotes = updatedNote => {
-		const newNotes = this.state.notes.map(note =>
+	const updateNotes = updatedNote => {
+		const newNotes = notes.map(note =>
 			note.id !== updatedNote.id ? note : updatedNote
 		);
-
-		this.setState({ notes: newNotes });
+		setNotes(newNotes);
 	};
 
 	// to stop submit of EditFolder form since deleteFolder button is inside the form
-	clearDeletedFolderId = () => {
-		this.setState({ deletedFolderId: null });
+	const clearDeletedFolderId = () => {
+		setDeletedFolderId(null);
 	};
 
-	handleClickDeleteFolder = (id_folder, props) => {
+	const handleClickDeleteFolder = (id_folder, props) => {
 		// to stop submit of EditFolder form since deleteFolder button is inside the form
-		this.setState({ deletedFolderId: id_folder });
+		setDeletedFolderId(id_folder);
 
 		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'DELETE',
@@ -268,7 +235,7 @@ class App extends React.Component {
 				// this is where the App component can remove it from state
 				// ie. update the folders stored in state
 				// which also updates the folders stored in context
-				this.deleteFolder(id_folder);
+				deleteFolder(id_folder);
 
 				// remove id_folder from URL
 				props.history.push(`/`);
@@ -276,11 +243,11 @@ class App extends React.Component {
 			.catch(error => {
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error !== 404) {
-					this.addErrorFolders(error);
+					addErrorFolders(error);
 				}
 
 				if (error === 404) {
-					this.deleteFolder(id_folder);
+					deleteFolder(id_folder);
 
 					// remove id_folder from URL
 					props.history.push(`/`);
@@ -288,27 +255,33 @@ class App extends React.Component {
 			});
 	};
 
-	render() {
-		// create object to update the values stored in NotefulContext
-		const contextObj = {
-			notes: this.state.notes,
-			folders: this.state.folders,
-			deleteNote: this.deleteNote,
-			addNote: this.addNote,
-			addFolder: this.addFolder,
-			addErrorNotes: this.addErrorNotes,
-			addErrorFolders: this.addErrorFolders,
-			notesError: this.notesError,
-			updateFolders: this.updateFolders,
-			updateNotes: this.updateNotes,
-			handleClickDeleteFolder: this.handleClickDeleteFolder,
-			deletedFolderId: this.deletedFolderId,
-			clearDeletedFolderId: this.clearDeletedFolderId
-		};
-		return (
-			<>
-				<Header />
-				{/* actually update the values stored in NotefulContext by passing contextObj into value
+	// only load ONCE, to fetch initial API data
+	useEffect(() => {
+		getFolders();
+		getNotes();
+	}, []); /* add an empty array as the 2nd argument to have this run only 1x after the initial render */
+
+	// create object to update the values stored in NotefulContext
+	const contextObj = {
+		notes: notes,
+		folders: folders,
+		deleteNote: deleteNote,
+		addNote: addNote,
+		addFolder: addFolder,
+		addErrorNotes: addErrorNotes,
+		addErrorFolders: addErrorFolders,
+		notesError: notesError,
+		updateFolders: updateFolders,
+		updateNotes: updateNotes,
+		handleClickDeleteFolder: handleClickDeleteFolder,
+		deletedFolderId: deletedFolderId,
+		clearDeletedFolderId: clearDeletedFolderId
+	};
+
+	return (
+		<>
+			<Header />
+			{/* actually update the values stored in NotefulContext by passing contextObj into value
 
                 Use the Provider to make values available to all children/grandchildren/subcomponents
 
@@ -316,18 +289,16 @@ class App extends React.Component {
 
                 -- the code below will re-render all consumers every time the Provider re-renders because a new object is always created for value
                 */}
-				<NotefulContext.Provider value={contextObj}>
-					<main>
-						<div className="aside">
-							{this.state.foldersError && (
-								<p className="error">{this.state.foldersError.value}</p>
-							)}
-							{routes.map(({ path, exact, aside: A }) => (
-								<Route key={path} path={path} exact={exact} component={A} />
-							))}
-						</div>
-						<article>
-							{/* NOTE:
+			<NotefulContext.Provider value={contextObj}>
+				<main>
+					<div className="aside">
+						{foldersError && <p className="error">{foldersError.value}</p>}
+						{routes.map(({ path, exact, aside: A }) => (
+							<Route key={path} path={path} exact={exact} component={A} />
+						))}
+					</div>
+					<article>
+						{/* NOTE:
                          CAN use render props to pass unfinishedMessage prop via route
                          AND
                          to pass location, match and history props to the component so that in the component I have access to the history object to push a new location into
@@ -354,21 +325,18 @@ class App extends React.Component {
 
                         */}
 
-							{this.state.notesError && (
-								<p className="error">{this.state.notesError.value}</p>
-							)}
+						{notesError && <p className="error">{notesError.value}</p>}
 
-							{routes.map(({ path, exact, section: S }) => (
-								<Route key={path} path={path} exact={exact} component={S} />
-							))}
-						</article>
-					</main>
-				</NotefulContext.Provider>
+						{routes.map(({ path, exact, section: S }) => (
+							<Route key={path} path={path} exact={exact} component={S} />
+						))}
+					</article>
+				</main>
+			</NotefulContext.Provider>
 
-				<Footer />
-			</>
-		);
-	}
-}
+			<Footer />
+		</>
+	);
+};
 
 export default App;

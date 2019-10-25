@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
@@ -9,15 +9,31 @@ const FolderList = props => {
 	const contextType = useContext(NotefulContext);
 	const { notes, folders, handleClickDeleteFolder } = contextType;
 
+	const [refresh, setRefresh] = useState(0);
+
 	// QUESTION - WHY ISNT FOLDERS CHANGING IN CONTEXT WHEN DELETED FROM FolderList??
 	// I thought updating something in Context (via changing state) would cause re-render of any CONSUMER COMPONENTS?
-	if (contextType.folders) console.log('folders = ', JSON.stringify(folders));
+	console.log('folders inside FolderList = ', JSON.stringify(folders));
 
+	// new function to trigger state refresh inside FolderList when run handleClickDeleteFolder in App
+	const deleteFolderRefresh = (id_folder, props) => {
+		handleClickDeleteFolder(id_folder, props);
+
+		if (refresh === 0) {
+			setRefresh(1);
+			console.log('refresh inside function = ', refresh);
+		} else {
+			setRefresh(0);
+			console.log('refresh inside function = ', refresh);
+		}
+	};
+
+	console.log('refresh outside function = ', refresh);
 	return (
 		<>
 			<header>
 				<>
-					<h2>Folders</h2>
+					<h2>Folders {refresh}</h2>
 					&nbsp;&nbsp;
 					<NavLink to={'/add-folder'}>
 						<button className="btn-add">+</button>
@@ -32,7 +48,7 @@ const FolderList = props => {
 							<button
 								className="btn-delete"
 								onClick={() =>
-									handleClickDeleteFolder(props.match.params.id_folder, props)
+									deleteFolderRefresh(props.match.params.id_folder, props)
 								}
 							>
 								-
@@ -55,11 +71,7 @@ const FolderList = props => {
 									&#x1F4C2;
 								</span>
 								&nbsp;{folder.name}&nbsp;(
-								{
-									notes.filter(note => note.id_folder === parseInt(folder.id))
-										.length
-								}
-								)
+								{notes.filter(note => note.id_folder === folder.id).length})
 							</NavLink>
 						</FolderError>
 					</li>
