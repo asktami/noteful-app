@@ -6,9 +6,12 @@ import FolderError from './FolderError';
 import NotefulContext from '../NotefulContext';
 
 const FolderList = props => {
-	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
-	const { folders, handleClickDeleteFolder } = contextType;
+	const { notes, folders, handleClickDeleteFolder } = contextType;
+
+	// QUESTION - WHY ISNT FOLDERS CHANGING IN CONTEXT WHEN DELETED FROM FolderList??
+	// I thought updating something in Context (via changing state) would cause re-render of any CONSUMER COMPONENTS?
+	if (contextType.folders) console.log('folders = ', JSON.stringify(folders));
 
 	return (
 		<>
@@ -51,7 +54,12 @@ const FolderList = props => {
 								<span role="img" aria-label="Folder">
 									&#x1F4C2;
 								</span>
-								&nbsp;{folder.name}
+								&nbsp;{folder.name}&nbsp;(
+								{
+									notes.filter(note => note.id_folder === parseInt(folder.id))
+										.length
+								}
+								)
 							</NavLink>
 						</FolderError>
 					</li>
