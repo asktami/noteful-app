@@ -133,13 +133,12 @@ class EditNote extends React.Component {
 		// get the form fields to be updated
 		const { noteId } = this.props.match.params;
 
-		// QUESTION - why doesn't it update MODIFIED when using db.json?
+		// when using db.json, add modified: new Date().toString()
 		const newNote = {
 			id: this.state.id,
 			id_folder: this.state.id_folder,
 			name: this.state.name,
-			content: this.state.content,
-			modified: new Date()
+			content: this.state.content
 		};
 
 		this.setState({ apiError: null });
@@ -178,7 +177,6 @@ class EditNote extends React.Component {
 
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="hidden" name="id" />
 				<fieldset>
 					<legend>Edit Note</legend>
 					<label htmlFor="id_folder">Folder</label>
