@@ -14,7 +14,9 @@ const NotefulContext = React.createContext({
 	notesError: () => {},
 	updateFolders: () => {},
 	updateNotes: () => {},
-	handleClickDeleteFolder: () => {}
+	handleClickDeleteFolder: () => {},
+	deletedFolderId: null,
+	clearDeletedFolderId: () => {}
 });
 
 export default NotefulContext;

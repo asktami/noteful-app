@@ -97,6 +97,9 @@ const App = props => {
 	const [foldersError, setFoldersError] = useState(null);
 	const [notesError, setNotesError] = useState(null);
 
+	// to stop submit of EditFolder form since deleteFolder button is inside the form
+	const [deletedFolderId, setDeletedFolderId] = useState(null);
+
 	// to see foldersError in ui:
 	// const [foldersError, setFoldersError] = useState({ value: 'foldersAPI errorMessage' });
 
@@ -196,7 +199,15 @@ const App = props => {
 		setNotes(newNotes);
 	};
 
+	// to stop submit of EditFolder form since deleteFolder button is inside the form
+	const clearDeletedFolderId = () => {
+		setDeletedFolderId(null);
+	};
+
 	const handleClickDeleteFolder = (id_folder, props) => {
+		// to stop submit of EditFolder form since deleteFolder button is inside the form
+		setDeletedFolderId(id_folder);
+
 		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'DELETE',
 			headers: {
@@ -260,7 +271,9 @@ const App = props => {
 		notesError: notesError,
 		updateFolders: updateFolders,
 		updateNotes: updateNotes,
-		handleClickDeleteFolder: handleClickDeleteFolder
+		handleClickDeleteFolder: handleClickDeleteFolder,
+		deletedFolderId: deletedFolderId,
+		clearDeletedFolderId: clearDeletedFolderId
 	};
 
 	return (
