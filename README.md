@@ -6,6 +6,8 @@
 
 ## Description
 
+Works with [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api).
+
 There are 3 routes: the main route, the dynamic folder route and a dynamic note route.
 
 - Each route should have a header, main section, and a sidebar section
