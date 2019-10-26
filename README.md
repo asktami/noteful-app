@@ -46,9 +46,7 @@ To get your local copy of the noteful API, clone this project into your local pr
 You can see documentation for the JSON-server once its started by visiting http://localhost:9090.
 You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
 
-Use `db BACKUP.json`, from the `noteful-react-client` repo, as the datasource (renamed as `db.json`). More info is at [https://github.com/typicode/json-server](https://github.com/typicode/json-server.)
-
-[https://github.com/typicode/json-server](https://github.com/typicode/json-server) lets you create a fake REST API for the database.
+Use `db BACKUP.json`, from the `noteful-react-client` repo, as the datasource (renamed as `db.json`). More info is at [https://github.com/typicode/json-server](https://github.com/typicode/json-server) - a fake REST API for the database.
 
 ---
 
