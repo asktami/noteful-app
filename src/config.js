@@ -1,18 +1,17 @@
-// hosted locally using PostgreSQL db
+// hosted on Heroku using PostgreSQL db
 export default {
 	DATASOURCE: `postgresql`,
-	NOTES_ENDPOINT: `http://localhost:8000/api/notes`,
-	FOLDERS_ENDPOINT: `http://localhost:8000/api/folders`,
+	NOTES_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/notes`,
+	FOLDERS_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/folders`,
 	API_KEY: process.env.REACT_APP_API_KEY
 };
 
-// hosted on github using json db
-// https://my-json-server.typicode.com/asktami/react-router-context-noteful
-
+// hosted locally using PostgreSQL db
 // export default {
-//	DATASOURCE: `json`,
-// 	FOLDERS_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/folders`,
-// 	NOTES_ENDPOINT: `https://my-json-server.typicode.com/asktami/react-router-context-noteful/notes`
+// 	DATASOURCE: `postgresql`,
+// 	NOTES_ENDPOINT: `http://localhost:8000/api/notes`,
+// 	FOLDERS_ENDPOINT: `http://localhost:8000/api/folders`,
+// 	API_KEY: process.env.REACT_APP_API_KEY
 // };
 
 // hosted locally using json db
