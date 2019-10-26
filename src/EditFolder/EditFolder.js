@@ -185,7 +185,7 @@ class EditFolder extends React.Component {
 
 				{this.state.formValid ? (
 					<button
-						className="btn-delete-folder"
+						className="btn-delete-folder btn-position"
 						disabled={this.state.formValid === false}
 						onClick={() =>
 							this.context.handleClickDeleteFolder(this.state.id, this.props)

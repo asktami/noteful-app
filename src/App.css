@@ -18,6 +18,32 @@ textarea {
 	text-align: left;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	/*safari and chrome*/
+	select {
+		height: 40px;
+		line-height: 40px;
+	}
+}
+select::-moz-focus-inner {
+	/*Remove button padding in FF*/
+	border: 0;
+	padding: 0;
+}
+@-moz-document url-prefix() {
+	/* targets Firefox only */
+	select {
+		padding: 0px 0 !important;
+	}
+}
+@media screen\0 {
+	/* IE Hacks: targets IE 8, 9 and 10 */
+	select {
+		height: 40px;
+		line-height: 40px;
+	}
+}
+
 a:link,
 a:visited {
 	color: #004c82;
@@ -401,4 +427,15 @@ article > header {
 header a:focus {
 	outline: solid;
 	outline-color: #fff;
+}
+
+/* to make edit-folder delete button appear as if it is inside the form */
+article {
+	position: relative;
+}
+
+.btn-position {
+	position: absolute;
+	top: 137px;
+	left: 205px;
 }
