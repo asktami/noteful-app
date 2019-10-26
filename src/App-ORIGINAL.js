@@ -120,8 +120,6 @@ const App = props => {
 	const deleteFolder = id_folder => {
 		const newFolders = folders.filter(folder => folder.id !== id_folder);
 		setFolders(newFolders);
-
-		console.log('folders inside App after delete = ', folders);
 	};
 
 	const addNote = note => {
