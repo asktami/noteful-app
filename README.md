@@ -34,6 +34,14 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - Implement "edit-folder" and "edit-note" controlled component forms
 
+### .env file contents
+
+```
+NODE_ENV=development
+PORT=8000
+REACT_APP_API_KEY="YOUR-API-KEY"
+```
+
 ### Noteful JSON server
 
 To get your local copy of the Noteful JSON API, clone this project into your local projects folder:
