@@ -10,27 +10,27 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - Each route should have a header, main section, and a sidebar section
 
-- Every route will have the same header section, the app's title should be a link to the main route.
+- Every route will have the same header section, the app's title should be a link to the main route
 
 - The main route: - Should be displayed when the path is / - The main section will display all of the available notes - - Each note should show it's name and modified date - The sidebar will display a list of folders with none selected
 
 - The dynamic folder route: - Should be displayed when the path is /folder/<with-a-folder-id-here> - The folder-id will reference an id of one of the folders in state - The main section should display only the notes that are "in" the selected folder - The sidebar should display the folder list with the selected folder highlighted
 
-- The dynamic note route: - Should be displayed when the path is /notes/<with-a-note-id-here> - The note-id will reference an id of one of the notes in state - The main section should display the currently selected notes name, modified date and content - The sidebar should display the folder of the currently selected note as well as a "back" button.
+- The dynamic note route: - Should be displayed when the path is /notes/<with-a-note-id-here> - The note-id will reference an id of one of the notes in state - The main section should display the currently selected notes name, modified date and content - The sidebar should display the folder of the currently selected note as well as a "back" button
 
 - Use the React Context API instead of prop drilling
 
-- Implement fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState inside the main App component.
+- Implement fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState inside the main App component
 
-- The API calls can be made to either a local json server or a PostgreSQL database.
+- The API calls can be made to either a **local json server** or a **PostgreSQL database**
 
-- Implement the delete button for each note in the list in the main route and folder route.
+- Implement the delete button for each note in the list in the main route and folder route
 
-- Implement the delete button on the note page, if the delete is successful, redirect to the / path.
+- Implement the delete button on the note page, if the delete is successful, redirect to the / path
 
-- Implement "add-folder" and "add-note" controlled component forms.
+- Implement "add-folder" and "add-note" controlled component forms
 
-- Implement "edit-folder" and "edit-note" controlled component forms.
+- Implement "edit-folder" and "edit-note" controlled component forms
 
 ### Noteful JSON server
 
