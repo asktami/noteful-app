@@ -1,28 +1,8 @@
-# react-router-context-noteful
+# noteful-react-client
 
 ![Noteful screenshot](https://github.com/asktami/react-router-context-noteful/blob/master/noteful.png 'Noteful')
 
 [View Live](https://asktami.github.io/react-router-context-noteful/)
-
-**Note:** when you re-load any page, only the original folders and notes will show - any folders/notes you've created will disappear because, as a function of the free service, "**changes are faked and aren't persisted**".
-
-Uses [https://github.com/typicode/json-server](https://github.com/typicode/json-server) fake REST API for the database. See json data at [https://my-json-server.typicode.com/asktami/react-router-context-noteful](https://my-json-server.typicode.com/asktami/react-router-context-noteful).
-
-### Noteful JSON server
-
-To get your local copy of the noteful API, clone this project into your local projects folder:
-
-      git clone https://github.com/tomatau/noteful-json-server
-      cd ./noteful-json-server
-      npm install
-      npm start
-
-      Ctrl-c to close the server
-
-You can see documentation for the JSON-server once its started by visiting http://localhost:9090.
-You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
-
----
 
 ## Requirements
 
@@ -51,6 +31,28 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 - Implement "add-folder" and "add-note" controlled component forms.
 
 - Implement "edit-folder" and "edit-note" controlled component forms.
+
+### Noteful JSON server
+
+To get your local copy of the noteful API, clone this project into your local projects folder:
+
+      git clone https://github.com/tomatau/noteful-json-server
+      cd ./noteful-json-server
+      npm install
+      npm start
+
+      Ctrl-c to close the server
+
+You can see documentation for the JSON-server once its started by visiting http://localhost:9090.
+You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
+
+Use `db BACKUP.json`, from the `noteful-react-client` repo, as the datasource (renamed as `db.json`). More info is at [https://github.com/typicode/json-server](https://github.com/typicode/json-server.)
+
+[https://github.com/typicode/json-server](https://github.com/typicode/json-server) lets you create a fake REST API for the database.
+
+---
+
+## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
