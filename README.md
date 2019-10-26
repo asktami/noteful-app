@@ -40,15 +40,17 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - Use the React Context API instead of prop drilling
 
-- Implement two fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState inside the main App component.
+- Implement fetch requests to two endpoints when the application mounts: /folders and /notes. Store the response from these requests using a setState inside the main App component.
 
-- The API calls will be made to a local server called noteful-json-server that you'll need to have running separately to your noteful React application.
+- The API calls can be made to either a local json server or a PostgreSQL database.
 
 - Implement the delete button for each note in the list in the main route and folder route.
 
 - Implement the delete button on the note page, if the delete is successful, redirect to the / path.
 
 - Implement "add-folder" and "add-note" controlled component forms.
+
+- Implement "edit-folder" and "edit-note" controlled component forms.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
