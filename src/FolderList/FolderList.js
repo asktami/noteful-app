@@ -1,39 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import FolderError from './FolderError';
 import NotefulContext from '../NotefulContext';
+import config from '../config';
 
 const FolderList = props => {
 	const contextType = useContext(NotefulContext);
 	const { notes, folders, handleClickDeleteFolder } = contextType;
 
-	const [refresh, setRefresh] = useState(0);
+	let folderId;
+	if (config.DATASOURCE === 'postgresql') {
+		folderId = parseInt(props.match.params.id_folder);
+	} else {
+		folderId = props.match.params.id_folder;
+	}
 
-	// QUESTION - WHY ISNT FOLDERS CHANGING IN CONTEXT WHEN DELETED FROM FolderList??
-	// I thought updating something in Context (via changing state) would cause re-render of any CONSUMER COMPONENTS?
-	console.log('folders inside FolderList = ', JSON.stringify(folders));
-
-	// new function to trigger state refresh inside FolderList when run handleClickDeleteFolder in App
-	const deleteFolderRefresh = (id_folder, props) => {
-		handleClickDeleteFolder(id_folder, props);
-
-		if (refresh === 0) {
-			setRefresh(1);
-			console.log('refresh inside function = ', refresh);
-		} else {
-			setRefresh(0);
-			console.log('refresh inside function = ', refresh);
-		}
-	};
-
-	console.log('refresh outside function = ', refresh);
 	return (
 		<>
 			<header>
 				<>
-					<h2>Folders {refresh}</h2>
+					<h2>Folders</h2>
 					&nbsp;&nbsp;
 					<NavLink to={'/add-folder'}>
 						<button className="btn-add">+</button>
@@ -47,9 +35,7 @@ const FolderList = props => {
 							&nbsp;&nbsp;
 							<button
 								className="btn-delete"
-								onClick={() =>
-									deleteFolderRefresh(props.match.params.id_folder, props)
-								}
+								onClick={() => handleClickDeleteFolder(folderId, props)}
 							>
 								-
 							</button>
@@ -61,9 +47,7 @@ const FolderList = props => {
 				{folders.map(folder => (
 					<li
 						key={folder.id}
-						className={
-							folder.id === props.match.params.id_folder ? ' active' : null
-						}
+						className={folder.id === folderId ? ' active' : null}
 					>
 						<FolderError>
 							<NavLink to={`/folders/${folder.id}`}>
