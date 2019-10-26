@@ -44,7 +44,7 @@ To get your local copy of the Noteful JSON API, clone this project into your loc
       npm install
       npm start
 
-      Use db BACKUP.json, from this repo as the datasource (renamed as db.json).
+      Use db BACKUP.json, from this repo, as the datasource (renamed as db.json).
 
       Ctrl-c to close the server
 ```
