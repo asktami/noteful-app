@@ -97,9 +97,6 @@ class App extends React.Component {
 	// const [foldersError, setFoldersError] = useState(null);
 	// const [notesError, setNotesError] = useState(null);
 
-	// // to stop submit of EditFolder form since deleteFolder button is inside the form
-	// const [deletedFolderId, setDeletedFolderId] = useState(null);
-
 	state = {
 		folders: [],
 		notes: [],
@@ -130,11 +127,6 @@ class App extends React.Component {
 			folder => folder.id !== id_folder
 		);
 		this.setState({ folders: newFolders });
-
-		console.log(
-			'folders inside App after delete = ',
-			JSON.stringify(this.state.folders)
-		);
 	};
 
 	addNote = note => {
@@ -234,15 +226,7 @@ class App extends React.Component {
 		this.setState({ notes: newNotes });
 	};
 
-	// to stop submit of EditFolder form since deleteFolder button is inside the form
-	clearDeletedFolderId = () => {
-		this.setState({ deletedFolderId: null });
-	};
-
 	handleClickDeleteFolder = (id_folder, props) => {
-		// to stop submit of EditFolder form since deleteFolder button is inside the form
-		this.setState({ deletedFolderId: id_folder });
-
 		fetch(config.FOLDERS_ENDPOINT + `/${id_folder}`, {
 			method: 'DELETE',
 			headers: {
@@ -301,9 +285,7 @@ class App extends React.Component {
 			notesError: this.notesError,
 			updateFolders: this.updateFolders,
 			updateNotes: this.updateNotes,
-			handleClickDeleteFolder: this.handleClickDeleteFolder,
-			deletedFolderId: this.deletedFolderId,
-			clearDeletedFolderId: this.clearDeletedFolderId
+			handleClickDeleteFolder: this.handleClickDeleteFolder
 		};
 		return (
 			<>
