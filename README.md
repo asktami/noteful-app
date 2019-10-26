@@ -45,13 +45,14 @@ To get your local copy of the Noteful JSON API, clone this project into your loc
       npm start
 
       Use db BACKUP.json, from this repo as the datasource (renamed as db.json).
-      More info is at [https://github.com/typicode/json-server](https://github.com/typicode/json-server) - a fake REST API for the database.
 
       Ctrl-c to close the server
 ```
 
 You can see documentation for the JSON server once its started by visiting http://localhost:9090.
 You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
+
+More info is at [https://github.com/typicode/json-server](https://github.com/typicode/json-server) - a fake REST API for the database.
 
 ---
 
