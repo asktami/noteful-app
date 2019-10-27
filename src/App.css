@@ -144,7 +144,8 @@ textarea {
 }
 
 textarea {
-	height: 72px;
+	overflow-y: scroll;
+	min-height: 30vh;
 }
 
 fieldset {
