@@ -9,7 +9,11 @@ const Header = props => {
 					<Link to="/">Noteful</Link>
 				</h1>
 			</span>
-			<span>a React app</span>
+			<span>
+				a React app
+				<br />
+				(takes a couple of seconds to load the 1st time)
+			</span>
 		</header>
 	);
 };
