@@ -100,7 +100,7 @@ class AddNote extends React.Component {
 			id_folder: id_folder.value,
 			name: name.value,
 			content: content.value,
-			modified: new Date()
+			modified: new Date(Date.UTC())
 		};
 		this.setState({ apiError: null });
 

@@ -150,7 +150,6 @@ class EditNote extends React.Component {
 			correct_type_folderId = this.state.id_folder;
 		}
 
-		// when using db.json, add modified: new Date().toString()
 		const newNote = {
 			id: correct_type_noteId,
 			id_folder: correct_type_folderId,
