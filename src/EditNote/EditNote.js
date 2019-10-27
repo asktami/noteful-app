@@ -133,9 +133,18 @@ class EditNote extends React.Component {
 		// get the form fields to be updated
 		const { noteId } = this.props.match.params;
 
+		// b/c id from datasource can be either text or number
+		let correct_type_Id;
+
+		if (config.DATASOURCE === 'postgresql') {
+			correct_type_Id = parseInt(this.state.id);
+		} else {
+			correct_type_Id = this.state.id;
+		}
+
 		// when using db.json, add modified: new Date().toString()
 		const newNote = {
-			id: this.state.id,
+			id: correct_type_Id,
 			id_folder: this.state.id_folder,
 			name: this.state.name,
 			content: this.state.content
