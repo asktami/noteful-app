@@ -104,6 +104,7 @@ export default class NoteItem extends React.Component {
 					<span>
 						Modified on{' '}
 						<span className="note-datemod">
+							{' '}
 							{this.props.note.modified
 								? this.props.note.modified.toString().split('T', 1)[0]
 								: ''}
