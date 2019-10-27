@@ -12,7 +12,7 @@ const Header = props => {
 			<span>
 				a React app
 				<br />
-				(takes a couple of seconds to load the 1st time)
+				(everything takes a couple of seconds to load)
 			</span>
 		</header>
 	);
