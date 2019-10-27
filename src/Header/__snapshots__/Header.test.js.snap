@@ -13,6 +13,8 @@ exports[`Header component renders a Header by default 1`] = `
   </span>
   <span>
     a React app
+    <br />
+    (takes a couple of seconds to load the 1st time)
   </span>
 </header>
 `;
