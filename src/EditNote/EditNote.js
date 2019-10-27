@@ -134,20 +134,29 @@ class EditNote extends React.Component {
 		const { noteId } = this.props.match.params;
 
 		// b/c id from datasource can be either text or number
-		let correct_type_Id;
+		let correct_type_noteId;
 
 		if (config.DATASOURCE === 'postgresql') {
-			correct_type_Id = parseInt(this.state.id);
+			correct_type_noteId = parseInt(this.state.id);
 		} else {
-			correct_type_Id = this.state.id;
+			correct_type_noteId = this.state.id;
+		}
+
+		let correct_type_folderId;
+
+		if (config.DATASOURCE === 'postgresql') {
+			correct_type_folderId = parseInt(this.state.id_folder);
+		} else {
+			correct_type_folderId = this.state.id_folder;
 		}
 
 		// when using db.json, add modified: new Date().toString()
 		const newNote = {
-			id: correct_type_Id,
-			id_folder: this.state.id_folder,
+			id: correct_type_noteId,
+			id_folder: correct_type_folderId,
 			name: this.state.name,
-			content: this.state.content
+			content: this.state.content,
+			modified: new Date()
 		};
 
 		this.setState({ apiError: null });
@@ -167,7 +176,7 @@ class EditNote extends React.Component {
 				this.resetFields(newNote);
 				this.context.updateNotes(newNote);
 
-				// return to selected folder
+				// return to note folder
 				this.props.history.push(`/folders/${this.state.id_folder}`);
 			})
 			.catch(error => {
