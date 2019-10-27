@@ -1,6 +1,6 @@
 # noteful-react-client
 
-![Noteful screenshot](https://github.com/asktami/react-router-context-noteful/blob/master/noteful.png 'Noteful')
+![Noteful screenshot](https://github.com/asktami/noteful-react-client/blob/master/noteful.png 'Noteful')
 
 [View Live](https://noteful-react-client.asktami.now.sh/)
 
