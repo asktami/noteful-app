@@ -127,6 +127,10 @@ class App extends React.Component {
 			folder => folder.id !== id_folder
 		);
 		this.setState({ folders: newFolders });
+
+		// deleting a folder cascade deletes notes in the database
+		// so need to update notes array in state
+		this.getNotes();
 	};
 
 	addNote = note => {
