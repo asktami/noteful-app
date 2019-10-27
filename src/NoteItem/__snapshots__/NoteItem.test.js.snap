@@ -30,6 +30,7 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
       <span
         className="note-datemod"
       >
+         
         Mon Sep 30 2019 00:00:00 GM
       </span>
     </span>
@@ -85,6 +86,7 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
       <span
         className="note-datemod"
       >
+         
         Mon Sep 30 2019 00:00:00 GM
       </span>
     </span>
