@@ -34,6 +34,14 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - Implement "edit-folder" and "edit-note" controlled component forms
 
+
+## How to Install on Your Computer
+1. See [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api) for instructions on installing the backend API
+2. Clone this repo
+3. In Terminal, change to the directory on your computer that contains this repo
+4. Run `npm install`
+5. Run `npm start` - this starts the app in a web browser
+
 ### Noteful JSON server
 
 To get your local copy of the Noteful JSON API, clone this project into your local projects folder:
