@@ -34,8 +34,10 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - Implement "edit-folder" and "edit-note" controlled component forms
 
+- A folder is a _parent_ record to _child_ note records
 
 ## How to Install on Your Computer
+
 1. See [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api) for instructions on installing the backend API
 2. Clone this repo
 3. In Terminal, change to the directory on your computer that contains this repo
