@@ -36,17 +36,26 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - A folder is a _parent_ record to _child_ note records
 
-## How to Install on Your Computer
+## Setup
 
 1. See [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api) for instructions on installing the backend API
+
 2. Clone this repo
+
 3. In Terminal, change to the directory on your computer that contains this repo
-4. Run `npm install`
-5. Run `npm start` - this starts the app in a web browser
 
-### Noteful JSON server
+4. Install dependencies: `npm install`
+5. Environment:
 
-To get your local copy of the Noteful JSON API, clone this project into your local projects folder:
+   - Prepare the environment file: `cp example.env .env`
+   - Replace values in `.env` with your custom values
+   - Replace the value for `REACT_APP_API_KEY` with the same API token value you use in your backend API
+
+6. Start the app in a web browser: `npm start`
+
+### To Use A Noteful JSON server
+
+1. To get your local copy of the Noteful JSON API, clone this project into your local projects folder:
 
 ```
       git clone https://github.com/tomatau/noteful-json-server
@@ -54,10 +63,12 @@ To get your local copy of the Noteful JSON API, clone this project into your loc
       npm install
       npm start
 
-      Use db BACKUP.json, from this repo, as the datasource (renamed as db.json).
+      Use db BACKUP.json, from this repo, as the datasource (renamed as db.json, replacing the existing db.json).
 
       Ctrl-c to close the server
 ```
+
+2. Change the backend API endpoints in `./src/config.js`
 
 You can see documentation for the JSON server once its started by visiting http://localhost:9090.
 You can see all of the data currently stored in the server by visiting http://localhost:9090/db.
