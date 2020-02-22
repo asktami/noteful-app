@@ -57,7 +57,7 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 6. Start the app in a web browser: `npm start`
 
-### To Use A Noteful JSON server
+### To use a Noteful JSON server
 
 1. To get your local copy of the Noteful JSON API, clone this project into your local projects folder:
 
