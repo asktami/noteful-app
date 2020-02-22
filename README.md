@@ -36,6 +36,10 @@ There are 3 routes: the main route, the dynamic folder route and a dynamic note 
 
 - A folder is a _parent_ record to _child_ note records
 
+## Hosted on
+
+- Zeit
+
 ## Setup
 
 1. See [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api) for instructions on installing the backend API
