@@ -1,9 +1,9 @@
 // hosted on Heroku using PostgreSQL db
 export default {
 	DATASOURCE: `postgresql`,
-	NOTES_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/notes`,
-	FOLDERS_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/folders`,
-	API_KEY: process.env.REACT_APP_API_KEY
+	NOTES_ENDPOINT: `https://asktami-cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/notes`,
+	FOLDERS_ENDPOINT: `https://asktami-cors-anywhere.herokuapp.com/https://asktami-noteful-api.herokuapp.com/api/folders`,
+	API_KEY: process.env.REACT_APP_API_KEY,
 };
 
 // hosted locally using PostgreSQL db
