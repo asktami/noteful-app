@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import NotefulContext from '../NotefulContext';
-import config from '../config';
+import { config } from '../config';
 
-const FolderItem = props => {
+const FolderItem = (props) => {
 	const context = useContext(NotefulContext);
 	const { folders, notes } = context;
 
@@ -21,18 +21,18 @@ const FolderItem = props => {
 		noteId = props.match.params.noteId;
 	}
 
-	const activeNote = notes ? notes.find(note => note.id === noteId) : '';
+	const activeNote = notes ? notes.find((note) => note.id === noteId) : '';
 
 	if (!activeNote) return 'Sorry, no note found.';
 
 	const id_folder = activeNote.id_folder;
-	const activeFolder = folders.filter(folder => folder.id === id_folder);
+	const activeFolder = folders.filter((folder) => folder.id === id_folder);
 
 	return (
 		<>
 			{!activeFolder
 				? null
-				: activeFolder.map(folder => (
+				: activeFolder.map((folder) => (
 						<header key={folder.id}>
 							<h2>
 								{folder.name}
@@ -63,14 +63,14 @@ FolderItem.propTypes = {
 	folders: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			name: PropTypes.string.isRequired
+			name: PropTypes.string.isRequired,
 		})
 	),
 	notes: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.instanceOf(Date).isRequired
+			modified: PropTypes.instanceOf(Date).isRequired,
 		})
-	)
+	),
 };

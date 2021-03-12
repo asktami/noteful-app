@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+import { config } from '../config';
 
 import NotefulContext from '../NotefulContext';
 
@@ -14,15 +14,15 @@ class AddFolder extends React.Component {
 		errorCount: null,
 		name: '',
 		errors: {
-			name: 'You must enter a folder name'
-		}
+			name: 'You must enter a folder name',
+		},
 	};
 
 	updateErrorCount = () => {
 		let errors = this.state.errors;
 		let count = 0;
 
-		Object.values(errors).forEach(val => {
+		Object.values(errors).forEach((val) => {
 			if (val.length > 0) {
 				count++;
 			}
@@ -49,7 +49,7 @@ class AddFolder extends React.Component {
 		this.setState({ errors });
 	};
 
-	handleChange = event => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value.trim() });
 
@@ -61,7 +61,7 @@ class AddFolder extends React.Component {
 		this.props.history.push('/');
 	};
 
-	handleSubmit = e => {
+	handleSubmit = (e) => {
 		e.preventDefault();
 
 		// do NOT submit form if any errors
@@ -70,7 +70,7 @@ class AddFolder extends React.Component {
 		// get the form fields from the event
 		const { name } = e.target;
 		const folder = {
-			name: name.value
+			name: name.value,
 		};
 		this.setState({ apiError: null });
 
@@ -79,20 +79,20 @@ class AddFolder extends React.Component {
 			body: JSON.stringify(folder),
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					// get the error message from the response,
-					return res.json().then(error => {
+					return res.json().then((error) => {
 						// then throw it
 						throw error;
 					});
 				}
 				return res.json();
 			})
-			.then(data => {
+			.then((data) => {
 				// clear form values
 				name.value = '';
 
@@ -101,7 +101,7 @@ class AddFolder extends React.Component {
 				// select newly created folder:
 				this.props.history.push(`/folders/${data.id}`);
 			})
-			.catch(error => {
+			.catch((error) => {
 				this.setState({ apiError: error });
 			});
 	};

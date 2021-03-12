@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
-import config from './config';
+import { config } from './config';
 
 // when using dummyStore text datafile:
 // import dummyStore from './dummy-store';
@@ -30,64 +30,64 @@ const routes = [
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/folders/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/notes/:noteId',
 		exact: true,
 		header: Header,
 		aside: FolderItem,
-		section: Note
+		section: Note,
 	},
 	{
 		path: '/add-folder',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: AddFolder
+		section: AddFolder,
 	},
 	{
 		path: '/add-note',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: AddNote
+		section: AddNote,
 	},
 	{
 		path: '/edit-note/:noteId',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: EditNote
+		section: EditNote,
 	},
 	{
 		path: '/edit-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: EditFolder
+		section: EditFolder,
 	},
 	{
 		path: '/delete-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/:any/:any/:any',
 		exact: true,
 		header: Header,
 		aside: () => null,
-		section: () => 'Do not edit the  url!'
-	}
+		section: () => 'Do not edit the  url!',
+	},
 ];
 
 class App extends React.Component {
@@ -102,7 +102,7 @@ class App extends React.Component {
 		notes: [],
 		foldersError: null,
 		notesError: null,
-		deleteFolderId: null
+		deleteFolderId: null,
 	};
 
 	// to see foldersError in ui:
@@ -117,14 +117,14 @@ class App extends React.Component {
 	/*
     After making successful a DELETE API request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.
     */
-	deleteNote = noteId => {
-		const newNotes = this.state.notes.filter(note => note.id !== noteId);
+	deleteNote = (noteId) => {
+		const newNotes = this.state.notes.filter((note) => note.id !== noteId);
 		this.setState({ notes: newNotes });
 	};
 
-	deleteFolder = id_folder => {
+	deleteFolder = (id_folder) => {
 		const newFolders = this.state.folders.filter(
-			folder => folder.id !== id_folder
+			(folder) => folder.id !== id_folder
 		);
 		this.setState({ folders: newFolders });
 
@@ -133,19 +133,19 @@ class App extends React.Component {
 		this.getNotes();
 	};
 
-	addNote = note => {
+	addNote = (note) => {
 		this.setState({ notes: [...this.state.notes, note] });
 	};
 
-	addFolder = folder => {
+	addFolder = (folder) => {
 		this.setState({ folders: [...this.state.folders, folder] });
 	};
 
-	addErrorNotes = error => {
+	addErrorNotes = (error) => {
 		this.setState({ notesError: error });
 	};
 
-	addErrorFolders = error => {
+	addErrorFolders = (error) => {
 		this.setState({ foldersError: error });
 	};
 
@@ -156,16 +156,16 @@ class App extends React.Component {
     // So the component rendering the /detail/:id route needs to fetch data for itself, including the correct id to use from the url, via the props React Router provides.
     */
 
-	setFolders = folders => {
+	setFolders = (folders) => {
 		this.setState({
 			folders,
-			error: null
+			error: null,
 		});
 	};
-	setNotes = notes => {
+	setNotes = (notes) => {
 		this.setState({
 			notes,
-			error: null
+			error: null,
 		});
 	};
 
@@ -174,10 +174,10 @@ class App extends React.Component {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.status);
 				}
@@ -186,7 +186,7 @@ class App extends React.Component {
 			.then(this.setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => this.setState({ foldersError: error }));
+			.catch((error) => this.setState({ foldersError: error }));
 	};
 
 	getNotes = () => {
@@ -194,10 +194,10 @@ class App extends React.Component {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.status);
 				}
@@ -206,7 +206,7 @@ class App extends React.Component {
 			.then(this.setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => this.setState({ notesError: error }));
+			.catch((error) => this.setState({ notesError: error }));
 	};
 
 	componentDidMount() {
@@ -214,16 +214,16 @@ class App extends React.Component {
 		this.getNotes();
 	}
 
-	updateFolders = updatedFolder => {
-		const newFolders = this.state.folders.map(folder =>
+	updateFolders = (updatedFolder) => {
+		const newFolders = this.state.folders.map((folder) =>
 			folder.id !== updatedFolder.id ? folder : updatedFolder
 		);
 
 		this.setState({ folders: newFolders });
 	};
 
-	updateNotes = updatedNote => {
-		const newNotes = this.state.notes.map(note =>
+	updateNotes = (updatedNote) => {
+		const newNotes = this.state.notes.map((note) =>
 			note.id !== updatedNote.id ? note : updatedNote
 		);
 
@@ -235,15 +235,15 @@ class App extends React.Component {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
 
 				if (!res.ok || res.status === '404') {
 					// get the error message from the response,
-					return res.json().then(error => {
+					return res.json().then((error) => {
 						// then throw it
 						// throw res.status instead of error b/c error is an empty object
 						throw res.status;
@@ -251,7 +251,7 @@ class App extends React.Component {
 				}
 				return res.json();
 			})
-			.then(data => {
+			.then((data) => {
 				// call the callback function when the request is successful
 				// this is where the App component can remove it from state
 				// ie. update the folders stored in state
@@ -261,7 +261,7 @@ class App extends React.Component {
 				// remove id_folder from URL
 				props.history.push(`/`);
 			})
-			.catch(error => {
+			.catch((error) => {
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error !== 404) {
 					this.addErrorFolders(error);
@@ -289,7 +289,7 @@ class App extends React.Component {
 			notesError: this.notesError,
 			updateFolders: this.updateFolders,
 			updateNotes: this.updateNotes,
-			handleClickDeleteFolder: this.handleClickDeleteFolder
+			handleClickDeleteFolder: this.handleClickDeleteFolder,
 		};
 		return (
 			<>

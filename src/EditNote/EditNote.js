@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+import { config } from '../config';
 
 import NotefulContext from '../NotefulContext';
 
@@ -19,8 +19,8 @@ class EditNote extends React.Component {
 		errors: {
 			id_folder: '',
 			name: '',
-			content: ''
-		}
+			content: '',
+		},
 	};
 
 	// to see addNote apiError in ui:
@@ -37,23 +37,23 @@ class EditNote extends React.Component {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
+				authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
-				if (!res.ok) return res.json().then(error => Promise.reject(error));
+			.then((res) => {
+				if (!res.ok) return res.json().then((error) => Promise.reject(error));
 
 				return res.json();
 			})
-			.then(responseData => {
+			.then((responseData) => {
 				this.setState({
 					id: responseData.id,
 					name: responseData.name,
 					id_folder: responseData.id_folder,
-					content: responseData.content
+					content: responseData.content,
 				});
 			})
-			.catch(error => {
+			.catch((error) => {
 				this.setState({ apiError: error });
 			});
 	}
@@ -62,7 +62,7 @@ class EditNote extends React.Component {
 		let errors = this.state.errors;
 		let count = 0;
 
-		Object.values(errors).forEach(val => {
+		Object.values(errors).forEach((val) => {
 			if (val.length > 0) {
 				count++;
 			}
@@ -103,7 +103,7 @@ class EditNote extends React.Component {
 		this.setState({ errors });
 	};
 
-	handleChange = event => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 
@@ -115,16 +115,16 @@ class EditNote extends React.Component {
 		this.props.history.push('/');
 	};
 
-	resetFields = newFields => {
+	resetFields = (newFields) => {
 		this.setState({
 			id: newFields.id || '',
 			name: newFields.name || '',
 			content: newFields.content || '',
-			id_folder: newFields.id_folder || ''
+			id_folder: newFields.id_folder || '',
 		});
 	};
 
-	handleSubmit = e => {
+	handleSubmit = (e) => {
 		e.preventDefault();
 
 		// do NOT submit form if any errors
@@ -155,7 +155,7 @@ class EditNote extends React.Component {
 			id_folder: correct_type_folderId,
 			name: this.state.name,
 			content: this.state.content,
-			modified: new Date()
+			modified: new Date(),
 		};
 
 		this.setState({ apiError: null });
@@ -165,11 +165,11 @@ class EditNote extends React.Component {
 			body: JSON.stringify(newNote),
 			headers: {
 				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
+				authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
-				if (!res.ok) return res.json().then(error => Promise.reject(error));
+			.then((res) => {
+				if (!res.ok) return res.json().then((error) => Promise.reject(error));
 			})
 			.then(() => {
 				this.resetFields(newNote);
@@ -178,7 +178,7 @@ class EditNote extends React.Component {
 				// return to note folder
 				this.props.history.push(`/folders/${this.state.id_folder}`);
 			})
-			.catch(error => {
+			.catch((error) => {
 				error(error);
 				this.setState({ apiError: error });
 			});
@@ -209,7 +209,7 @@ class EditNote extends React.Component {
 						onChange={this.handleChange}
 					>
 						<option value="">Select a folder</option>
-						{folders.map(folder => (
+						{folders.map((folder) => (
 							<option key={folder.id} value={folder.id}>
 								{folder.name}
 							</option>

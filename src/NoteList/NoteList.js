@@ -6,9 +6,9 @@ import NoteError from './NoteError';
 import NoteItem from '../NoteItem/NoteItem';
 import NotefulContext from '../NotefulContext';
 
-import config from '../config';
+import { config } from '../config';
 
-const NoteList = props => {
+const NoteList = (props) => {
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
 	const { notes } = contextType;
@@ -24,7 +24,7 @@ const NoteList = props => {
 	}
 
 	const foldernotes = props.match.params.id_folder
-		? notes.filter(note => note.id_folder === folderId)
+		? notes.filter((note) => note.id_folder === folderId)
 		: notes;
 
 	return (
@@ -39,14 +39,14 @@ const NoteList = props => {
 					// to pass selected id_folder:
 					to={{
 						pathname: '/add-note',
-						state: { id_folder: props.match.params.id_folder }
+						state: { id_folder: props.match.params.id_folder },
 					}}
 				>
 					<button className="btn-add">+</button>
 				</NavLink>
 			</header>
 			{foldernotes.length > 0 ? (
-				foldernotes.map(note => (
+				foldernotes.map((note) => (
 					<section key={note.id}>
 						<NoteError>
 							<div className="note">
@@ -83,7 +83,7 @@ NoteList.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.instanceOf(Date).isRequired
+			modified: PropTypes.instanceOf(Date).isRequired,
 		})
-	)
+	),
 };

@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 import FolderError from './FolderError';
 import NotefulContext from '../NotefulContext';
-import config from '../config';
+import { config } from '../config';
 
-const FolderList = props => {
+const FolderList = (props) => {
 	const contextType = useContext(NotefulContext);
 	const { notes, folders, handleClickDeleteFolder } = contextType;
 
@@ -44,7 +44,7 @@ const FolderList = props => {
 				</>
 			</header>
 			<ul>
-				{folders.map(folder => (
+				{folders.map((folder) => (
 					<li
 						key={folder.id}
 						className={folder.id === folderId ? ' active' : null}
@@ -55,7 +55,7 @@ const FolderList = props => {
 									&#x1F4C2;
 								</span>
 								&nbsp;{folder.name}&nbsp;(
-								{notes.filter(note => note.id_folder === folder.id).length})
+								{notes.filter((note) => note.id_folder === folder.id).length})
 							</NavLink>
 						</FolderError>
 					</li>
@@ -74,7 +74,7 @@ FolderList.propTypes = {
 	folders: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			name: PropTypes.string.isRequired
+			name: PropTypes.string.isRequired,
 		})
-	)
+	),
 };

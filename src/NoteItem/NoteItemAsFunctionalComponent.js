@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import config from '../config';
+import { config } from '../config';
 import NotefulContext from '../NotefulContext';
 
 // this function 1st deletes via the API, then from state
@@ -16,20 +16,20 @@ function handleClickDelete(props, context) {
 	fetch(config.NOTES_ENDPOINT + `/${noteId}`, {
 		method: 'DELETE',
 		headers: {
-			'content-type': 'application/json'
-		}
+			'content-type': 'application/json',
+		},
 	})
-		.then(res => {
+		.then((res) => {
 			if (!res.ok) {
 				// get the error message from the response,
-				return res.json().then(error => {
+				return res.json().then((error) => {
 					// then throw it
 					throw error;
 				});
 			}
 			return res.json();
 		})
-		.then(data => {
+		.then((data) => {
 			// call the callback function when the request is successful
 			// this is where the App component can remove it from state
 			// ie. update the notes stored in state
@@ -41,12 +41,12 @@ function handleClickDelete(props, context) {
 				props.history.push(`/`);
 			}
 		})
-		.catch(error => {
+		.catch((error) => {
 			context.addErrorNotes(error);
 		});
 }
 
-const NoteItem = props => {
+const NoteItem = (props) => {
 	// need to grab NotefulContext (globals)
 	const contextType = useContext(NotefulContext);
 
@@ -64,7 +64,7 @@ const NoteItem = props => {
 			NOTE: context could be any word since its just the parameter label
 			*/}
 
-			{context => (
+			{(context) => (
 				<div className="note-item">
 					{/*
 			THIS CAUSED A staticContent ERROR:

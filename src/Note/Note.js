@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import NoteItem from '../NoteItem/NoteItem';
 
 import NotefulContext from '../NotefulContext';
-import config from '../config';
+import { config } from '../config';
 
-const Note = props => {
+const Note = (props) => {
 	// need to grab NotefulContext (globals)
 	const context = useContext(NotefulContext);
 	const { notes } = context;
@@ -22,7 +22,7 @@ const Note = props => {
 		noteId = props.match.params.noteId;
 	}
 
-	const note = notes.find(note => note.id === noteId) || {};
+	const note = notes.find((note) => note.id === noteId) || {};
 
 	return (
 		<section>
@@ -46,7 +46,7 @@ Note.propTypes = {
 			id_folder: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
 			content: PropTypes.string.isRequired,
-			modified: PropTypes.instanceOf(Date).isRequired
+			modified: PropTypes.instanceOf(Date).isRequired,
 		})
-	)
+	),
 };

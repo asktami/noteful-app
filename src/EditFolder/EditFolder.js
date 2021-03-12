@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+import { config } from '../config';
 
 import NotefulContext from '../NotefulContext';
 
@@ -15,8 +15,8 @@ class EditFolder extends React.Component {
 		id: this.props.match.params.id_folder,
 		name: '',
 		errors: {
-			name: ''
-		}
+			name: '',
+		},
 	};
 
 	// get folder to be updated
@@ -26,21 +26,21 @@ class EditFolder extends React.Component {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
+				authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
-				if (!res.ok) return res.json().then(error => Promise.reject(error));
+			.then((res) => {
+				if (!res.ok) return res.json().then((error) => Promise.reject(error));
 
 				return res.json();
 			})
-			.then(responseData => {
+			.then((responseData) => {
 				this.setState({
 					id: responseData.id,
-					name: responseData.name
+					name: responseData.name,
 				});
 			})
-			.catch(error => {
+			.catch((error) => {
 				this.setState({ apiError: error });
 			});
 	}
@@ -49,7 +49,7 @@ class EditFolder extends React.Component {
 		let errors = this.state.errors;
 		let count = 0;
 
-		Object.values(errors).forEach(val => {
+		Object.values(errors).forEach((val) => {
 			if (val.length > 0) {
 				count++;
 			}
@@ -75,7 +75,7 @@ class EditFolder extends React.Component {
 		this.setState({ errors });
 	};
 
-	handleChange = event => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value.trim() });
 
@@ -87,14 +87,14 @@ class EditFolder extends React.Component {
 		this.props.history.push('/');
 	};
 
-	resetFields = newFields => {
+	resetFields = (newFields) => {
 		this.setState({
 			id: newFields.id || '',
-			name: newFields.name || ''
+			name: newFields.name || '',
 		});
 	};
 
-	handleSubmit = e => {
+	handleSubmit = (e) => {
 		e.preventDefault();
 
 		// do NOT submit form if any errors
@@ -112,11 +112,11 @@ class EditFolder extends React.Component {
 			body: JSON.stringify(newFolder),
 			headers: {
 				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
+				authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
-				if (!res.ok) return res.json().then(error => Promise.reject(error));
+			.then((res) => {
+				if (!res.ok) return res.json().then((error) => Promise.reject(error));
 			})
 			.then(() => {
 				this.resetFields(newFolder);
@@ -124,7 +124,7 @@ class EditFolder extends React.Component {
 				// return to list:
 				this.props.history.push('/');
 			})
-			.catch(error => {
+			.catch((error) => {
 				this.setState({ apiError: error });
 			});
 	};

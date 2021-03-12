@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
-import config from './config';
+import { config } from './config';
 
 // when using dummyStore text datafile:
 // import dummyStore from './dummy-store';
@@ -30,67 +30,67 @@ const routes = [
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/folders/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/notes/:noteId',
 		exact: true,
 		header: Header,
 		aside: FolderItem,
-		section: Note
+		section: Note,
 	},
 	{
 		path: '/add-folder',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: AddFolder
+		section: AddFolder,
 	},
 	{
 		path: '/add-note',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: AddNote
+		section: AddNote,
 	},
 	{
 		path: '/edit-note/:noteId',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: EditNote
+		section: EditNote,
 	},
 	{
 		path: '/edit-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: null,
-		section: EditFolder
+		section: EditFolder,
 	},
 	{
 		path: '/delete-folder/:id_folder',
 		exact: true,
 		header: Header,
 		aside: FolderList,
-		section: NoteList
+		section: NoteList,
 	},
 	{
 		path: '/:any/:any/:any',
 		exact: true,
 		header: Header,
 		aside: () => null,
-		section: () => 'Do not edit the  url!'
-	}
+		section: () => 'Do not edit the  url!',
+	},
 ];
 
-const App = props => {
+const App = (props) => {
 	// set default state variable values with hooks
 	const [folders, setFolders] = useState([]);
 	const [notes, setNotes] = useState([]);
@@ -112,29 +112,29 @@ const App = props => {
 	/*
     After making successful a DELETE API request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.
     */
-	const deleteNote = noteId => {
-		const newNotes = notes.filter(note => note.id !== noteId);
+	const deleteNote = (noteId) => {
+		const newNotes = notes.filter((note) => note.id !== noteId);
 		setNotes(newNotes);
 	};
 
-	const deleteFolder = id_folder => {
-		const newFolders = folders.filter(folder => folder.id !== id_folder);
+	const deleteFolder = (id_folder) => {
+		const newFolders = folders.filter((folder) => folder.id !== id_folder);
 		setFolders(newFolders);
 	};
 
-	const addNote = note => {
+	const addNote = (note) => {
 		setNotes([...notes, note]);
 	};
 
-	const addFolder = folder => {
+	const addFolder = (folder) => {
 		setFolders([...folders, folder]);
 	};
 
-	const addErrorNotes = error => {
+	const addErrorNotes = (error) => {
 		setNotesError(error);
 	};
 
-	const addErrorFolders = error => {
+	const addErrorFolders = (error) => {
 		setFoldersError(error);
 	};
 
@@ -150,10 +150,10 @@ const App = props => {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.status);
 				}
@@ -162,7 +162,7 @@ const App = props => {
 			.then(setFolders)
 			// passes res to setFolders function
 			// shortcut which equals .then(res => this.setFolders(res))
-			.catch(error => setFoldersError(error));
+			.catch((error) => setFoldersError(error));
 	};
 
 	const getNotes = () => {
@@ -170,10 +170,10 @@ const App = props => {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.status);
 				}
@@ -182,18 +182,18 @@ const App = props => {
 			.then(setNotes)
 			// passes res to setNotes function
 			// shortcut which equals .then(res => this.setNotes(res))
-			.catch(error => setNotesError(error));
+			.catch((error) => setNotesError(error));
 	};
 
-	const updateFolders = updatedFolder => {
-		const newFolders = folders.map(folder =>
+	const updateFolders = (updatedFolder) => {
+		const newFolders = folders.map((folder) =>
 			folder.id !== updatedFolder.id ? folder : updatedFolder
 		);
 		setFolders(newFolders);
 	};
 
-	const updateNotes = updatedNote => {
-		const newNotes = notes.map(note =>
+	const updateNotes = (updatedNote) => {
+		const newNotes = notes.map((note) =>
 			note.id !== updatedNote.id ? note : updatedNote
 		);
 		setNotes(newNotes);
@@ -212,15 +212,15 @@ const App = props => {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
 
 				if (!res.ok || res.status === '404') {
 					// get the error message from the response,
-					return res.json().then(error => {
+					return res.json().then((error) => {
 						// then throw it
 						// throw res.status instead of error b/c error is an empty object
 						throw res.status;
@@ -228,7 +228,7 @@ const App = props => {
 				}
 				return res.json();
 			})
-			.then(data => {
+			.then((data) => {
 				// call the callback function when the request is successful
 				// this is where the App component can remove it from state
 				// ie. update the folders stored in state
@@ -238,7 +238,7 @@ const App = props => {
 				// remove id_folder from URL
 				props.history.push(`/`);
 			})
-			.catch(error => {
+			.catch((error) => {
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error !== 404) {
 					addErrorFolders(error);
@@ -273,7 +273,7 @@ const App = props => {
 		updateNotes: updateNotes,
 		handleClickDeleteFolder: handleClickDeleteFolder,
 		deletedFolderId: deletedFolderId,
-		clearDeletedFolderId: clearDeletedFolderId
+		clearDeletedFolderId: clearDeletedFolderId,
 	};
 
 	return (

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import config from '../config';
+import { config } from '../config';
 import NotefulContext from '../NotefulContext';
 
 // this function 1st deletes via the API, then from state
@@ -16,7 +16,7 @@ export default class NoteItem extends React.Component {
 	// need to grab NotefulContext (globals)
 	static contextType = NotefulContext;
 
-	handleClickDelete = e => {
+	handleClickDelete = (e) => {
 		e.preventDefault();
 
 		const noteId = this.props.note.id;
@@ -25,14 +25,14 @@ export default class NoteItem extends React.Component {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
+				authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				// I think b/c cors, typecode gives a res.status = 404 and an EMPTY error object when try to delete note so,
 				if (!res.ok || res.status === '404') {
 					// get the error message from the response,
-					return res.json().then(error => {
+					return res.json().then((error) => {
 						// then throw it
 						// throw res.status instead of error b/c error is an empty object
 						throw res.status;
@@ -40,7 +40,7 @@ export default class NoteItem extends React.Component {
 				}
 				return res.json();
 			})
-			.then(data => {
+			.then((data) => {
 				// call the callback function when the request is successful
 				// this is where the App component can remove it from state
 				// ie. update the notes stored in state
@@ -57,7 +57,7 @@ export default class NoteItem extends React.Component {
 					this.props.history.push(this.props.location.pathname);
 				}
 			})
-			.catch(error => {
+			.catch((error) => {
 				// WORKAROUND to handle EMPTY error object and res.status = 404
 				if (error !== 404) {
 					this.context.addErrorNotes(error);
@@ -95,7 +95,7 @@ export default class NoteItem extends React.Component {
 				<NavLink
 					to={{
 						pathname: `/notes/${this.props.note.id}`,
-						props: this.props
+						props: this.props,
 					}}
 				>
 					<h3>{this.props.note.name}</h3>
@@ -136,9 +136,9 @@ NoteItem.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			modified: PropTypes.instanceOf(Date).isRequired
+			modified: PropTypes.instanceOf(Date).isRequired,
 		})
-	)
+	),
 };
 
 // default values

@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+import { config } from '../config';
 
 import NotefulContext from '../NotefulContext';
 
@@ -19,8 +19,8 @@ class AddNote extends React.Component {
 			id_folder:
 				!this.props.location.state.id_folder && 'You must select a folder', // error only if no id_folder passed in via NavLink
 			name: 'You must enter a note title',
-			content: 'You must enter a description'
-		}
+			content: 'You must enter a description',
+		},
 	};
 
 	// to see addNote apiError in ui:
@@ -34,7 +34,7 @@ class AddNote extends React.Component {
 		let errors = this.state.errors;
 		let count = 0;
 
-		Object.values(errors).forEach(val => {
+		Object.values(errors).forEach((val) => {
 			if (val.length > 0) {
 				count++;
 			}
@@ -75,7 +75,7 @@ class AddNote extends React.Component {
 		this.setState({ errors });
 	};
 
-	handleChange = event => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value.trim() });
 
@@ -87,7 +87,7 @@ class AddNote extends React.Component {
 		this.props.history.push('/');
 	};
 
-	handleSubmit = e => {
+	handleSubmit = (e) => {
 		e.preventDefault();
 		// this.updateErrorCount();
 
@@ -100,7 +100,7 @@ class AddNote extends React.Component {
 			id_folder: id_folder.value,
 			name: name.value,
 			content: content.value,
-			modified: new Date(Date.UTC())
+			modified: new Date(Date.UTC()),
 		};
 		this.setState({ apiError: null });
 
@@ -109,20 +109,20 @@ class AddNote extends React.Component {
 			body: JSON.stringify(note),
 			headers: {
 				'content-type': 'application/json',
-				Authorization: `Bearer ${config.API_KEY}`
-			}
+				Authorization: `Bearer ${config.API_KEY}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				if (!res.ok) {
 					// get the error message from the response,
-					return res.json().then(error => {
+					return res.json().then((error) => {
 						// then throw it
 						throw error;
 					});
 				}
 				return res.json();
 			})
-			.then(data => {
+			.then((data) => {
 				// clear form values
 				id_folder.value = '';
 				name.value = '';
@@ -133,7 +133,7 @@ class AddNote extends React.Component {
 				// return to list:
 				this.props.history.push(`/folders/${id_folder.value}`);
 			})
-			.catch(error => {
+			.catch((error) => {
 				this.setState({ apiError: error });
 			});
 	};
@@ -163,7 +163,7 @@ class AddNote extends React.Component {
 						onChange={this.handleChange}
 					>
 						<option value="">Select a folder</option>
-						{folders.map(folder => (
+						{folders.map((folder) => (
 							<option key={folder.id} value={folder.id}>
 								{folder.name}
 							</option>
