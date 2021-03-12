@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-
 import NoteItem from './NoteItem';
+
+// hardcode modified date so that test will pass when deploy to server in a different timezone
 
 describe(`NoteItem component`, () => {
 	const props = {
@@ -10,8 +11,8 @@ describe(`NoteItem component`, () => {
 			id: 1,
 			id_folder: 101,
 			title: 'test-note-title',
-			modified: new Date(2019, 8, 30)
-		}
+			modified: new Date(Date.UTC(2021, 3, 11, 3, 4, 5)),
+		},
 	};
 
 	it('renders a NoteItem by default', () => {

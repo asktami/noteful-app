@@ -12,7 +12,7 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
           "note": Object {
             "id": 1,
             "id_folder": 101,
-            "modified": 2019-09-30T04:00:00.000Z,
+            "modified": 2021-04-11T03:04:05.000Z,
             "title": "test-note-title",
           },
         },
@@ -31,7 +31,7 @@ exports[`NoteItem component renders a NoteItem by default 1`] = `
         className="note-datemod"
       >
          
-        Mon Sep 30 2019 00:00:00 GM
+        Sat Apr 10 2021 23:04:05 GM
       </span>
     </span>
     <span>
@@ -68,7 +68,7 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
           "note": Object {
             "id": 1,
             "id_folder": 101,
-            "modified": 2019-09-30T04:00:00.000Z,
+            "modified": 2021-04-11T03:04:05.000Z,
             "title": "test-note-title",
           },
         },
@@ -87,7 +87,7 @@ exports[`NoteItem component renders the NoteItem given props 1`] = `
         className="note-datemod"
       >
          
-        Mon Sep 30 2019 00:00:00 GM
+        Sat Apr 10 2021 23:04:05 GM
       </span>
     </span>
     <span>
