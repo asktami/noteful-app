@@ -11,7 +11,7 @@ describe(`NoteItem component`, () => {
 			id: 1,
 			id_folder: 101,
 			title: 'test-note-title',
-			modified: new Date(Date.UTC(2021, 3, 11, 3, 4, 5)),
+			modified: new Date(Date.UTC(2021, 3, 11, 3, 4, 5)).toLocaleString('en-US', { timeZone: 'America/New_York' }),
 		},
 	};
 
