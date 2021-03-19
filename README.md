@@ -4,7 +4,7 @@
 
 [View Live](https://noteful-react-client.asktami.now.sh/)
 
-## Description
+## Descriptions
 
 Works with [https://github.com/asktami/noteful-api](https://github.com/asktami/noteful-api).
 
