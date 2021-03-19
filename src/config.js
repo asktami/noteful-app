@@ -1,4 +1,4 @@
-// NOTE: You cannot override NODE_ENV manually
+// NOTES: You cannot override NODE_ENV manually
 // The built-in environment variable is called NODE_ENV. You can read it from process.env.NODE_ENV.  Its in the .env file.
 
 // TO SEE THE PRODUCTION version locally:
