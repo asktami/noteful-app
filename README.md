@@ -2,7 +2,7 @@
 
 ![Noteful screenshot](https://github.com/asktami/noteful-react-client/blob/master/noteful.png 'Noteful')
 
-[View Live](https://noteful-react-client.asktami.now.sh/)
+[View Live](https://noteful-app-asktami.vercel.app/)
 
 ## Description
 
